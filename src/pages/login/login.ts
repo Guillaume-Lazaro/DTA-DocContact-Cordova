@@ -3,15 +3,10 @@ import {Events, IonicPage, NavController, NavParams, ToastController} from 'ioni
 
 import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-//import { Storage } from '@ionic/storage';
+import { ContactServicesProvider } from "../../providers/contact-services/contact-services";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+
 
 @IonicPage()
 @Component({
@@ -19,7 +14,6 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
   templateUrl: 'login.html',
 })
 export class LoginPage {
-
   phoneNumber: string;
   password: string;
   //rememberMe: boolean = false;  //On verra plus tard
@@ -29,8 +23,9 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-              public events: Events) {
+              public events: Events, contactService : ContactServicesProvider) {
 
+    contactService.logTheUser('6666666666', '0000').then((token)=>(console.log(token)));
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
 
@@ -60,6 +55,7 @@ export class LoginPage {
       });
       toast.present();
     }
+    //A utiliser quand ready
 
     //Cette partie sera à remplacer par la vrai vérification sur le réseau tout ça
     //Actuellement, n'importe quel numéro de téléphone (à 10 chiffres) avec '0000' comme mdp marche
