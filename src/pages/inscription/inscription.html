@@ -7,12 +7,94 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>inscription</ion-title>
+    <ion-title>Inscription</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
+    <div>
+      <ion-item>
+        <ion-label floating>Last name: </ion-label>
+        <ion-input formControlName="lastName" [(ngModel)]="lastName"></ion-input>
+      </ion-item>
+      <div *ngIf="lastNameCtrl.dirty && lastNameCtrl.hasError('required')">
+        The last name is required
+      </div>
+
+      <ion-item>
+        <ion-label floating>First name: </ion-label>
+        <ion-input formControlName="firstName" [(ngModel)]="firstName"></ion-input>
+      </ion-item>
+      <div *ngIf="firstNameCtrl.dirty && firstNameCtrl.hasError('required')">
+        The first name is required
+      </div>
+
+      <ion-item>
+        <ion-label floating>Phone number: </ion-label>
+        <ion-input formControlName="phone" type="number" [(ngModel)]="phone"></ion-input>
+      </ion-item>
+      <div *ngIf="phoneCtrl.dirty && phoneCtrl.errors">
+        The phone number is unvalid
+      </div>
+      <div *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('required')">
+        The phone number is required
+      </div>
+
+      <ion-item>
+        <ion-label floating>Email: </ion-label>
+        <ion-input formControlName="email" type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">
+        The email is invalid
+      </div>
+      <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">
+        The email is required
+      </div>
+
+      <ion-item>
+        <ion-label floating>Profile: </ion-label>
+        <ion-input formControlName="profile" [(ngModel)]="profile"></ion-input>
+      </ion-item>
+      <div *ngIf="profileCtrl.dirty && profileCtrl.hasError('required')">
+        The profile is required
+      </div>
+
+      <ion-item>
+        <ion-label floating >Password: </ion-label>
+        <ion-input type="password" formControlName="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password">
+        </ion-input>
+      </ion-item>
+      <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
+        The password must be 4 caracters long
+      </div>
+      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
+        The password is required
+      </div>
+
+      <ion-item>
+        <ion-label>Profile 2: </ion-label>
+        <ion-select formControlName="profile2" [(ngModel)]="profile2" interface="popover">
+          <ion-option>Family</ion-option>
+          <ion-option>Doctor</ion-option>
+          <ion-option>Senior</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+
+    <div class="submitButton">
+      <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+        Inscription
+      </button>
+    </div>
+
+  </form>
+
+
+
+  <button type="button" name="button" ion-button (click)="testButton()"> Test </button>
 
 </ion-content>

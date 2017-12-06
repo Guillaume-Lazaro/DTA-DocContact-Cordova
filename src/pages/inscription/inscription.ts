@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 /**
  * Generated class for the InscriptionPage page.
@@ -15,11 +17,72 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class InscriptionPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  lastName: string;
+  firstName: string;
+  phone: string;
+  email: string;
+  profile: string;  //TODO: changer ça pour un picker
+  profile2: string;
+
+  password: string;
+
+  lastNameCtrl: FormControl;
+  firstNameCtrl: FormControl;
+  phoneCtrl: FormControl;
+  emailCtrl: FormControl;
+  profileCtrl: FormControl;
+  passwordCtrl: FormControl;
+  userForm: FormGroup;
+
+  profile2Ctrl: FormControl;
+
+  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
+              public events: Events) {
+
+    this.lastNameCtrl = fb.control('', [Validators.required]);
+    this.firstNameCtrl = fb.control('', [Validators.required]);
+    this.phoneCtrl = fb.control('', [Validators.minLength(10), Validators.maxLength(10), Validators.required]);
+    this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
+    this.profileCtrl = fb.control('', Validators.required);
+    this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
+    //TODO password verification
+
+    //Test:
+    this.profile2Ctrl = fb.control('', Validators.required);
+
+    this.userForm = fb.group({
+      lastName: this.lastNameCtrl,
+      firstName: this.firstNameCtrl,
+      phone: this.phoneCtrl,
+      email: this.emailCtrl,
+      profile: this.profileCtrl,
+      password: this.passwordCtrl,
+      profile2: this.profile2Ctrl
+    });
+  }
+
+  handleSubmit() {
+    let toast = this.toastCtrl.create({
+      message: 'Vous etes inscrit! Bien joué!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InscriptionPage');
+  }
+
+  testButton() {
+    let toast = this.toastCtrl.create({
+      message: 'Profile 2 = '+this.profile2,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
+
+    console.log('Profile 2 = '+this.profile2);
   }
 
 }
