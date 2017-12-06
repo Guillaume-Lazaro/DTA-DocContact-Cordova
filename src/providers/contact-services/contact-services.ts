@@ -16,6 +16,7 @@ export class ContactServicesProvider {
   }
   // ON VA GERER ICI LES CONTACTS
 
+
   //EXEMPLE :
   // movieList: Array<Movie> = [];
   // getList(){

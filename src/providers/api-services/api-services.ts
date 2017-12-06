@@ -1,10 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-//const API_BASE_URL: string = 'http://localhost:8080/';
-//const API_BASE_URL: string = 'http://10.1.0.201:8080/';
-//const API_USERS: string = 'trailers';
+const API_BASE_URL: string = 'http://familink.cleverapps.io';
+const API_PUBLIC: string = '/public';
+//const API_SECURE: string = '/secured/users';
 
 @Injectable()
 export class ApiServicesProvider {
@@ -12,7 +12,14 @@ export class ApiServicesProvider {
   constructor(public http: HttpClient) {
 
   }
-  // UTILISER LA METHODE CHOISIE
+
+  logUser(phoneInput: String, passwordInput: String) {
+    let body = {phone : phoneInput , password: passwordInput};
+    console.log('API-PROVIDER', 'login');
+    return this.http.post(`${API_BASE_URL}${API_PUBLIC}/login`, body);
+  }
+
+  
 
   // getList() {
   //   return this.http.get(`${API_BASE_URL}${API_USERS}`);
