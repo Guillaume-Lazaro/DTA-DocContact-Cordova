@@ -1,8 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-//const API_BASE_URL: string = 'http://localhost:8080/';
+const API_BASE_URL: string = 'http://familink.cleverapps.io/';
+const API_PUBLIC_MODIFIER: string = "public/";
+const API_PRIVATE_MODIFIER: string = "secured/users/";
 //const API_BASE_URL: string = 'http://10.1.0.201:8080/';
 //const API_USERS: string = 'trailers';
 
@@ -12,6 +14,42 @@ export class ApiServicesProvider {
   constructor(public http: HttpClient) {
 
   }
+  /*createUser(phone, password, firstName, lastName, email, profile){
+    return new Promise(resolve => {
+      this.http.post(API_BASE_URL + API_PUBLIC_MODIFIER + "sign-in?contactsLength=0",{
+        phone: phone,
+        password: password,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        profile: profile
+      },{
+        headers:new HttpHeaders().set("Content-Type","application/json")
+      }).subscribe(data =>{
+      resolve(data);
+    }, err =>{
+        console.log(err);
+    });
+    });
+  }*/
+
+  getUser(token){
+    var headers = new HttpHeaders();
+    headers.append("Content-Type","application/json");
+    headers.append("Authorization","Bearer " + token);
+    return new Promise(resolve => {
+      this.http.get(API_BASE_URL + API_PRIVATE_MODIFIER + "current", {
+        headers: headers
+      })
+    .subscribe(data => {
+        var dataStr = JSON.stringify(data);
+        resolve(dataStr);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   // UTILISER LA METHODE CHOISIE
 
   // getList() {
