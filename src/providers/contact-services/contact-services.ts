@@ -8,13 +8,5 @@ export class ContactServicesProvider {
   constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
   }
 
-  logTheUser(login: string, password: string){
-    return new Promise((resolve) => {
-      this.apiServices.logUser(login, password).toPromise()
-        .then((message)=> {
-          resolve(message)
-        })
-        .catch((e)=> console.error(e))
-    })
-  }
+
 }
