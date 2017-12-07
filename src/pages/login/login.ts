@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Events, IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 
 import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
@@ -24,13 +24,12 @@ export class LoginPage {
   userForm: FormGroup;
   userServices: UserServicesProvider;
 
-  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-
-              public events: Events, userServices : UserServicesProvider) {
+  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events, userServices : UserServicesProvider,  public menuCtrl: MenuController
+  ) {
+    this.menuCtrl.enable(false);
     this.userServices = userServices;
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
-
 
     this.userForm = fb.group({
       phoneNumber: this.phoneNumberCtrl,
@@ -43,7 +42,8 @@ export class LoginPage {
     let verif = this.password;
 
     this.userServices.logTheUser(this.phoneNumber, this.password)
-      .then((reponse)=>{
+      .then((reponse: any)=>{
+
         if(reponse.status===400){
           let toast = this.toastCtrl.create({
             message: 'Le nom d\'utilisateur ou le mot de passe est incorrect',
@@ -55,6 +55,7 @@ export class LoginPage {
         if(reponse.token!== undefined){
           this.goToAccueil();
         }
+
       })
       .catch();
   }
