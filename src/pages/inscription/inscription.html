@@ -1,9 +1,3 @@
-<!--
-  Generated template for the InscriptionPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -61,18 +55,29 @@
         </ion-select>
       </ion-item>
 
-      <ion-item>
-        <ion-label floating >Password: </ion-label>
-        <ion-input type="password" formControlName="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password">
-        </ion-input>
-      </ion-item>
-      <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
-        The password must be 4 caracters long
-      </div>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
-        The password is required
-      </div>
+      <form [formGroup]="passwordForm">
+        <ion-item>
+          <ion-label floating >Password: </ion-label>
+          <ion-input formControlName="password" type="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password"></ion-input>
+        </ion-item>
+        <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
+          The password must be 4 caracters long
+        </div>
+        <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
+          The password is required
+        </div>
 
+        <ion-item>
+          <ion-label floating >Confirm password: </ion-label>
+          <ion-input formControlName="confirmPassword" type="password" name="confirmPassword" [(ngModel)]="confirmPassword"></ion-input>
+        </ion-item>
+        <div *ngIf="confirmPasswordCtrl.errors && confirmPasswordCtrl.dirty">
+          The password is incorrect!
+        </div>
+        <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">
+          The password is required
+        </div>
+      </form >
     </div>
 
     <div class="submitButton">
@@ -80,7 +85,6 @@
         Inscription
       </button>
     </div>
-
   </form>
 
   <button type="button" name="button" ion-button (click)="testButton()"> Test </button>
