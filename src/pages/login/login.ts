@@ -53,7 +53,7 @@ export class LoginPage {
               console.log(contacts)
             })
           });
-          this.goToAccueil();
+          this.goToContactList();
         }
       })
       .catch();
@@ -69,8 +69,8 @@ export class LoginPage {
     this.navCtrl.push(InscriptionPage).then();
   }
 
-  goToAccueil(){
-    this.navCtrl.push(ContactListPage).then();
+  goToContactList(){
+    this.navCtrl.setRoot(ContactListPage).then();
   }
 
 }

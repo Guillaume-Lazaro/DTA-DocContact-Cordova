@@ -16,9 +16,11 @@ export class ContactListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
     this.menuCtrl.enable(true);
+
   }
 
   ionViewDidLoad() {
+
     // METTRE LE VRAI TOKEN
     // this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjY2NjY2NjY2NjYiLCJpYXQiOjE1MTI2NTIzOTIsImV4cCI6MTUxMjY1MjY5Mn0.ZG-mi3_vdDvnHeYyE9HUMg8al8UTBO0demeaHVUC_QM")
     //   .then( data => {
