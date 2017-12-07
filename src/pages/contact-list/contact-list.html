@@ -23,6 +23,7 @@
   <ion-searchbar
     [(ngModel)]="searchQuery"
     [showCancelButton]="shouldShowCancel"
+    placeholder="Cherchez par nom ou par numéro de téléphone"
     (ionInput)="searchFunction($event)"
     >
   </ion-searchbar>

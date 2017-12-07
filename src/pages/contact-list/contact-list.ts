@@ -44,16 +44,16 @@ export class ContactListPage {
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
       this.contacts = this.contacts.filter((item) => {
-        if(item.firstName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.lastName.toLowerCase().indexOf(val.toLowerCase()) > -1){
+        if(item.firstName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.lastName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.phone.indexOf(val) > -1 ){
           return item;
         }
       })
     }
   }
   goToEditView(){
-    this.navCtrl.push(EditContactPage);
+    this.navCtrl.push(EditContactPage).then();
   }
   goToContactDetails(contact){
-    this.navCtrl.push(ContactDetailPage, { 'contact': contact});
+    this.navCtrl.push(ContactDetailPage, { 'contact': contact}).then();
   }
 }
