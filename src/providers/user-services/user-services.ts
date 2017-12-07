@@ -12,6 +12,7 @@ import {toPromise} from "rxjs/operator/toPromise";
 */
 @Injectable()
 export class UserServicesProvider {
+  token: string;
   constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
     console.log('Hello UserServicesProvider Provider');
   }

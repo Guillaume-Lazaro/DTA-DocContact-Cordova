@@ -82,6 +82,13 @@ export class ApiServicesProvider {
       })
   }
 
+  deleteContact(id: string, token: string){
+    let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
+    return this.http.delete(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts/${id}`,{
+      headers: headers
+    })
+  }
+
 
   // getList() {
   //   return this.http.get(`${API_BASE_URL}${API_USERS}`);
