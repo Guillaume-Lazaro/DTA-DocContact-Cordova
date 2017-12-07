@@ -34,6 +34,7 @@ export class ContactServicesProvider {
 
   }
 
+
   deleteContact(id: string, token: string){
     return new Promise( resolve=> {
       this.apiServices.deleteContact(id, token).toPromise().then( reponse=>{
@@ -43,9 +44,6 @@ export class ContactServicesProvider {
         console.log(error)
         })
     })
-      .catch(error=>{
-        console.log(error)
-      })
   }
 
   createGravatar(mail: string){

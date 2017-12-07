@@ -49,7 +49,7 @@ export class LoginPage {
         if(reponse.token !== undefined){
           this.userServices.getUser(reponse.token).then(user=> {
             console.log(user);
-            this.userServices.token=reponse.token;
+            this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
             this.contactServices.getContacts(reponse.token).then( contacts =>{
               console.log(contacts)
             })
