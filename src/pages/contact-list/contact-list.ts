@@ -20,10 +20,10 @@ export class ContactListPage {
 
   ionViewDidLoad() {
     // METTRE LE VRAI TOKEN
-    this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjY2NjY2NjY2NjYiLCJpYXQiOjE1MTI2NTIzOTIsImV4cCI6MTUxMjY1MjY5Mn0.ZG-mi3_vdDvnHeYyE9HUMg8al8UTBO0demeaHVUC_QM")
-      .then( data => {
-        console.log(data)
-      })
+    // this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjY2NjY2NjY2NjYiLCJpYXQiOjE1MTI2NTIzOTIsImV4cCI6MTUxMjY1MjY5Mn0.ZG-mi3_vdDvnHeYyE9HUMg8al8UTBO0demeaHVUC_QM")
+    //   .then( data => {
+    //     console.log(data)
+    //   })
   }
   goToEditView(){
     this.navCtrl.push(EditContactPage);
