@@ -41,6 +41,7 @@ export class ApiServicesProvider {
       })
     .subscribe(data => {
         resolve(data);
+        
       }, err => {
         console.log(err);
       });
