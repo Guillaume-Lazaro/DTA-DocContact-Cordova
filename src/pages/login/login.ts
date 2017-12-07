@@ -18,17 +18,19 @@ import {UserServicesProvider} from "../../providers/user-services/user-services"
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  phoneNumber: string;
-  password: string;
+  phoneNumber: string = '0655545546'; // Supprimer la valeur dans la version finale
+  password: string = '0000';    // Supprimer la valeur dans la version finale
   //rememberMe: boolean = false;  //On verra plus tard
 
   phoneNumberCtrl: FormControl;
   passwordCtrl: FormControl;
   userForm: FormGroup;
+  userServices : UserServicesProvider
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               userServices : UserServicesProvider,  public menuCtrl: MenuController) {
 
+    this.userServices = userServices;
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
