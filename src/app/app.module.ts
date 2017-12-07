@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiServicesProvider } from '../providers/api-services/api-services';
 import { ContactServicesProvider } from '../providers/contact-services/contact-services';
 import { HttpClientModule } from "@angular/common/http";
+import { UserServicesProvider } from '../providers/user-services/user-services';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { HttpClientModule } from "@angular/common/http";
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
-    ContactServicesProvider
+    ContactServicesProvider,
+    UserServicesProvider,
   ]
 })
 export class AppModule {}
