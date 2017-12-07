@@ -21,6 +21,9 @@ export class LoginPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
+  //For Tests
+  contacts:any;
+
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
 
@@ -51,10 +54,11 @@ export class LoginPage {
             console.log(user);
             this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
             this.contactServices.getContacts(reponse.token).then( contacts =>{
+              this.contacts = contacts;
               console.log(contacts)
+              this.goToContactList(contacts);
             })
           });
-          this.goToContactList();
         }
       })
       .catch();
@@ -68,8 +72,10 @@ export class LoginPage {
     this.navCtrl.push(InscriptionPage).then();
   }
 
-  goToContactList(){
-    this.navCtrl.setRoot(ContactListPage).then();
+  goToContactList(params){
+    this.navCtrl.setRoot(ContactListPage, {
+      'contacts': this.contacts
+    }).then();
   }
 
 }

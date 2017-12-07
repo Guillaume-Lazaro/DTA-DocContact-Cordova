@@ -20,7 +20,23 @@
 <ion-content padding>
   <button type="button" name="button" ion-button (click)="goToEditView()">Edit View</button>
   <button type="button" name="button" ion-button (click)="goToDetailView()"> Detail View </button>
-  <button ion-button menuToggle>
-     <ion-icon name="menu"></ion-icon>
-  </button>
+  <ion-searchbar
+    [(ngModel)]="searchQuery"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="searchFunction($event)"
+    >
+  </ion-searchbar>
+  <br>
+  <div *ngFor="let contact of contacts" >
+    <div (click)="goToContactDetails(contact)">
+      <div class="contactCard">
+        <h2>
+          {{contact.firstName}}
+        </h2>
+        <p class="cardGenre">
+          {{contact.lastName}}
+        </p>
+      </div>
+    </div>
+  </div>
 </ion-content>
