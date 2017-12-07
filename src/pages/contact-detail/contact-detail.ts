@@ -19,7 +19,8 @@ export class ContactDetailPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ContactDetailPage');
+    let contact = this.navParams.get('contact');
+    console.log(contact);
   }
 
 }
