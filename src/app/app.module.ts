@@ -45,7 +45,7 @@ import { UserServicesProvider } from '../providers/user-services/user-services';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
-    UserServicesProvider,
+    UserServicesProvider
   ]
 })
 export class AppModule {}
