@@ -4,14 +4,7 @@ import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
-import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -28,7 +21,7 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider,  public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
+              public userServices : UserServicesProvider,  public menuCtrl: MenuController) {
 
     this.userServices = userServices;
     this.menuCtrl.enable(false);
@@ -68,19 +61,11 @@ export class LoginPage {
   }
 
   goToInscription(){
-    this.userServices.getUser("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA2MDAwMDAwMDIiLCJpYXQiOjE1MTI2MzYzNTMsImV4cCI6MTUxMjYzNjY1M30.C03-9hKd_kI0F3Og6LVTHa-veAdhEBqjPeUk5UZCNFk")
-      .then(data => {
-        console.log(data);
-        this.navCtrl.push(InscriptionPage).then();
-      })
+    this.navCtrl.push(InscriptionPage).then();
 
   }
   goToAccueil(){
-    this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA2MDAwMDAwMDIiLCJpYXQiOjE1MTI2NTExNjYsImV4cCI6MTUxMjY1MTQ2Nn0.wMapMzYRIBZWg5vAvVNDwE1aXZrnhXmi_uzGUrNsCY4")
-    .then( data => {
-      console.log(data)
-    })
-    this.navCtrl.push(ContactListPage);
+    this.navCtrl.push(ContactListPage).then();
   }
 
 }
