@@ -27,7 +27,7 @@ export class LoginPage {
   }
 
   goToInscription(){
-    this.apiServices.getUser("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA5NDYxMzI3NDgiLCJpYXQiOjE1MTI1Nzk2MzQsImV4cCI6MTUxMjU3OTkzNH0.1btb7R78Nt7o3jAB1oDvHyrj4Y_GRjdLH1gRmV3JOko")
+    this.apiServices.getUser("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA2MDAwMDAwMDIiLCJpYXQiOjE1MTI2MzYzNTMsImV4cCI6MTUxMjYzNjY1M30.C03-9hKd_kI0F3Og6LVTHa-veAdhEBqjPeUk5UZCNFk")
       .then(data => {
         console.log(data);
         this.navCtrl.push(InscriptionPage).then();

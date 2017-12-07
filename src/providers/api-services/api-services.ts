@@ -34,16 +34,13 @@ export class ApiServicesProvider {
   }*/
 
   getUser(token){
-    var headers = new HttpHeaders();
-    headers.append("Content-Type","application/json");
-    headers.append("Authorization","Bearer " + token);
+    var headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
     return new Promise(resolve => {
       this.http.get(API_BASE_URL + API_PRIVATE_MODIFIER + "current", {
         headers: headers
       })
     .subscribe(data => {
-        var dataStr = JSON.stringify(data);
-        resolve(dataStr);
+        resolve(data);
       }, err => {
         console.log(err);
       });
