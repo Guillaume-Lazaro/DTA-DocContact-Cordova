@@ -26,7 +26,6 @@ export class LoginPage {
   phoneNumberCtrl: FormControl;
   passwordCtrl: FormControl;
   userForm: FormGroup;
-  userServices : UserServicesProvider
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider,  public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
