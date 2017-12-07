@@ -15,5 +15,42 @@
 
 <ion-content padding>
   <button type="button" name="button" ion-button (click)="goToInscription()"> Inscription </button>
-  <button type="button" name="button" ion-button (click)="goToAccueil()">Accueil</button>
+  <button type="button" name="button" ion-button (click)="goToContactList()">Accueil</button>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
+    <div>
+      <ion-item>
+        <ion-label floating>Phone number: </ion-label>
+        <ion-input formControlName="phoneNumber" type="number" [(ngModel)]="phoneNumber"></ion-input>
+      </ion-item>
+
+      <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.errors">
+        The phone number is unvalid
+      </div>
+      <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.hasError('required')">
+        The phone number is required
+      </div>
+
+      <ion-item>
+        <ion-label floating >Password: </ion-label>
+        <ion-input type="password" formControlName="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password">
+        </ion-input>
+      </ion-item>
+
+      <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
+        The password must be 4 caracters long
+      </div>
+      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
+        The password is required
+      </div>
+
+    </div>
+
+    <div class="submitButton">
+      <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+        Connection
+      </button>
+    </div>
+
+  </form>
 </ion-content>

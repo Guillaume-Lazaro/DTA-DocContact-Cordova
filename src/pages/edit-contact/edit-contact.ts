@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
+import {UserServicesProvider} from "../../providers/user-services/user-services";
 
 /**
  * Generated class for the EditContactPage page.
@@ -15,7 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EditContactPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider, public userServices: UserServicesProvider) {
   }
 
   ionViewDidLoad() {

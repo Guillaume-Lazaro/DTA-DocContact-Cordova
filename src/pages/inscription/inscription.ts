@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
-
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UserServicesProvider} from "../../providers/user-services/user-services";
 
 /**
  * Generated class for the InscriptionPage page.
