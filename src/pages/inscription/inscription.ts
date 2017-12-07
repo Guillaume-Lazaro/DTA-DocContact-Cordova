@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {UserServicesProvider} from "../../providers/user-services/user-services";
 
 /**
  * Generated class for the InscriptionPage page.

@@ -54,9 +54,11 @@ export class LoginPage {
           toast.present().then();
         }
         if(reponse.token !== undefined){
+          this.userServices.getUser(reponse.token).then(user=> {
+            console.log(user)
+          });
           this.goToAccueil();
         }
-
       })
       .catch();
   }
