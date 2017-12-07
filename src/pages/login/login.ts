@@ -3,7 +3,6 @@ import {Events, IonicPage, MenuController, NavController, NavParams, ToastContro
 
 import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
-import { ContactServicesProvider } from "../../providers/contact-services/contact-services";
 
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
@@ -24,8 +23,8 @@ export class LoginPage {
   userForm: FormGroup;
   userServices: UserServicesProvider;
 
-  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events, userServices : UserServicesProvider,  public menuCtrl: MenuController
-  ) {
+  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
+              userServices : UserServicesProvider,  public menuCtrl: MenuController) {
     this.menuCtrl.enable(false);
     this.userServices = userServices;
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -38,9 +37,6 @@ export class LoginPage {
   }
 
   handleSubmit() {
-    console.log('Je suis dans le handleSubmit');
-    let verif = this.password;
-
     this.userServices.logTheUser(this.phoneNumber, this.password)
       .then((reponse: any)=>{
 

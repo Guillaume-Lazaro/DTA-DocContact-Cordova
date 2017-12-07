@@ -15,6 +15,7 @@ import { ApiServicesProvider } from '../providers/api-services/api-services';
 import { ContactServicesProvider } from '../providers/contact-services/contact-services';
 import { HttpClientModule } from "@angular/common/http";
 import { UserServicesProvider } from '../providers/user-services/user-services';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { UserServicesProvider } from '../providers/user-services/user-services';
   providers: [
     StatusBar,
     SplashScreen,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
