@@ -13,21 +13,39 @@ export class ContactServicesProvider {
 
   getContacts(token: string){
     return new Promise(resolve => {
-      this.apiServices.getContacts(token).then(contacts=>
-        resolve(contacts))
-    })
-      .catch(error=>{
-        console.log(error)
+      this.apiServices.getContacts(token).then(contacts=>{
+        resolve(contacts)
       })
+    }).catch(error=>{
+      console.log(error)
+    })
   }
+
   createContacts(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string){
     var gravatar = this.createGravatar(email);
     return new Promise( resolve =>{
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
         resolve(contact)
       })
-    });
+    })
+      .catch(error=>{
+        console.log(error)
+      })
+
   }
+
+
+  deleteContact(id: string, token: string){
+    return new Promise( resolve=> {
+      this.apiServices.deleteContact(id, token).toPromise().then( reponse=>{
+        resolve(reponse)
+      })
+        .catch(error=>{
+        console.log(error)
+        })
+    })
+  }
+
   createGravatar(mail: string){
     var mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
     var gravatar = `https://www.gravatar.com/avatar/${mailMd5}`;
