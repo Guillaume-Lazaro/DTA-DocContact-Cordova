@@ -25,10 +25,12 @@ export class LoginPage {
   userServices: UserServicesProvider;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
+
               public events: Events, userServices : UserServicesProvider) {
     this.userServices = userServices;
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
+
 
     this.userForm = fb.group({
       phoneNumber: this.phoneNumberCtrl,
