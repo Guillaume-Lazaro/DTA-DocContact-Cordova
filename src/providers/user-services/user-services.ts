@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import {ApiServicesProvider} from "../api-services/api-services";
+import {toPromise} from "rxjs/operator/toPromise";
 
 /*
   Generated class for the UserServicesProvider provider.
@@ -25,10 +26,29 @@ export class UserServicesProvider {
         .catch((e)=> (resolve(e)))
     })
   }
-  getUser(token: string){
+  /*getUser(token: string){
     return new Promise( resolve =>{
       this.apiServices.getUser(token).then( user=>
       resolve(user))
+    })
+      .catch(error=>{
+        console.log(error)
+      })
+  }*/
+  getUser(token: string){
+    return new Promise( resolve =>{
+      this.apiServices.getUser(token).toPromise().then( user=>
+        resolve(user))
+    })
+      .catch(error=>{
+        console.log(error)
+      })
+  }
+
+  createUser(phone: string, password: string, firstName: string,lastName: string, email: string, profile: string){
+    return new Promise (resolve=>{
+      this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( user=>
+        resolve(user))
     })
       .catch(error=>{
         console.log(error)
