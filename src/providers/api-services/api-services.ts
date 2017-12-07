@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Dialogs} from "@ionic-native/dialogs";
 
 
 const API_BASE_URL: string = 'http://familink.cleverapps.io';
@@ -9,7 +10,7 @@ const API_PRIVATE_MODIFIER: string = "/secured/users";
 @Injectable()
 export class ApiServicesProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, private dialog: Dialogs) {
 
   }
   SignUpUser(phone, password, firstName, lastName, email, profile){
@@ -82,6 +83,18 @@ export class ApiServicesProvider {
       })
   }
 
+  forgotPassword(){
+    let headers = new HttpHeaders().set("Content-Type","application/json");
+    return new Promise(resolve => {
+      this.http.post(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/forgot-password`, {
+        headers: headers
+     })
+        .subscribe()
+    })
+    this.dialog.prompt("Veuillez indiquer votre numero de telephone afin de recevoir votre mot de passe","Mot de passe oublié", [],"")
+      .then(()=> console.log("Dialog Dismissed"))
+      .catch(e => console.log(e));
+  }
 
   // getList() {
   //   return this.http.get(`${API_BASE_URL}${API_USERS}`);
