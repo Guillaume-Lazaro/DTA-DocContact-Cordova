@@ -4,6 +4,7 @@ import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
+import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 
 
 @IonicPage()
@@ -21,7 +22,7 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider,  public menuCtrl: MenuController) {
+              public userServices : UserServicesProvider, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
 
     this.userServices = userServices;
     this.menuCtrl.enable(false);
@@ -48,7 +49,6 @@ export class LoginPage {
         if(reponse.token !== undefined){
           this.userServices.getUser(reponse.token).then(user=> {
             console.log(user);
-            this.userServices.token = reponse.token;
             this.contactServices.getContacts(reponse.token).then( contacts =>{
               console.log(contacts)
             })
@@ -65,7 +65,7 @@ export class LoginPage {
   }
 
   goToInscription(){
-    
+
     this.navCtrl.push(InscriptionPage).then();
   }
 
