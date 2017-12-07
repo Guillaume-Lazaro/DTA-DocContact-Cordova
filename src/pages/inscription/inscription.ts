@@ -21,8 +21,9 @@ export class InscriptionPage {
   firstName: string;
   phone: string;
   email: string;
-  profile: string;  //TODO: changer ça pour un picker
-  profile2: string;
+  profile: string;
+  //profile2: string;
+  profileType: any;
 
   password: string;
 
@@ -34,7 +35,7 @@ export class InscriptionPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
-  profile2Ctrl: FormControl;
+  //profile2Ctrl: FormControl;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
               public events: Events) {
@@ -47,8 +48,15 @@ export class InscriptionPage {
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
     //TODO password verification
 
+    this.profile = 'senior';
+    this.profileType = [
+      { text: 'Doctor', value: 'doctor' },
+      { text: 'Senior', value: 'senior' },
+      { text: 'Family', value: 'family' },
+    ];
+
     //Test:
-    this.profile2Ctrl = fb.control('', Validators.required);
+    //this.profileCtrl = fb.control('', Validators.required);
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,
@@ -57,7 +65,7 @@ export class InscriptionPage {
       email: this.emailCtrl,
       profile: this.profileCtrl,
       password: this.passwordCtrl,
-      profile2: this.profile2Ctrl
+      //profile2: this.profile2Ctrl
     });
   }
 
@@ -72,17 +80,19 @@ export class InscriptionPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InscriptionPage');
+
+
   }
 
   testButton() {
     let toast = this.toastCtrl.create({
-      message: 'Profile 2 = '+this.profile2,
+      message: 'Profile = '+this.profile,
       duration: 3000,
       position: 'bottom'
     });
     toast.present();
 
-    console.log('Profile 2 = '+this.profile2);
+    console.log('Profile = '+this.profile);
   }
 
 }

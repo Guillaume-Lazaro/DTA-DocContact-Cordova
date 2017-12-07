@@ -55,12 +55,11 @@
       </div>
 
       <ion-item>
-        <ion-label floating>Profile: </ion-label>
-        <ion-input formControlName="profile" [(ngModel)]="profile"></ion-input>
+        <ion-label>Profile : </ion-label>
+        <ion-select formControlName="profile" [(ngModel)]="profile" interface="popover" [selectOptions]="profileType">
+          <ion-option *ngFor="let o of profileType" [value]="o.value">{{o.text}}</ion-option>
+        </ion-select>
       </ion-item>
-      <div *ngIf="profileCtrl.dirty && profileCtrl.hasError('required')">
-        The profile is required
-      </div>
 
       <ion-item>
         <ion-label floating >Password: </ion-label>
@@ -74,15 +73,6 @@
         The password is required
       </div>
 
-      <ion-item>
-        <ion-label>Profile 2: </ion-label>
-        <ion-select formControlName="profile2" [(ngModel)]="profile2" interface="popover">
-          <ion-option>Family</ion-option>
-          <ion-option>Doctor</ion-option>
-          <ion-option>Senior</ion-option>
-        </ion-select>
-      </ion-item>
-
     </div>
 
     <div class="submitButton">
@@ -92,8 +82,6 @@
     </div>
 
   </form>
-
-
 
   <button type="button" name="button" ion-button (click)="testButton()"> Test </button>
 
