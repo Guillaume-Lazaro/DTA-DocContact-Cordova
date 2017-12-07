@@ -61,6 +61,7 @@ export class LoginPage {
   }
 
   goToInscription(){
+    
     this.navCtrl.push(InscriptionPage).then();
 
   }

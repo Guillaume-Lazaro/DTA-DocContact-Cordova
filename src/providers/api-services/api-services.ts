@@ -53,6 +53,20 @@ export class ApiServicesProvider {
     });
   }
 
+  getProfiles(){
+    let headers = new HttpHeaders().set("Content-Type","application/json");
+    return new Promise(resolve => {
+      this.http.get(`${API_BASE_URL}${API_PUBLIC}/profiles`, {
+        headers: headers
+      })
+        .subscribe(data=> {
+          resolve(data);
+        }, err=>{
+          console.log(err);
+        });
+    });
+  }
+
 
   // getList() {
   //   return this.http.get(`${API_BASE_URL}${API_USERS}`);
