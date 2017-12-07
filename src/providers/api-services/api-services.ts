@@ -53,6 +53,19 @@ export class ApiServicesProvider {
     });
   }
 
+  getProfiles(){
+    let headers = new HttpHeaders().set("Content-Type","application/json");
+    return new Promise(resolve => {
+      this.http.get(`${API_BASE_URL}${API_PUBLIC}/profiles`, {
+        headers: headers
+      })
+        .subscribe(data=> {
+          resolve(data);
+        }, err=>{
+          console.log(err);
+        });
+    });
+  }
   createContact(firstName: string, lastname: string, phone: string, email: string,profile:string, gravatar: string, emergency, token: string){
     let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
      return this.http.post(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts`, {
