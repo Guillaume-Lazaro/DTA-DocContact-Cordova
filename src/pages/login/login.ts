@@ -4,14 +4,7 @@ import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
-import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -28,7 +21,7 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider,  public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
+              public userServices : UserServicesProvider,  public menuCtrl: MenuController) {
 
     this.userServices = userServices;
     this.menuCtrl.enable(false);
@@ -76,7 +69,7 @@ export class LoginPage {
   }
 
   goToAccueil(){
-    this.navCtrl.push(ContactListPage);
+    this.navCtrl.push(ContactListPage).then();
   }
 
 }
