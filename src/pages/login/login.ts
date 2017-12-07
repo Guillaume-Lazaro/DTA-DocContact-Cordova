@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Events, IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import { ContactServicesProvider } from "../../providers/contact-services/contact-services";
@@ -27,10 +27,12 @@ export class LoginPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
-  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-              public events: Events, public userServices : UserServicesProvider) {
+  constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events, public userServices : UserServicesProvider,  public menuCtrl: MenuController
+  ) {
+    this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
+
     this.userForm = fb.group({
       phoneNumber: this.phoneNumberCtrl,
       password: this.passwordCtrl,
@@ -54,6 +56,7 @@ export class LoginPage {
         if(reponse.token !== undefined){
           this.goToAccueil();
         }
+
       })
       .catch();
   }
