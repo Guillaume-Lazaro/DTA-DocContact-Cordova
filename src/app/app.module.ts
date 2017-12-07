@@ -47,7 +47,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
-    UserServicesProvider,
+    UserServicesProvider
   ]
 })
 export class AppModule {}

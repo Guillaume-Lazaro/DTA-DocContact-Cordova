@@ -20,9 +20,18 @@ export class UserServicesProvider {
     return new Promise((resolve) => {
       this.apiServices.logUser(login, password).toPromise()
         .then((message)=> {
-          resolve(message)
+          resolve(message);
         })
         .catch((e)=> (resolve(e)))
     })
+  }
+  getUser(token: string){
+    return new Promise( resolve =>{
+      this.apiServices.getUser(token).then( user=>
+      resolve(user))
+    })
+      .catch(error=>{
+        console.log(error)
+      })
   }
 }
