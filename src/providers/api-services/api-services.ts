@@ -25,7 +25,7 @@ export class ApiServicesProvider {
       })
   }
 
-  getUser(token){
+  getUser(token: string){
     var headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " +token);
     // return new Promise(resolve => {
       return this.http.get(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/current`, {
@@ -33,13 +33,13 @@ export class ApiServicesProvider {
       })
   }
 
-  logUser(phoneInput: String, passwordInput: String) {
+  logUser(phoneInput: string, passwordInput: string) {
     let body = {phone : phoneInput , password: passwordInput};
     console.log('API-PROVIDER', 'login');
     return this.http.post(`${API_BASE_URL}${API_PUBLIC}/login`, body);
   }
 
-  getContacts(token){
+  getContacts(token: string){
     let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
     return new Promise(resolve =>{
       this.http.get(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts`, {
@@ -51,6 +51,22 @@ export class ApiServicesProvider {
           console.log(err);
         });
     });
+  }
+
+  createContact(firstName: string, lastname: string, phone: string, email: string,profile:string, gravatar: string, emergency, token: string){
+    let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
+     return this.http.post(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts`, {
+        phone:phone,
+        firstName: firstName,
+        lastName: lastname,
+        email: email,
+        profile: profile,
+        gravatar: gravatar,
+        isFamilinkUser: emergency,
+        isEmergencyUser: emergency
+      },{
+        headers: headers
+      })
   }
 
 

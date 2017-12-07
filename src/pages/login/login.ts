@@ -54,7 +54,11 @@ export class LoginPage {
         }
         if(reponse.token !== undefined){
           this.userServices.getUser(reponse.token).then(user=> {
-            console.log(user)
+            console.log(user);
+            this.userServices.token = reponse.token;
+            this.contactServices.getContacts(reponse.token).then( contacts =>{
+              console.log(contacts)
+            })
           });
           this.goToAccueil();
         }
@@ -68,18 +72,10 @@ export class LoginPage {
   }
 
   goToInscription(){
-    this.userServices.getUser("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA2MDAwMDAwMDIiLCJpYXQiOjE1MTI2MzYzNTMsImV4cCI6MTUxMjYzNjY1M30.C03-9hKd_kI0F3Og6LVTHa-veAdhEBqjPeUk5UZCNFk")
-      .then(data => {
-        console.log(data);
-        this.navCtrl.push(InscriptionPage).then();
-      })
-
+    this.navCtrl.push(InscriptionPage).then();
   }
+
   goToAccueil(){
-    this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA2MDAwMDAwMDIiLCJpYXQiOjE1MTI2NTExNjYsImV4cCI6MTUxMjY1MTQ2Nn0.wMapMzYRIBZWg5vAvVNDwE1aXZrnhXmi_uzGUrNsCY4")
-    .then( data => {
-      console.log(data)
-    })
     this.navCtrl.push(ContactListPage);
   }
 
