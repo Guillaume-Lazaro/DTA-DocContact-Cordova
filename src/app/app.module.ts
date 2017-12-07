@@ -48,6 +48,6 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     ApiServicesProvider,
     ContactServicesProvider,
     UserServicesProvider
-  ]
+  ],
 })
 export class AppModule {}

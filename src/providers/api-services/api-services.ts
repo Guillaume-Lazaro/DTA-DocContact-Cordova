@@ -39,6 +39,19 @@ export class ApiServicesProvider {
     return this.http.post(`${API_BASE_URL}${API_PUBLIC}/login`, body);
   }
 
+  getContacts(token){
+    let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
+    return new Promise(resolve =>{
+      this.http.get(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts`, {
+        headers: headers
+      })
+        .subscribe(data => {
+          resolve(data);
+        }, err=>{
+          console.log(err);
+        });
+    });
+  }
 
 
   // getList() {
@@ -58,4 +71,6 @@ export class ApiServicesProvider {
   //   return this.http.put(`${API_BASE_URL}${API_USERS}/${todo.id}`,todo);
   //
   // }
+
+
 }

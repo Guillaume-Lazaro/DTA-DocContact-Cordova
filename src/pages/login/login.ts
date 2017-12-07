@@ -4,6 +4,7 @@ import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
+import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 
 /**
  * Generated class for the LoginPage page.
@@ -27,7 +28,7 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              userServices : UserServicesProvider,  public menuCtrl: MenuController) {
+              public userServices : UserServicesProvider,  public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
 
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -74,6 +75,10 @@ export class LoginPage {
 
   }
   goToAccueil(){
+    this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjA2MDAwMDAwMDIiLCJpYXQiOjE1MTI2NTExNjYsImV4cCI6MTUxMjY1MTQ2Nn0.wMapMzYRIBZWg5vAvVNDwE1aXZrnhXmi_uzGUrNsCY4")
+    .then( data => {
+      console.log(data)
+    })
     this.navCtrl.push(ContactListPage);
   }
 
