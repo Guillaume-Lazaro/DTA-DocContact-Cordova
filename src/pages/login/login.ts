@@ -47,7 +47,11 @@ export class LoginPage {
         }
         if(reponse.token !== undefined){
           this.userServices.getUser(reponse.token).then(user=> {
-            console.log(user)
+            console.log(user);
+            this.userServices.token = reponse.token;
+            this.contactServices.getContacts(reponse.token).then( contacts =>{
+              console.log(contacts)
+            })
           });
           this.goToAccueil();
         }
@@ -63,8 +67,8 @@ export class LoginPage {
   goToInscription(){
     
     this.navCtrl.push(InscriptionPage).then();
-
   }
+
   goToAccueil(){
     this.navCtrl.push(ContactListPage).then();
   }

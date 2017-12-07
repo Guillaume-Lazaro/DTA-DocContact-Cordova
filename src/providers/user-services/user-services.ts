@@ -12,7 +12,6 @@ import {toPromise} from "rxjs/operator/toPromise";
 */
 @Injectable()
 export class UserServicesProvider {
-
   constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
     console.log('Hello UserServicesProvider Provider');
   }
