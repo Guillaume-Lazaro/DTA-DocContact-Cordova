@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 
-//const API_BASE_URL: string = 'http://localhost:8080/';
+
+const API_BASE_URL: string = 'http://familink.cleverapps.io/';
 //const API_BASE_URL: string = 'http://10.1.0.201:8080/';
-//const API_USERS: string = 'trailers';
+const API_USERS: string = 'secured/users/contacts';
 
 @Injectable()
 export class ApiServicesProvider {
@@ -31,4 +32,18 @@ export class ApiServicesProvider {
   //   return this.http.put(`${API_BASE_URL}${API_USERS}/${todo.id}`,todo);
   //
   // }
+
+  getContacts(token){
+    var headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
+    return new Promise(resolve =>{
+      this.http.get(API_BASE_URL + API_USERS, {
+        headers: headers
+      })
+        .subscribe(data => {
+          resolve(data);
+        }, err=>{
+          console.log(err);
+        });
+    });
+  }
 }

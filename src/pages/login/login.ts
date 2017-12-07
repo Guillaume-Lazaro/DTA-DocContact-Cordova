@@ -4,6 +4,8 @@ import {Events, IonicPage, NavController, NavParams, ToastController} from 'ioni
 import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import { ApiServicesProvider } from "../../providers/api-services/api-services";
+
 //import { Storage } from '@ionic/storage';
 
 /**
@@ -29,7 +31,7 @@ export class LoginPage {
   userForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-              public events: Events) {
+              public events: Events, public apiService: ApiServicesProvider) {
 
     this.phoneNumberCtrl = fb.control('', [Validators.minLength(10), Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [Validators.minLength(4), Validators.maxLength(4), Validators.required]);
@@ -97,6 +99,10 @@ export class LoginPage {
     this.navCtrl.push(InscriptionPage);
   }
   goToAccueil(){
+    this.apiService.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijk5OTY2NjQ0NDAiLCJpYXQiOjE1MTI2NDI3MzQsImV4cCI6MTUxMjY0MzAzNH0.fXy0gf6FhOE7uECvN_aBEKnZ6BAnpz-JhLnaRZBqPUQ")
+    .then( data => {
+      console.log(data)
+    })
     this.navCtrl.push(ContactListPage);
   }
 
