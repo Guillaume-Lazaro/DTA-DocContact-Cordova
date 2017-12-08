@@ -26,8 +26,6 @@ export class LoginPage {
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
 
-    this.userServices = userServices;
-
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
@@ -74,7 +72,7 @@ export class LoginPage {
 
   }
 
-  goForgotPassword(){
+  ForgotPassword(){
     let alert = this.alertCtrl.create({
       title: 'Forgot Password',
       message: 'Please enter your phone number to receive your password',
@@ -97,7 +95,7 @@ export class LoginPage {
           handler: data => {
             this.apiServices.forgotPassword(data.phone).toPromise()
               .then(()=> {
-                console.log("password send")
+                console.log("password sent")
                 let toast = this.toastCtrl.create({
                   message: 'Your password has been sent',
                   duration: 3000,
