@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, Events, IonicPage, NavController, NavOptions, NavParams, ToastController} from 'ionic-angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactListPage} from "../contact-list/contact-list";
@@ -100,7 +100,7 @@ export class EditUserPage {
   }
 
   goToContactList() {
-    this.navCtrl.setRoot(ContactListPage);
+    this.navCtrl.setRoot(ContactListPage, {}, {animate:true});
   }
 
 }
