@@ -73,6 +73,10 @@ export class LoginPage {
   }
 
   forgotPassword(){
+    this.apiServices.getProfiles().toPromise()
+    .then(data => {
+      console.log(data);
+    });
     let alert = this.alertCtrl.create({
       title: 'Forgot Password',
       message: 'Please enter your phone number to receive your password',

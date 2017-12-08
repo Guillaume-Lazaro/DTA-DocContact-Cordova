@@ -3,6 +3,7 @@ import {AlertController, Events, IonicPage, NavController, NavParams, ToastContr
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ApiServicesProvider} from "../../providers/api-services/api-services";
 
 /**
  * Generated class for the EditContactPage page.
@@ -38,7 +39,7 @@ export class EditContactPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider,
               public userServices: UserServicesProvider, fb: FormBuilder, private toastCtrl: ToastController,
-              public events: Events, public alertCtrl: AlertController) {
+              public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -48,11 +49,16 @@ export class EditContactPage {
 
     //TODO récupérer la liste de types de profile via le webservices
     this.profile = 'senior';  //Valeur par défaut
-    this.profileType = [      //text= ce qui est affiché, value= la "vraie" valeur
-      { text: 'Doctor', value: 'MEDECIN' },
-      { text: 'Senior', value: 'SENIOR' },
-      { text: 'Family', value: 'FAMILLE' },
-    ];
+    // this.profileType = [ 'Doctot','test'     //text= ce qui est affiché, value= la "vraie" valeur
+    //   // { text: 'Doctor', value: 'MEDECIN' },
+    //   // { text: 'Senior', value: 'SENIOR' },
+    //   // { text: 'Family', value: 'FAMILLE' },
+    // ];
+
+    this.apiServices.getProfiles().toPromise()
+      .then(profiles =>{
+        this.profileType = profiles
+      });
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,
