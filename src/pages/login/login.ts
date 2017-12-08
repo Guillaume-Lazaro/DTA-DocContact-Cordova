@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Events, IonicPage, MenuController, NavController, ToastController} from 'ionic-angular';
 import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -22,8 +22,6 @@ export class LoginPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
-  //For Tests
-  contacts:any;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
@@ -42,8 +40,8 @@ export class LoginPage {
 
   handleSubmit() {
     this.userServices.logTheUser(this.phoneNumber, this.password)
-      .then((reponse: any)=>{
-        if(reponse.status === 400){
+      .then((response: any)=>{
+        if(response.status === 400){
           let toast = this.toastCtrl.create({
             message: 'Le nom d\'utilisateur ou le mot de passe est incorrect',
             duration: 3000,
@@ -51,34 +49,29 @@ export class LoginPage {
           });
           toast.present();
         }
-        if(reponse.token !== undefined){
-          this.userServices.getUser(reponse.token).then(user=> {
+        if(response.token !== undefined){
+          this.userServices.getUser(response.token).then(user=> {
             console.log(user);
-            this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
-            this.contactServices.getContacts(reponse.token).then( contacts =>{
-              this.contacts = contacts;
-              console.log(contacts)
-              this.goToContactList(contacts);
-            })
-              .catch();
-          })
-            .catch();
+            this.userServices.token=response.token; // Variable de debug, faire autrement pour la version finale
+            this.goToContactList();
+          });
+
         }
       })
       .catch();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
   goToInscription(){
     this.navCtrl.push(InscriptionPage).then();
   }
-  goToContactList(params) {
-    this.navCtrl.setRoot(ContactListPage, {
-      'contacts': this.contacts
-    });
+
+
+  goToContactList(){
+    this.navCtrl.setRoot(ContactListPage).then();
+
   }
 
   goForgotPassword(){

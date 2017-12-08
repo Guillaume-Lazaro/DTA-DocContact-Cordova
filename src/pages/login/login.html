@@ -12,12 +12,9 @@
 
 </ion-header>
 
-
 <ion-content padding>
-  <button type="button" name="button" ion-button (click)="goToInscription()"> Inscription </button>
-  <button type="button" name="button" ion-button (click)="goToContactList()">Accueil</button>
-
-  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
+  <div class="mainWindow">
+    <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire">
     <div>
       <ion-item>
         <ion-label floating>Phone number: </ion-label>
@@ -54,4 +51,9 @@
 
   </form>
   <button ion-button (click)="goForgotPassword()" clear>Mot de passe oublié</button>
+
+
+  <button type="button" name="button" ion-button (click)="goToInscription()"> Inscription </button>
+
+  </div>
 </ion-content>
