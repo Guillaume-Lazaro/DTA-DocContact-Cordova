@@ -5,7 +5,8 @@ import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
-
+import {ApiServicesProvider} from "../../providers/api-services/api-services";
+import {AlertController} from "ionic-angular";
 
 @IonicPage()
 @Component({
@@ -20,9 +21,11 @@ export class LoginPage {
   phoneNumberCtrl: FormControl;
   passwordCtrl: FormControl;
   userForm: FormGroup;
+  apiServices: ApiServicesProvider;
+
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
+              public userServices : UserServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
 
     this.userServices = userServices;
     this.menuCtrl.enable(false);
@@ -65,8 +68,38 @@ export class LoginPage {
   }
 
   goToInscription(){
+    //this.apiServices.presentPrompt()
+    //this.navCtrl.push(InscriptionPage).then();
 
-    this.navCtrl.push(InscriptionPage).then();
+    let alert = this.alertCtrl.create({
+      title: 'Forgot Password',
+      inputs: [
+        {
+          name: "phone",
+          placeholder: "Phone number"
+        }
+      ],
+      buttons:[
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler:() => {
+            console.log('cancel clicked');
+          }
+        },
+        {
+          text: "Send password",
+          handler: data => {
+            if(data.phone == "8520963187"){
+              console.log("Password send");
+            } else {
+              console.log("Wrong phone number");
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   goToAccueil(){
