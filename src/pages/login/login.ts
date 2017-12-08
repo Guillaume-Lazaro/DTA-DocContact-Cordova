@@ -60,7 +60,20 @@ export class LoginPage {
               console.log(user.phone)
             });
             this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
-            this.contactServices.getContacts(reponse.token).then( contacts =>{
+            this.contactServices.getContacts(reponse.token).then( (contacts:any) =>{
+              this.storage.get('user').then(user=>{
+              for (var contact of contacts) {
+                this.contactServices.storeContact(user,
+                  contact.firstName,
+                  contacts.lastName,
+                  contact.phone,
+                  contact.email,
+                  contact.profile,
+                  contact.gravatar,
+                  false,
+                  contact.id)
+              }
+              });
               this.contacts = contacts;
               console.log(contacts);
               this.goToContactList(contacts);

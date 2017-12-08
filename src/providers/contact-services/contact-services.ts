@@ -6,6 +6,7 @@ import { Md5 } from "ts-md5/dist/md5"
 import {Contact} from "../../model/Contact";
 import {Storage} from "@ionic/storage";
 import {User} from "../../model/User";
+import {of} from "rxjs/observable/of";
 
 @Injectable()
 export class ContactServicesProvider {
@@ -17,11 +18,11 @@ export class ContactServicesProvider {
   getContacts(token: string){
     return new Promise(resolve => {
       this.apiServices.getContacts(token).toPromise().then((contacts: any)=>{
-       resolve(contacts)
+        resolve(contacts)
       })
         .catch(error=>{
-        console.log(error)
-      })
+          console.log(error)
+        })
     })
   }
 
@@ -32,8 +33,8 @@ export class ContactServicesProvider {
         resolve(contact)
       })
         .catch(error=>{
-        console.log(error)
-      })
+          console.log(error)
+        })
     })
 
   }
@@ -67,16 +68,10 @@ export class ContactServicesProvider {
     return gravatar;
   }
 
-  storeContact(contact: Contact){
-    this.storage.get('user').then((user: User)=>{
+  storeContact(user:User,firstName: string, lastName: string, phone: string, email: string, profile: string, gravatar: string,emergency: boolean, id: string){
+    var contact = new Contact(firstName,lastName,email,phone,gravatar,profile,id, emergency,emergency);
       user.contacts.push(contact);
-      })
   }
-  /*storeContacts(user: User,contacts: any){
-    this.storage.get('user').then((user: User)=>{
-      for contact: Contact of contacts {
-        this.storeContact(user, contact)
-      }
-    })
-  }*/
+
+
 }
