@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import {ContactListPage} from "../pages/contact-list/contact-list";
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import {UserServicesProvider} from "../providers/user-services/user-services";
+import {EditUserPage} from "../pages/edit-user/edit-user";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,7 +18,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  items: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userServices: UserServicesProvider ) {
          //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
@@ -25,8 +26,8 @@ export class MyApp {
     //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     // used for an example of ngFor and navigation
-    this.items = [
-      { title: 'Mon Profil', component: UserProfilePage },
+    this.pages = [
+      { title: 'Modifier mon Profil', component: EditUserPage },
       { title: 'Mes Contacts', component: ContactListPage },
       { title: 'Deconnexion', component: LoginPage}
     ];

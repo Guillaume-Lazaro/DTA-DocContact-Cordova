@@ -23,22 +23,18 @@ export class UserServicesProvider {
         .then((message)=> {
           resolve(message);
         })
-        .catch((e)=> (resolve(e)))
-    })
-  }
-  /*getUser(token: string){
-    return new Promise( resolve =>{
-      this.apiServices.getUser(token).then( user=>
-      resolve(user))
-    })
-      .catch(error=>{
+        .catch( error=> {
         console.log(error)
       })
-  }*/
+    })
+  }
+
   getUser(token: string){
     return new Promise( resolve =>{
-      this.apiServices.getUser(token).toPromise().then( user=>
-        resolve(user))
+      this.apiServices.getUser(token).toPromise().then( user=>{
+        resolve(user)}).catch(error=>{
+        console.log(error)
+      });
     })
       .catch(error=>{
         console.log(error)
@@ -47,12 +43,13 @@ export class UserServicesProvider {
 
   createUser(phone: string, password: string, firstName: string,lastName: string, email: string, profile: string){
     return new Promise (resolve=>{
-      this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( user=>
-        resolve(user))
-    })
-      .catch(error=>{
+      this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( user=>{
+        resolve(user)
+      })
+        .catch(error=>{
         console.log(error)
       })
+    })
   }
 
 
