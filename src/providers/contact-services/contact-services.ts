@@ -13,27 +13,41 @@ export class ContactServicesProvider {
 
   getContacts(token: string){
     return new Promise(resolve => {
-      this.apiServices.getContacts(token).then(contacts=>{
+      this.apiServices.getContacts(token).toPromise().then(contacts=>{
         resolve(contacts)
       })
-    }).catch(error=>{
-      console.log(error)
+        .catch(error=>{
+        console.log(error)
+      })
     })
   }
 
-  createContacts(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string){
-    var gravatar = this.createGravatar(email);
+  createContact(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string){
+    let gravatar = this.createGravatar(email);
     return new Promise( resolve =>{
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
+        resolve(contact)
+      }).catch(error=>{
+        console.log(error)
+      })
+        .catch(error=>{
+        console.log(error)
+      })
+    })
+
+  }
+
+  updateContact(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string, id: string){
+    let gravatar = this.createGravatar(email);
+    return new Promise( resolve =>{
+      this.apiServices.updateContact(firstName, lastName, phone, email, profile, gravatar, emergency, token, id).toPromise().then( contact=>{
         resolve(contact)
       })
     })
       .catch(error=>{
         console.log(error)
       })
-
   }
-
 
   deleteContact(id: string, token: string){
     return new Promise( resolve=> {
@@ -41,7 +55,7 @@ export class ContactServicesProvider {
         resolve(reponse)
       })
         .catch(error=>{
-        console.log(error)
+          console.log(error)
         })
     })
   }
