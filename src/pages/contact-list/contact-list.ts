@@ -19,18 +19,16 @@ export class ContactListPage {
   //For tests
   contacts:any;
   originalContact: any;
-  token: string;
   verif0Contact: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider, public userServices: UserServicesProvider) {
     this.menuCtrl.enable(true);
 
-    this.token = this.userServices.token
 
   }
 
   ionViewDidLoad() {
-    this.contactServices.getContacts(this.token).then( contacts =>{
+    this.contactServices.getContacts(this.userServices.token).then( contacts =>{
       this.originalContact = contacts;
       this.contacts = this.originalContact;
       this.verif0Contact = (this.contacts.length == 0);

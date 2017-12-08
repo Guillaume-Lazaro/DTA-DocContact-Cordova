@@ -12,7 +12,7 @@ import {UserServicesProvider} from "../../providers/user-services/user-services"
   templateUrl: 'login.html',
 })
 export class LoginPage {
-  phoneNumber: string = '4000000004'; // Supprimer la valeur dans la version finale
+  phoneNumber: string = '0655545546'; // Supprimer la valeur dans la version finale
   password: string = '0000';    // Supprimer la valeur dans la version finale
   //rememberMe: boolean = false;  //On verra plus tard
 

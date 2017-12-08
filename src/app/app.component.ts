@@ -17,7 +17,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  items: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userServices: UserServicesProvider ) {
          //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
@@ -25,7 +25,7 @@ export class MyApp {
     //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     // used for an example of ngFor and navigation
-    this.items = [
+    this.pages = [
       { title: 'Mon Profil', component: UserProfilePage },
       { title: 'Mes Contacts', component: ContactListPage },
       { title: 'Deconnexion', component: LoginPage}
