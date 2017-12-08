@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -37,7 +37,8 @@ export class EditContactPage {
   userForm:     FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider,
-              public userServices: UserServicesProvider, fb: FormBuilder, private toastCtrl: ToastController, public events: Events) {
+              public userServices: UserServicesProvider, fb: FormBuilder, private toastCtrl: ToastController,
+              public events: Events, public alertCtrl: AlertController) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -72,7 +73,7 @@ export class EditContactPage {
     var toastMessage;
     if (this.isInEditMode) {
       toastMessage = 'Le contact a bien été modifié';
-      //TODO implémenter editContact
+      //TODO implémenter editContact() depuis contact-services
     } else {
       //Création
       toastMessage = 'Le contact a bien été ajouté';
@@ -96,6 +97,30 @@ export class EditContactPage {
   }
 
   ionViewDidLoad() {
+  }
+
+  deleteContact() {
+    let alert = this.alertCtrl.create({
+      title: 'Delete ?',
+      message: 'Do you want to delete this contact ?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('No clicked');
+          }
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            console.log('Delete clicked');
+            //TODO ajouter deleteContact() depuis le contacts-services et retourner à la liste
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
 
   fillFields() {

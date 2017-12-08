@@ -81,4 +81,8 @@
 
   </form>
 
+  <div *ngIf="isInEditMode">
+    <button type="button" name="button" ion-button (click)="deleteContact()"> Supprimer </button>
+  </div>
+
 </ion-content>
