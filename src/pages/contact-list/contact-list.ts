@@ -17,6 +17,7 @@ export class ContactListPage {
   searchQuery: string = '';
   //For tests
   contacts:any;
+  verif0Contact: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
     this.menuCtrl.enable(true);
@@ -25,11 +26,11 @@ export class ContactListPage {
 
   ionViewDidLoad() {
     this.initializeList();
-    // METTRE LE VRAI TOKEN
-    // this.contactServices.getContacts("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6IjY2NjY2NjY2NjYiLCJpYXQiOjE1MTI2NTIzOTIsImV4cCI6MTUxMjY1MjY5Mn0.ZG-mi3_vdDvnHeYyE9HUMg8al8UTBO0demeaHVUC_QM")
-    //   .then( data => {
-    //     console.log(data)
-    //   })
+    if(this.contacts.length==0){
+      this.verif0Contact=true;
+    }else{
+      this.verif0Contact=false;
+    }
   }
 
   initializeList(){
@@ -50,9 +51,10 @@ export class ContactListPage {
       })
     }
   }
-  goToEditView(){
+  goToAddContact(){
     this.navCtrl.push(EditContactPage).then();
   }
+
   goToContactDetails(contact){
     this.navCtrl.push(ContactDetailPage, { 'contact': contact}).then();
   }
