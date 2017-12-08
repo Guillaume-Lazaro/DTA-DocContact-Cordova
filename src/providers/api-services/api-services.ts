@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Dialogs} from "@ionic-native/dialogs";
+import { AlertController } from "ionic-angular";
 
 
 const API_BASE_URL: string = 'http://familink.cleverapps.io';
@@ -10,7 +11,7 @@ const API_PRIVATE_MODIFIER: string = "/secured/users";
 @Injectable()
 export class ApiServicesProvider {
 
-  constructor(public http: HttpClient, private dialog: Dialogs) {
+  constructor(public http: HttpClient, private alertCtrl: AlertController) {
 
   }
   SignUpUser(phone, password, firstName, lastName, email, profile){
@@ -90,10 +91,39 @@ export class ApiServicesProvider {
         headers: headers
      })
         .subscribe()
-    })
-    this.dialog.prompt("Veuillez indiquer votre numero de telephone afin de recevoir votre mot de passe","Mot de passe oublié", [],"")
-      .then(()=> console.log("Dialog Dismissed"))
-      .catch(e => console.log(e));
+    });
+  }
+
+  presentPrompt(){
+    let alert = this.alertCtrl.create({
+      title: 'Forgot Password',
+      inputs: [
+        {
+          name: "phone",
+          placeholder: "Phone number"
+        }
+      ],
+      buttons:[
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler:data => {
+            console.log('cancel clicked');
+          }
+        },
+        {
+          text: "Send password",
+          handler: data => {
+            if(data.name == "8520963187"){
+              console.log("Password send");
+            } else {
+              console.log("Wrong phone number");
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   // getList() {
