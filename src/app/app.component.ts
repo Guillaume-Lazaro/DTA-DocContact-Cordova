@@ -8,6 +8,7 @@ import { LoginPage } from '../pages/login/login';
 import {ContactListPage} from "../pages/contact-list/contact-list";
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import {UserServicesProvider} from "../providers/user-services/user-services";
+import {EditUserPage} from "../pages/edit-user/edit-user";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,7 +27,7 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Mon Profil', component: UserProfilePage },
+      { title: 'Modifier mon Profil', component: EditUserPage },
       { title: 'Mes Contacts', component: ContactListPage },
       { title: 'Deconnexion', component: LoginPage}
     ];

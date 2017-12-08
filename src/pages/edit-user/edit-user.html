@@ -7,12 +7,62 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>editUser</ion-title>
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goToContactList()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>Profile</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+  <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
+    <div>
+      <ion-item>
+        <ion-label floating>Last name: </ion-label>
+        <ion-input formControlName="lastName" [(ngModel)]="lastName"></ion-input>
+      </ion-item>
+      <div *ngIf="lastNameCtrl.dirty && lastNameCtrl.hasError('required')">
+        The last name is required
+      </div>
+
+      <ion-item>
+        <ion-label floating>First name: </ion-label>
+        <ion-input formControlName="firstName" [(ngModel)]="firstName"></ion-input>
+      </ion-item>
+      <div *ngIf="firstNameCtrl.dirty && firstNameCtrl.hasError('required')">
+        The first name is required
+      </div>
+
+      <ion-item>
+        <ion-label floating>Email: </ion-label>
+        <ion-input formControlName="email" type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">
+        The email is invalid
+      </div>
+      <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">
+        The email is required
+      </div>
+
+      <ion-item>
+        <ion-label>Profile : </ion-label>
+        <ion-select formControlName="profile" [(ngModel)]="profile" interface="popover" [selectOptions]="profileType">
+          <ion-option *ngFor="let o of profileType" [value]="o.value">{{o.text}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+
+    <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+      Modify
+    </button>
+
+  </form>
 
 </ion-content>
