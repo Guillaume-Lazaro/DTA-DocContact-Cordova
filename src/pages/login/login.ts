@@ -67,47 +67,55 @@ export class LoginPage {
 
   }
 
-  handleSendPass(phone: string){
-    console.log(this.apiServices);
-    this.apiServices.forgotPassword(phone).toPromise()
-      .then(()=> {
-        console.log("password send")
-      })
-      .catch(error => {
-        console.log(error);
-      })
+  goToInscription(){
+    this.navCtrl.push(InscriptionPage).then();
   }
 
-  goToInscription(){
-    //this.apiServices.presentPrompt()
-    //this.navCtrl.push(InscriptionPage).then();
-
-
-      let alert = this.alertCtrl.create({
-        title: 'Forgot Password',
-        inputs: [
-          {
-            name: "phone",
-            placeholder: "Phone number"
+  goForgotPassword(){
+    let alert = this.alertCtrl.create({
+      title: 'Forgot Password',
+      message: 'Please enter your phone number to receive your password',
+      inputs: [
+        {
+          name: "phone",
+          placeholder: "Phone number"
+        }
+      ],
+      buttons:[
+        {
+          text: "Cancel",
+          role: "cancel",
+          handler:() => {
+            console.log('cancel ');
           }
-        ],
-        buttons:[
-          {
-            text: "Cancel",
-            role: "cancel",
-            handler:() => {
-              console.log('cancel clicked');
-            }
-          },
-          {
-            text: "Send password",
-            handler: data => {
-              this.handleSendPass(data.phone)
-            }
+        },
+        {
+          text: "Send password",
+          handler: data => {
+            this.apiServices.forgotPassword(data.phone).toPromise()
+              .then(()=> {
+                console.log("password send")
+                let toast = this.toastCtrl.create({
+                  message: 'Your password has been sent',
+                  duration: 3000,
+                  position: 'bottom'
+                });
+                toast.present().then();
+              })
+              .catch(error => {
+                console.log(error);
+                let toast = this.toastCtrl.create({
+                  message: 'Invalid number',
+                  duration: 3000,
+                  position: 'bottom'
+                });
+                toast.present().then();
+              })
           }
-        ]
-      });
-      alert.present();
+        }
+      ]
+    });
+    alert.present();
   }
 
   goToAccueil(){
