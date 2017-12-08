@@ -22,7 +22,8 @@ export class UserServicesProvider {
       this.apiServices.logUser(login, password).toPromise()
         .then((message)=> {
           resolve(message);
-        }).catch( error=> {
+        })
+        .catch( error=> {
         console.log(error)
       })
     })
@@ -33,7 +34,7 @@ export class UserServicesProvider {
       this.apiServices.getUser(token).toPromise().then( user=>{
         resolve(user)}).catch(error=>{
         console.log(error)
-        });
+      });
     })
       .catch(error=>{
         console.log(error)
@@ -44,7 +45,8 @@ export class UserServicesProvider {
     return new Promise (resolve=>{
       this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( user=>{
         resolve(user)
-      }).catch(error=>{
+      })
+        .catch(error=>{
         console.log(error)
       })
     })
