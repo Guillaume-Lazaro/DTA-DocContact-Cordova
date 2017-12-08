@@ -22,6 +22,8 @@ export class LoginPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
+  //For Tests
+  contacts:any;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
@@ -47,16 +49,20 @@ export class LoginPage {
             duration: 3000,
             position: 'bottom'
           });
-          toast.present().then();
+          toast.present();
         }
         if(reponse.token !== undefined){
           this.userServices.getUser(reponse.token).then(user=> {
             console.log(user);
+            this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
             this.contactServices.getContacts(reponse.token).then( contacts =>{
+              this.contacts = contacts;
               console.log(contacts)
+              this.goToContactList(contacts);
             })
-          });
-          this.goToAccueil();
+              .catch();
+          })
+            .catch();
         }
       })
       .catch();
@@ -64,11 +70,15 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-
   }
 
   goToInscription(){
     this.navCtrl.push(InscriptionPage).then();
+  }
+  goToContactList(params) {
+    this.navCtrl.setRoot(ContactListPage, {
+      'contacts': this.contacts
+    });
   }
 
   goForgotPassword(){

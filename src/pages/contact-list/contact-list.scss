@@ -1,3 +1,33 @@
 page-contact-list {
 
 }
+.contactCard{
+  border: 1px solid lightgrey;
+  margin:10px;
+  padding:5px;
+}
+
+.containerAlert{
+  display:flex;
+  align-content: center;
+  width: 100%;
+  height: 60%;
+  margin: 5px;
+  padding: 5px;
+}
+.alertOContacts {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin:auto;
+  text-align: center;
+  background-color: lightgrey;
+  height:40%;
+  padding:10px;
+  border:1px solid grey;
+  border-radius: 5px;
+}
+.alertOContacts button{
+  align-self: end;
+}
+

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the ContactDetailPage page.
+ * Generated class for the EditUserPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,17 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-contact-detail',
-  templateUrl: 'contact-detail.html',
+  selector: 'page-edit-user',
+  templateUrl: 'edit-user.html',
 })
-export class ContactDetailPage {
+export class EditUserPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    let contact = this.navParams.get('contact');
-    console.log(contact);
+    console.log('ionViewDidLoad EditUserPage');
   }
 
 }
