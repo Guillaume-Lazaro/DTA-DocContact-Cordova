@@ -47,7 +47,7 @@ export class LoginPage {
             duration: 3000,
             position: 'bottom'
           });
-          toast.present().then();
+          toast.present();
         }
         if(reponse.token !== undefined){
           this.userServices.getUser(reponse.token).then(user=> {
@@ -58,7 +58,9 @@ export class LoginPage {
               console.log(contacts)
               this.goToContactList(contacts);
             })
-          });
+              .catch();
+          })
+            .catch();
         }
       })
       .catch();
@@ -69,13 +71,12 @@ export class LoginPage {
   }
 
   goToInscription(){
-    this.navCtrl.push(InscriptionPage).then();
+    this.navCtrl.push(InscriptionPage);
   }
-
   goToContactList(params){
     this.navCtrl.setRoot(ContactListPage, {
       'contacts': this.contacts
-    }).then();
+    });
   }
 
 }
