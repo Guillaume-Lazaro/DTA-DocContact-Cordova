@@ -77,7 +77,7 @@ export class EditContactPage {
     } else {
       //Création
       toastMessage = 'Le contact a bien été ajouté';
-      this.contactServices.createContacts(this.firstName,this.lastName,this.phone,this.email,this.profile, false, this.userServices.token)
+      this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, this.userServices.token)
         .then((reponse: any)=>{
           console.log('Reponse: '+reponse);
         })
@@ -114,7 +114,8 @@ export class EditContactPage {
           text: 'Delete',
           handler: () => {
             console.log('Delete clicked');
-            //TODO ajouter deleteContact() depuis le contacts-services et retourner à la liste
+            //TODO ajouter deleteContact() depuis le contacts-services
+            this.navCtrl.popToRoot();
           }
         }
       ]
