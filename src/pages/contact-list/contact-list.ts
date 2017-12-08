@@ -26,11 +26,7 @@ export class ContactListPage {
 
   ionViewDidLoad() {
     this.initializeList();
-    if(this.contacts.length==0){
-      this.verif0Contact=true;
-    }else{
-      this.verif0Contact=false;
-    }
+    this.verif0Contact = (this.contacts.length == 0);
   }
 
   initializeList(){
