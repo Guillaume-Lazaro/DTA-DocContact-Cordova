@@ -5,7 +5,7 @@ import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
-import {ApiServicesProvider} from "../../providers/api-services/api-services";
+import { ApiServicesProvider } from "../../providers/api-services/api-services";
 import {AlertController} from "ionic-angular";
 
 @IonicPage()
@@ -21,13 +21,13 @@ export class LoginPage {
   phoneNumberCtrl: FormControl;
   passwordCtrl: FormControl;
   userForm: FormGroup;
-  apiServices: ApiServicesProvider;
 
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
+              public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
 
     this.userServices = userServices;
+    this.apiServices = apiServices;
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
     this.passwordCtrl = fb.control('', [ Validators.minLength(4), Validators.maxLength(4), Validators.required]);
@@ -67,39 +67,47 @@ export class LoginPage {
 
   }
 
+  handleSendPass(phone: string){
+    console.log(this.apiServices);
+    this.apiServices.forgotPassword(phone).toPromise()
+      .then(()=> {
+        console.log("password send")
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  }
+
   goToInscription(){
     //this.apiServices.presentPrompt()
     //this.navCtrl.push(InscriptionPage).then();
 
-    let alert = this.alertCtrl.create({
-      title: 'Forgot Password',
-      inputs: [
-        {
-          name: "phone",
-          placeholder: "Phone number"
-        }
-      ],
-      buttons:[
-        {
-          text: "Cancel",
-          role: "cancel",
-          handler:() => {
-            console.log('cancel clicked');
+
+      let alert = this.alertCtrl.create({
+        title: 'Forgot Password',
+        inputs: [
+          {
+            name: "phone",
+            placeholder: "Phone number"
           }
-        },
-        {
-          text: "Send password",
-          handler: data => {
-            if(data.phone == "8520963187"){
-              console.log("Password send");
-            } else {
-              console.log("Wrong phone number");
+        ],
+        buttons:[
+          {
+            text: "Cancel",
+            role: "cancel",
+            handler:() => {
+              console.log('cancel clicked');
+            }
+          },
+          {
+            text: "Send password",
+            handler: data => {
+              this.handleSendPass(data.phone)
             }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
   }
 
   goToAccueil(){

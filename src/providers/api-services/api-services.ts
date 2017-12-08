@@ -1,7 +1,5 @@
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Dialogs} from "@ionic-native/dialogs";
-import { AlertController } from "ionic-angular";
 
 
 const API_BASE_URL: string = 'http://familink.cleverapps.io';
@@ -11,9 +9,10 @@ const API_PRIVATE_MODIFIER: string = "/secured/users";
 @Injectable()
 export class ApiServicesProvider {
 
-  constructor(public http: HttpClient, private alertCtrl: AlertController) {
+  constructor(public http: HttpClient) {
 
   }
+
   SignUpUser(phone, password, firstName, lastName, email, profile){
      return this.http.post(`${API_BASE_URL}${API_PUBLIC}/sign-in?contactsLength=0`,{
         phone: phone,
@@ -84,65 +83,13 @@ export class ApiServicesProvider {
       })
   }
 
-  forgotPassword(){
+  forgotPassword(phone: string){
     let headers = new HttpHeaders().set("Content-Type","application/json");
-    return new Promise(resolve => {
-      this.http.post(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/forgot-password`, {
+      return this.http.post(`${API_BASE_URL}${API_PUBLIC}/forgot-password`,{
+        phone: phone
+      } ,{
         headers: headers
-     })
-        .subscribe()
     });
   }
-
-  presentPrompt(){
-    let alert = this.alertCtrl.create({
-      title: 'Forgot Password',
-      inputs: [
-        {
-          name: "phone",
-          placeholder: "Phone number"
-        }
-      ],
-      buttons:[
-        {
-          text: "Cancel",
-          role: "cancel",
-          handler:data => {
-            console.log('cancel clicked');
-          }
-        },
-        {
-          text: "Send password",
-          handler: data => {
-            if(data.name == "8520963187"){
-              console.log("Password send");
-            } else {
-              console.log("Wrong phone number");
-            }
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  // getList() {
-  //   return this.http.get(`${API_BASE_URL}${API_USERS}`);
-  // }
-  //
-  // addTodos(todo){
-  //   return this.http.post(`${API_BASE_URL}${API_USERS}`,todo);
-  // }
-  //
-  // deleteTodos(todo){
-  //   console.log('id à suppr :'+todo.id)
-  //   return this.http.delete(`${API_BASE_URL}${API_USERS}/${todo.id}`);
-  // }
-  //
-  // modifyTodo(todo){
-  //   return this.http.put(`${API_BASE_URL}${API_USERS}/${todo.id}`,todo);
-  //
-  // }
-
 
 }
