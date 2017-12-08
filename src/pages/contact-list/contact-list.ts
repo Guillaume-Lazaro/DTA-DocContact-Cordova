@@ -28,11 +28,6 @@ export class ContactListPage {
   }
 
   ionViewDidLoad() {
-
-
-  }
-  ionViewWillEnter(){
-    //important to place it here if we want the content to be reloaded each time we call at the contact-list
     this.contactServices.getContacts(this.userServices.token).then( contacts =>{
       this.originalContact = contacts;
       this.contacts = this.originalContact;
@@ -40,8 +35,6 @@ export class ContactListPage {
       console.log(contacts)
     })
   }
-
-
 
   initializeList(){
     //For tests
@@ -60,9 +53,6 @@ export class ContactListPage {
         }
       })
     }
-  }
-  callContact(phone){
-    alert('call :'+phone);
   }
   goToAddContact(){
     this.navCtrl.push(EditContactPage).then();

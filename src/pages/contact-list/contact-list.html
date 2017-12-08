@@ -15,13 +15,12 @@
 </ion-header>
 
 
-<ion-content >
+<ion-content padding>
   <ion-searchbar
     [(ngModel)]="searchQuery"
     [showCancelButton]="shouldShowCancel"
     placeholder="Cherchez par nom ou par numéro de téléphone"
     (ionInput)="searchFunction($event)"
-    class="contactSearchBar"
     >
   </ion-searchbar>
   <br>
@@ -33,26 +32,15 @@
     </div>
   </div>
 
-  <div *ngFor="let contact of contacts">
-    <div >
+  <div *ngFor="let contact of contacts" >
+    <div (click)="goToContactDetails(contact)">
       <div class="contactCard">
-        <div (click)="goToContactDetails(contact)" class="detailContactClickZone">
-          <img src="http://upload.chatsdumonde.com/img_global/25-adopter-chat/aspects-pratiques-adoption-chat/arrivee-d-un-chaton-a-la-maison-preparer-son-environnement/_big-1334_1338-les-preparatifs-avant-l-arrivee-du-chaton.jpg" alt="">
-          <div class="contactNameContainer">
-          <span class="lastNameDisplay">
-            {{contact.lastName}}
-          </span>
-            <span class="firstNameDisplay">
-            {{contact.firstName}}
-          </span>
-          </div>
-        </div>
-
-        <div class="cellCallButton">
-          <button icon-only  class="callButton" (click)="callContact(contact.phone)">
-            <ion-icon name="call" class="iconCall"></ion-icon>
-          </button>
-        </div>
+        <h2>
+          {{contact.firstName}}
+        </h2>
+        <p class="cardGenre">
+          {{contact.lastName}}
+        </p>
       </div>
     </div>
   </div>
