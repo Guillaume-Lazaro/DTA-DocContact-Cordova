@@ -4,6 +4,7 @@ import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular
 import { EditContactPage } from '../edit-contact/edit-contact';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
+import {UserServicesProvider} from "../../providers/user-services/user-services";
 
 
 
@@ -17,21 +18,27 @@ export class ContactListPage {
   searchQuery: string = '';
   //For tests
   contacts:any;
+  originalContact: any;
   verif0Contact: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider, public userServices: UserServicesProvider) {
     this.menuCtrl.enable(true);
+
 
   }
 
   ionViewDidLoad() {
-    this.initializeList();
-    this.verif0Contact = (this.contacts.length == 0);
+    this.contactServices.getContacts(this.userServices.token).then( contacts =>{
+      this.originalContact = contacts;
+      this.contacts = this.originalContact;
+      this.verif0Contact = (this.contacts.length == 0);
+      console.log(contacts)
+    })
   }
 
   initializeList(){
     //For tests
-    this.contacts = this.navParams.get('contacts');
+    this.contacts = this.originalContact;
   }
 
   searchFunction(event: any){
