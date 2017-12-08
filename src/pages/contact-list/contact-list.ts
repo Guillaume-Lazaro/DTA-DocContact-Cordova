@@ -5,7 +5,7 @@ import { EditContactPage } from '../edit-contact/edit-contact';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
-
+import { CallNumber } from '@ionic-native/call-number';
 
 
 @IonicPage()
@@ -21,7 +21,9 @@ export class ContactListPage {
   originalContact: any;
   verif0Contact: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider, public userServices: UserServicesProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
+              public contactServices: ContactServicesProvider, public userServices: UserServicesProvider,
+              public callNumber: CallNumber) {
     this.menuCtrl.enable(true);
 
 
@@ -62,7 +64,10 @@ export class ContactListPage {
     }
   }
   callContact(phone){
-    alert('call :'+phone);
+    this.callNumber.callNumber(phone, true)
+      .then(() => console.log('Launched dialer!'))
+      .catch(() => console.log('Error launching dialer'));
+
   }
   goToAddContact(){
     this.navCtrl.push(EditContactPage).then();

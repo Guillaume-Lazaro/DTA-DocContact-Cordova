@@ -85,4 +85,5 @@
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
     <allow-navigation href="http://192.168.116.3:8101" />
     <allow-navigation href="http://10.1.2.63:8101" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
 </widget>
