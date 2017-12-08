@@ -13,11 +13,11 @@ export class ContactServicesProvider {
 
   getContacts(token: string){
     return new Promise(resolve => {
-      this.apiServices.getContacts(token).then(contacts=>{
+      this.apiServices.getContacts(token).toPromise().then(contacts=>{
         resolve(contacts)
-      })
-    }).catch(error=>{
-      console.log(error)
+      }).catch(error=>{
+        console.log(error)
+    })
     })
   }
 
@@ -26,10 +26,10 @@ export class ContactServicesProvider {
     return new Promise( resolve =>{
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
         resolve(contact)
-      })
-    })
-      .catch(error=>{
+      }).catch(error=>{
         console.log(error)
+    })
+
       })
 
   }

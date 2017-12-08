@@ -57,11 +57,11 @@ export class LoginPage {
               this.contacts = contacts;
               console.log(contacts)
               this.goToContactList(contacts);
-            })
-          });
+            }).catch();
+          }).catch();
         }
-      })
-      .catch();
+      }).catch();
+
   }
 
   ionViewDidLoad() {
@@ -69,13 +69,13 @@ export class LoginPage {
   }
 
   goToInscription(){
-    this.navCtrl.push(InscriptionPage).then();
+    this.navCtrl.push(InscriptionPage).then().catch();;
   }
 
   goToContactList(params){
     this.navCtrl.setRoot(ContactListPage, {
       'contacts': this.contacts
-    }).then();
+    }).then().catch();
   }
 
 }
