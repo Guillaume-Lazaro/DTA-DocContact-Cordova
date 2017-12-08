@@ -47,14 +47,6 @@ export class EditContactPage {
     this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
     this.profileCtrl = fb.control('', Validators.required);
 
-    //TODO récupérer la liste de types de profile via le webservices
-    this.profile = 'senior';  //Valeur par défaut
-    // this.profileType = [ 'Doctot','test'     //text= ce qui est affiché, value= la "vraie" valeur
-    //   // { text: 'Doctor', value: 'MEDECIN' },
-    //   // { text: 'Senior', value: 'SENIOR' },
-    //   // { text: 'Family', value: 'FAMILLE' },
-    // ];
-
     this.apiServices.getProfiles().toPromise()
       .then(profiles =>{
         this.profileType = profiles
@@ -102,8 +94,7 @@ export class EditContactPage {
     this.navCtrl.pop();
   }
 
-  ionViewDidLoad() {
-  }
+  ionViewDidLoad() { }
 
   deleteContact() {
     let alert = this.alertCtrl.create({

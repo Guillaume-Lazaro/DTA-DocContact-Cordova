@@ -3,6 +3,7 @@ import {AlertController, Events, IonicPage, NavController, NavOptions, NavParams
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactListPage} from "../contact-list/contact-list";
+import {ApiServicesProvider} from "../../providers/api-services/api-services";
 
 /**
  * Generated class for the EditUserPage page.
@@ -35,20 +36,17 @@ export class EditUserPage {
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public userServices: UserServicesProvider,
               fb: FormBuilder, private toastCtrl: ToastController,public events: Events,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController, public apiServices: ApiServicesProvider) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
     this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
     this.profileCtrl = fb.control('', Validators.required);
 
-    //TODO récupérer la liste de types de profile via le webservices
-    this.profile = 'SENIOR';  //Valeur par défaut
-    this.profileType = [      //text= ce qui est affiché, value= la "vraie" valeur
-      { text: 'Doctor', value: 'MEDECIN' },
-      { text: 'Senior', value: 'SENIOR' },
-      { text: 'Family', value: 'FAMILLE' },
-    ];
+    this.apiServices.getProfiles().toPromise()
+      .then(profiles =>{
+        this.profileType = profiles;
+      });
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,
@@ -65,6 +63,7 @@ export class EditUserPage {
       .catch(error=> {
         console.log(error);
       });
+
   }
 
   handleSubmit() {
@@ -88,9 +87,7 @@ export class EditUserPage {
     this.navCtrl.setRoot(ContactListPage).then();
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditUserPage');
-  }
+  ionViewDidLoad() { }
 
   fillFields() {
     this.lastName = this.user.lastName;
