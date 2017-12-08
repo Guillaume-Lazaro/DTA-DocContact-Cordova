@@ -5,7 +5,40 @@ page-contact-list {
   border: 1px solid lightgrey;
   margin:10px;
   padding:5px;
+  display: flex;
+  flex-direction: row;
+  -webkit-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
+  -moz-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
+  box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
 }
+.contactCard img{
+  width:90px;
+  height:90px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  border:1px solid lightgrey;
+}
+
+.contactNameContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  width: 100%;
+  padding-top:10px;
+}
+.cellCallButton{
+  margin-right:5%;
+}
+.callButton{
+  background-color: white;
+  height:100%;
+  width:90px;
+  border:1px solid grey;
+  border-radius: 50%;
+}
+
 
 .containerAlert{
   display:flex;
@@ -30,4 +63,3 @@ page-contact-list {
 .alertOContacts button{
   align-self: end;
 }
-

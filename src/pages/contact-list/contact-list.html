@@ -35,12 +35,20 @@
   <div *ngFor="let contact of contacts" >
     <div (click)="goToContactDetails(contact)">
       <div class="contactCard">
-        <h2>
-          {{contact.firstName}}
-        </h2>
-        <p class="cardGenre">
-          {{contact.lastName}}
-        </p>
+        <img src="http://upload.chatsdumonde.com/img_global/25-adopter-chat/aspects-pratiques-adoption-chat/arrivee-d-un-chaton-a-la-maison-preparer-son-environnement/_big-1334_1338-les-preparatifs-avant-l-arrivee-du-chaton.jpg" alt="">
+        <div class="contactNameContainer">
+          <h2>
+            {{contact.lastName}}
+          </h2>
+          <p class="cardGenre">
+            {{contact.firstName}}
+          </p>
+        </div>
+        <div class="cellCallButton">
+          <button icon-only  class="callButton">
+            <ion-icon name="call" class="iconCall" large></ion-icon>
+          </button>
+        </div>
       </div>
     </div>
   </div>
