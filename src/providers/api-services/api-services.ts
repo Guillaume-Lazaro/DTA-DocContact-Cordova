@@ -81,7 +81,7 @@ export class ApiServicesProvider {
         phone: phone
       } ,{
         headers: headers
-    });
+    })
   }
 
   updateContact(firstName: string, lastname: string, phone: string, email: string,profile:string, gravatar: string, emergency, token: string, id: string){
