@@ -72,7 +72,7 @@ export class LoginPage {
 
   }
 
-  ForgotPassword(){
+  forgotPassword(){
     let alert = this.alertCtrl.create({
       title: 'Forgot Password',
       message: 'Please enter your phone number to receive your password',
