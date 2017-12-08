@@ -5,6 +5,9 @@ import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
+import {User} from "../../model/User";
+import {Storage} from "@ionic/storage";
+import {Contact} from "../../model/Contact";
 
 
 @IonicPage()
@@ -25,7 +28,8 @@ export class LoginPage {
   contacts:any;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
+              public userServices : UserServicesProvider, public contactServices: ContactServicesProvider,
+              public menuCtrl: MenuController, private storage: Storage) {
 
     this.userServices = userServices;
     this.menuCtrl.enable(false);
@@ -50,12 +54,15 @@ export class LoginPage {
           toast.present();
         }
         if(reponse.token !== undefined){
-          this.userServices.getUser(reponse.token).then(user=> {
-            console.log(user);
+          this.userServices.getUser(reponse.token).then((user:any)=> {
+            this.userServices.storeUser(new User(user.firstName,user.lastName,user.email,user.phone,user.gravatar,user.profile,reponse.token,[]));
+            this.storage.get("user").then(user=>{
+              console.log(user.phone)
+            });
             this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
             this.contactServices.getContacts(reponse.token).then( contacts =>{
               this.contacts = contacts;
-              console.log(contacts)
+              console.log(contacts);
               this.goToContactList(contacts);
             })
               .catch();

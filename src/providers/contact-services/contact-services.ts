@@ -3,18 +3,21 @@ import { Injectable } from '@angular/core';
 
 import {ApiServicesProvider} from "../api-services/api-services";
 import { Md5 } from "ts-md5/dist/md5"
+import {Contact} from "../../model/Contact";
+import {Storage} from "@ionic/storage";
+import {User} from "../../model/User";
 
 @Injectable()
 export class ContactServicesProvider {
 
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
     console.log('Hello ContactServicesProvider Provider');
   }
 
   getContacts(token: string){
     return new Promise(resolve => {
-      this.apiServices.getContacts(token).toPromise().then(contacts=>{
-        resolve(contacts)
+      this.apiServices.getContacts(token).toPromise().then((contacts: any)=>{
+       resolve(contacts)
       })
         .catch(error=>{
         console.log(error)
@@ -63,4 +66,17 @@ export class ContactServicesProvider {
     var gravatar = `https://www.gravatar.com/avatar/${mailMd5}`;
     return gravatar;
   }
+
+  storeContact(contact: Contact){
+    this.storage.get('user').then((user: User)=>{
+      user.contacts.push(contact);
+      })
+  }
+  /*storeContacts(user: User,contacts: any){
+    this.storage.get('user').then((user: User)=>{
+      for contact: Contact of contacts {
+        this.storeContact(user, contact)
+      }
+    })
+  }*/
 }
