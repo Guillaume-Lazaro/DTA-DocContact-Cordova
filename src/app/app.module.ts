@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { Dialogs } from "@ionic-native/dialogs";
 
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
@@ -53,7 +54,8 @@ import { UserServicesProvider } from '../providers/user-services/user-services';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
-    UserServicesProvider
+    UserServicesProvider,
+    Dialogs
   ],
 })
 export class AppModule {}
