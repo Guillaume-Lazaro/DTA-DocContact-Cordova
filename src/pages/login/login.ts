@@ -44,7 +44,7 @@ export class LoginPage {
             duration: 3000,
             position: 'bottom'
           });
-          toast.present().then();
+          toast.present();
         }
         if(response.token !== undefined){
           this.userServices.getUser(response.token).then(user=> {
@@ -52,6 +52,7 @@ export class LoginPage {
             this.userServices.token=response.token; // Variable de debug, faire autrement pour la version finale
             this.goToContactList();
           });
+
         }
       })
       .catch();
@@ -61,11 +62,13 @@ export class LoginPage {
   }
 
   goToInscription(){
-    this.navCtrl.push(InscriptionPage).then();
+    this.navCtrl.push(InscriptionPage);
   }
+
 
   goToContactList(){
     this.navCtrl.setRoot(ContactListPage).then();
+
   }
 
 }
