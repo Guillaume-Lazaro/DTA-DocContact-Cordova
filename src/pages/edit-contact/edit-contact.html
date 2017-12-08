@@ -6,12 +6,10 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title *ngIf="isInEditMode; else addTemplate">
-      Edit
-    </ion-title>
+    <ion-title *ngIf="isInEditMode; else addTitle">Edit</ion-title>
 
-    <ng-template #addTemplate>
-      Add
+    <ng-template #addTitle>
+      <ion-title>Add</ion-title>
     </ng-template>
   </ion-navbar>
 </ion-header>
@@ -67,11 +65,20 @@
 
     </div>
 
-    <div class="submitButton">
+    <div class="submitButton" *ngIf="isInEditMode; else addButton" >
       <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
         Modify
       </button>
     </div>
+
+    <ng-template #addButton>
+      <div class="submitButton">
+        <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+          Create
+        </button>
+      </div>
+    </ng-template>
+
   </form>
 
 </ion-content>

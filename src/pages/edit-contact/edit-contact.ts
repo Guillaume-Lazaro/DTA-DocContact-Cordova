@@ -48,9 +48,9 @@ export class EditContactPage {
     //TODO récupérer la liste de types de profile via le webservices
     this.profile = 'senior';  //Valeur par défaut
     this.profileType = [      //text= ce qui est affiché, value= la "vraie" valeur
-      { text: 'Doctor', value: 'doctor' },
-      { text: 'Senior', value: 'senior' },
-      { text: 'Family', value: 'family' },
+      { text: 'Doctor', value: 'MEDECIN' },
+      { text: 'Senior', value: 'SENIOR' },
+      { text: 'Family', value: 'FAMILLE' },
     ];
 
     this.userForm = fb.group({
@@ -64,16 +64,30 @@ export class EditContactPage {
     if (this.navParams.get('contact') != undefined) {
       this.contact = this.navParams.get('contact');
       this.isInEditMode = true;
-    } else {
-      //this.isInEditMode = false;
+      this.fillFields();
     }
-
-    this.fillFields();
   }
 
   handleSubmit() {
+    var toastMessage;
+    if (this.isInEditMode) {
+      toastMessage = 'Le contact a bien été modifié';
+      //TODO implémenter editContact
+    } else {
+      //Création
+      toastMessage = 'Le contact a bien été ajouté';
+      this.contactServices.createContacts(this.firstName,this.lastName,this.phone,this.email,this.profile, false, this.userServices.token)
+        .then((reponse: any)=>{
+          console.log('Reponse: '+reponse);
+        })
+        .catch(error=>{
+          console.log(error)
+        });
+
+    }
+
     let toast = this.toastCtrl.create({
-      message: 'Le contact a bien été modifié',
+      message: toastMessage,
       duration: 3000,
       position: 'bottom'
     });
@@ -85,16 +99,11 @@ export class EditContactPage {
   }
 
   fillFields() {
-    if (this.isInEditMode) {
-      this.lastName = this.contact.lastName;
-      this.firstName = this.contact.firstName;
-      this.phone = this.contact.phone;
-      this.email = this.contact.email;
-      this.profile = this.contact.profile;
-    } else {
-      this.lastName = 'Unknown merde!';
-    }
-
+    this.lastName = this.contact.lastName;
+    this.firstName = this.contact.firstName;
+    this.phone = this.contact.phone;
+    this.email = this.contact.email;
+    this.profile = this.contact.profile;
   }
 
 }
