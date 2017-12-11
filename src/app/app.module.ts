@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
-
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { InscriptionPage } from '../pages/inscription/inscription';
@@ -10,7 +9,6 @@ import { ContactDetailPage } from '../pages/contact-detail/contact-detail';
 import { EditContactPage } from '../pages/edit-contact/edit-contact';
 import { UserProfilePage } from "../pages/user-profile/user-profile";
 import { EditUserPage } from "../pages/edit-user/edit-user";
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiServicesProvider } from '../providers/api-services/api-services';

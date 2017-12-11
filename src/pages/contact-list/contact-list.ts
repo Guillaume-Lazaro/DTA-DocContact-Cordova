@@ -37,12 +37,15 @@ export class ContactListPage {
   }
   ionViewWillEnter(){
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
-    this.contactServices.getContacts(this.userServices.token).then( (contacts: Array<Contact>) =>{
+    this.storage.get('user').then((user:User)=>{
+      this.contactServices.getContacts(user.token).then( (contacts: Array<Contact>) =>{
       this.allContacts = contacts;
       this.contacts = this.allContacts;
       this.verif0Contact = (this.contacts.length == 0);
       console.log(contacts)
+    });
     })
+
   }
 
   initializeList() {
