@@ -111,9 +111,9 @@ export class EditContactPage {
           text: 'Delete',
           handler: () => {
             console.log('Delete clicked');
+            console.log('Je delete le contact '+this.contact.id);
             this.contactServices.deleteContact(this.contact.id, this.userServices.token)
               .then((reponse:any)=> {
-                console.log('Je delete le contact '+this.contact);
                 console.log('reponse '+reponse);
                 this.navCtrl.popToRoot();   //TODO réparer cette merde (=> error 400)
               })
