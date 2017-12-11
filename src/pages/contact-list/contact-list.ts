@@ -24,13 +24,11 @@ export class ContactListPage {
   verif0Contact: boolean = false;
   allContacts:Array<Contact>;
 
-              public callNumber: CallNumber) {
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider, private storage: Storage) {
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
-              public contactServices: ContactServicesProvider, public userServices: UserServicesProvider,
+              public contactServices: ContactServicesProvider, private storage: Storage
+              ,public userServices: UserServicesProvider,public callNumber: CallNumber) {
+
     this.menuCtrl.enable(true);
-
-
   }
 
   ionViewDidLoad() {
@@ -40,8 +38,8 @@ export class ContactListPage {
   ionViewWillEnter(){
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
     this.contactServices.getContacts(this.userServices.token).then( contacts =>{
-      this.originalContact = contacts;
-      this.contacts = this.originalContact;
+      this.allContacts = contacts;
+      this.contacts = this.allContacts;
       this.verif0Contact = (this.contacts.length == 0);
       console.log(contacts)
     })

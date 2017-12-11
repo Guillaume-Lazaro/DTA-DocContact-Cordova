@@ -101,9 +101,8 @@ export class ApiServicesProvider {
     })
   }
   createGravatar(mail: string){
-    var mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
-    var gravatar = `https://www.gravatar.com/avatar/${mailMd5}`;
-    return gravatar;
+    let mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
+    return(`https://www.gravatar.com/avatar/${mailMd5}`);
   }
 
 

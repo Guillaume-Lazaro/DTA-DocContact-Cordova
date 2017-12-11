@@ -9,7 +9,6 @@ import { ApiServicesProvider } from "../../providers/api-services/api-services";
 import {AlertController} from "ionic-angular";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
-import {Contact} from "../../model/Contact";
 
 @IonicPage()
 @Component({
@@ -27,8 +26,8 @@ export class LoginPage {
 
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
-              public userServices : UserServicesProvider, public contactServices: ContactServicesProvider,
+              public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
+              public menuCtrl: MenuController,
               public menuCtrl: MenuController, private storage: Storage) {
 
     this.menuCtrl.enable(false);
@@ -52,9 +51,9 @@ export class LoginPage {
           });
           toast.present();
         }
-        if(reponse.token !== undefined){
+        if(response.token !== undefined){
           // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
-          this.userServices.getUser(reponse.token).then((user:User)=>{
+          this.userServices.getUser(response.token).then((user:User)=>{
             this.storage.set('user',user).then(()=>{
               this.goToContactList()
             })
