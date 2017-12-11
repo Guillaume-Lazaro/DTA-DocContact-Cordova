@@ -1,29 +1,34 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import {ApiServicesProvider} from "../api-services/api-services";
-import { Md5 } from "ts-md5/dist/md5"
+import {Contact} from "../../model/Contact";
+import {Storage} from "@ionic/storage";
+
 
 @Injectable()
 export class ContactServicesProvider {
 
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
     console.log('Hello ContactServicesProvider Provider');
   }
 
   getContacts(token: string){
     return new Promise(resolve => {
-      this.apiServices.getContacts(token).toPromise().then(contacts=>{
-        resolve(contacts)
+      this.apiServices.getContacts(token).toPromise().then((contacts: any)=>{
+        let contactsArray = [];
+        for (let contact of contacts){
+          contactsArray.push(new Contact(contact.firstName,contact.lastName,contact.email,contact.phone,contact.gravatar,contact.profile,contact._id,false,false))
+        }
+        resolve(contactsArray)
       })
         .catch(error=>{
-        console.log(error)
-      })
+          console.log(error)
+        })
     })
   }
 
   createContact(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string){
-    let gravatar = this.createGravatar(email);
+    let gravatar = this.apiServices.createGravatar(email);
     return new Promise( resolve =>{
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
         resolve(contact)
@@ -31,14 +36,14 @@ export class ContactServicesProvider {
         console.log(error)
       })
         .catch(error=>{
-        console.log(error)
-      })
+          console.log(error)
+        })
     })
 
   }
 
   updateContact(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string, id: string){
-    let gravatar = this.createGravatar(email);
+    let gravatar = this.apiServices.createGravatar(email);
     return new Promise( resolve =>{
       this.apiServices.updateContact(firstName, lastName, phone, email, profile, gravatar, emergency, token, id).toPromise().then( contact=>{
         resolve(contact)
@@ -60,9 +65,4 @@ export class ContactServicesProvider {
     })
   }
 
-  createGravatar(mail: string){
-    var mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
-    var gravatar = `https://www.gravatar.com/avatar/${mailMd5}`;
-    return gravatar;
-  }
 }
