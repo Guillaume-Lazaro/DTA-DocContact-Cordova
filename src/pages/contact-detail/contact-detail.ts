@@ -37,11 +37,13 @@ export class ContactDetailPage {
     };
     this.sms.send(phoneNum, message, options).then(e => console.log("success"+e)).catch(e => console.log('probleme de sms '));
   }
+
   giveCall(){
     this.callNumber.callNumber(this.contact.phone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
   }
+
   sendMail(){
     console.log("passage dans sendMail");
     let email = {
@@ -52,7 +54,6 @@ export class ContactDetailPage {
     };
     this.emailComposer.open(email);
   }
-
 
   goToEditView(contact){
     this.navCtrl.push(EditContactPage, { 'contact': this.contact }).then();
