@@ -24,8 +24,6 @@ export class LoginPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
-  //For Tests
-  contacts:any;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public contactServices: ContactServicesProvider,
@@ -74,11 +72,7 @@ export class LoginPage {
   goToInscription(){
     this.navCtrl.push(InscriptionPage);
   }
-  /*goToContactList(params){
-    this.navCtrl.setRoot(ContactListPage, {
-      'user': params
-    });
-  }*/
+
   goToContactList(){
     this.navCtrl.setRoot(ContactListPage);
   }

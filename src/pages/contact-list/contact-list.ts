@@ -49,12 +49,10 @@ export class ContactListPage {
     })
       .catch(error => console.log("erreur get user local" + error))
   }
-  resetList(){
-    this.contacts=this.allContacts
-  }
 
+  // on créé une liste de contact filtrée suivant la recherche effectuée
   searchFunction(event: any) {
-    this.resetList();
+    this.contacts=this.allContacts;
     let val = event.target.value;
 
     // if the value is an empty string don't filter the items
