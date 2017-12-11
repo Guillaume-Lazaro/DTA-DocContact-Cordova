@@ -46,7 +46,7 @@ export class InscriptionPage {
     this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
     this.profileCtrl = fb.control('', Validators.required);
 
-    //TODO récupérer la liste de types de profile via le webservices
+
     this.apiServices.getProfiles().toPromise()
       .then(profiles =>{
         this.profileType = profiles

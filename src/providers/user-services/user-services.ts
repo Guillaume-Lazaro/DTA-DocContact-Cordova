@@ -55,4 +55,16 @@ export class UserServicesProvider {
     })
   }
 
+  updateUser(firstName: string, lastName: string, email: string, profile: string, token: string){
+    return new Promise( resolve => {
+      this.apiServices.updateUser(firstName, lastName, email, profile, token).toPromise().then(user =>{
+        resolve(user)
+      })
+    })
+      .catch(error=>{
+        console.log(error)
+      })
+  }
+
+
 }
