@@ -21,63 +21,47 @@ page-contact-list {
   display: flex;
   flex-direction: row;
   width:82%;
+  align-items: center;
+  justify-content: center;
 }
 .cellImage{
-
 }
-.contactCard img{
-  align-self: center ;
-  width:75px;
-  height:75px;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
+.cellImage img{
+  min-width:50px;
+  height:50px ;
+  border-radius:50%;
   border:1px solid lightgrey;
 }
 
 .contactNameContainer{
-  display:flex;
-  flex-direction: column;
-  text-align: center;
-  width: 100%;
-  max-width:170px;
-  color:#2a2b2d;
-  margin:0px;
-  justify-content: flex-start;
+  padding:5px 10px 5px 15px;
+  width:800%;
+  justify-content: center;
 }
 .lastNameDisplay{
-  font-size:20px;
+  font-size:15px;
   font-weight: bold;
-  padding-top:5px;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  height: 26px;
-  line-height:20px;
 }
 .firstNameDisplay{
   font-size:15px;
-  margin-top:15px;
-  padding-top:5px;
-  word-break: break-all;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  height: 21px;
-  line-height:100%
+}
+.profileDisplay{
+  font-size:12px;
 }
 
-
 .cellCallButton{
-  margin-right:5%;
+  display:flex;
+  margin-right:10px;
   width:60px;
   height:60px;
   align-self: center;
+  justify-content: center;
 
 }
 .callButton{
   background-color: white;
-  width:60px;
-  height:60px;
+  width:50px;
+  height:50px;
   border:2px solid green;
   border-radius: 50%;
 }
