@@ -6,6 +6,7 @@ page-contact-detail {
   flex-direction: column;
   height:100%;
   width:100%;
+  margin-top:8%;
 }
 
 .photoContainer{
@@ -23,7 +24,6 @@ page-contact-detail {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-
 }
 .nameContainer{
   margin-top:20px;
@@ -46,7 +46,7 @@ page-contact-detail {
 .buttonLeft{
   height:100%;
   border-radius:0;
-  border: 1px solid black;
+  border: 1px solid #3a3b3d;
   border-top-left-radius:45%;
   border-bottom-left-radius: 45%;
   margin:0;
@@ -56,8 +56,8 @@ page-contact-detail {
 .buttonCenter{
   height:100%;
   border-radius:0;
-  border-top:1px solid black;
-  border-bottom:1px solid black;
+  border-top:1px solid #3a3b3d;
+  border-bottom:1px solid #3a3b3d;
   margin:0;
   width:70px;
 
@@ -66,7 +66,7 @@ page-contact-detail {
 .buttonRight{
   height:100%;
   border-radius:0;
-  border: 1px solid black;
+  border: 1px solid #3a3b3d;
   border-top-right-radius:45%;
   border-bottom-right-radius: 45%;
   margin:0;
