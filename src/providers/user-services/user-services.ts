@@ -34,7 +34,6 @@ export class UserServicesProvider {
       this.apiServices.getUser(token).toPromise().then( (userJson:any)=>{
         let userGravatar = this.apiServices.createGravatar(userJson.email);
         let user = new User(userJson.firstName, userJson.lastName,userJson.email,userJson.phone,userGravatar,userJson.profile,token,[]);
-        // TODO: récupérer les contacts du User
         resolve(user)
       })
         .catch(error=>{
@@ -59,8 +58,12 @@ export class UserServicesProvider {
 
   updateUser(firstName: string, lastName: string, email: string, profile: string, token: string){
     return new Promise( resolve => {
-      this.apiServices.updateUser(firstName, lastName, email, profile, token).toPromise().then(user =>{
-        resolve(user)
+      this.apiServices.updateUser(firstName, lastName, email, profile, token).toPromise().then((user:any) =>{
+        this.storage.get('user').then((userloc:User)=>{
+          this.storage.set('user',new User(user.firstName,user.lastName,user.email,user.phone,this.apiServices.createGravatar(user.email),user.profile,token,userloc.contacts)).then(()=>
+          resolve(userloc))
+        })
+          .catch(error=>console.log("erreur get user update user"));
       })
     })
       .catch(error=>{
