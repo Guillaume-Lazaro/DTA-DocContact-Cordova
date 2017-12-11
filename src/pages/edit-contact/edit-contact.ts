@@ -71,7 +71,13 @@ export class EditContactPage {
     var toastMessage;
     if (this.isInEditMode) {
       toastMessage = 'Le contact a bien été modifié';
-      //TODO implémenter editContact() depuis contact-services
+      this.contactServices.updateContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, this.userServices.token, this.contact.id)
+        .then((reponse: any)=>{
+          console.log('Reponse après l update:'+reponse);
+        })
+        .catch(error=>{
+          console.log(error)
+        });
     } else {
       //Création
       toastMessage = 'Le contact a bien été ajouté';
