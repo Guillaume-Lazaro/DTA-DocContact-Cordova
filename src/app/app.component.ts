@@ -9,6 +9,8 @@ import {ContactListPage} from "../pages/contact-list/contact-list";
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import {UserServicesProvider} from "../providers/user-services/user-services";
 import {EditUserPage} from "../pages/edit-user/edit-user";
+import {Storage} from "@ionic/storage";
+import {User} from "../model/User";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +26,8 @@ export class MyApp {
   myContacts : any = { title: 'Mes Contacts', component: ContactListPage };
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public userServices: UserServicesProvider, public app:App, private userService: UserServicesProvider ) {
+              public userServices: UserServicesProvider, public app:App, private userService: UserServicesProvider,
+              private storage: Storage) {
          //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
     this.initializeApp();
     //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
@@ -36,21 +39,14 @@ export class MyApp {
       })
     }
 
-
-
   checkIfUserInfoCanBeDisplayed(){
-    //If a token has been set, were are going to see if we have a user, else we're fetching it 
-    if(this.userService.token != "" && this.userService.token != undefined) {
-      if(this.menuContact==undefined || this.menuContact == ""){
-        this.userService.getUser(this.userService.token).then(contact =>{
-          console.log(contact);
-          this.menuContact = contact;
-        });
-
-      }
+    //If a token has been set, we're going to see if we have a user, else we're fetching it
+    if(this.menuContact==undefined || this.menuContact == ""){
+      this.storage.get('user').then((user:User)=>{
+        this.menuContact = user;
+      })
     }
   }
-
 
   initializeApp() {
     this.platform.ready().then(() => {
