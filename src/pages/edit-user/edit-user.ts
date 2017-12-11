@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactListPage} from "../contact-list/contact-list";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
+import {User} from "../../model/User";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the EditUserPage page.
@@ -19,7 +21,7 @@ import {ApiServicesProvider} from "../../providers/api-services/api-services";
 })
 export class EditUserPage {
 
-  user:any;
+  user:User;
 
   lastName:   string;
   firstName:  string;
@@ -36,7 +38,7 @@ export class EditUserPage {
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public userServices: UserServicesProvider,
               fb: FormBuilder, private toastCtrl: ToastController,public events: Events,
-              public apiServices: ApiServicesProvider) {
+              public apiServices: ApiServicesProvider, private storage: Storage) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -55,23 +57,19 @@ export class EditUserPage {
       profile: this.profileCtrl,
     });
 
-    this.user = userServices.getUser(userServices.token)
-      .then((reponse: any )=>{
-        this.user = reponse;
-        this.fillFields();
-      })
-      .catch(error=> {
-        console.log(error);
-      });
-
-  }
+    this.storage.get('user').then(user=>{
+      this.user=user;
+      this.fillFields()
+    })
+      .catch(error=>console.log("erreur get user edit user"))
+      }
 
   handleSubmit() {
 
     //Modification du profile
-    this.userServices.updateUser(this.firstName,this.lastName,this.email,this.profile, this.userServices.token)
+    this.userServices.updateUser(this.firstName,this.lastName,this.email,this.profile, this.user.token)
       .then((reponse: any)=>{
-        console.log(this.userServices.getUser(this.userServices.token));
+        console.log(this.userServices.getUser(this.user.token));
       })
       .catch(error=>{
         console.log(error)
