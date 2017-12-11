@@ -12,7 +12,7 @@ import {Storage} from "@ionic/storage";
 */
 @Injectable()
 export class UserServicesProvider {
-  token: string; // variable de Debug : a enlever pour la fin !
+  // token: string; // variable de Debug : a enlever pour la fin !
   constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
     console.log("Hello UserServicesProvider Provider");
   }
@@ -35,7 +35,9 @@ export class UserServicesProvider {
         let userGravatar = this.apiServices.createGravatar(userJson.email);
         let user = new User(userJson.firstName, userJson.lastName,userJson.email,userJson.phone,userGravatar,userJson.profile,token,[]);
         // TODO: récupérer les contacts du User
-        resolve(user)}).catch(error=>{
+        resolve(user)
+      })
+        .catch(error=>{
         console.log(error)
       });
     })

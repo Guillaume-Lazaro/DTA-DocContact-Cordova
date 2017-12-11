@@ -27,7 +27,7 @@ export class ContactListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
               public contactServices: ContactServicesProvider, private storage: Storage
               ,public userServices: UserServicesProvider,public callNumber: CallNumber) {
-    
+
     this.menuCtrl.enable(true);
   }
 
@@ -37,19 +37,22 @@ export class ContactListPage {
   }
   ionViewWillEnter(){
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
-    this.contactServices.getContacts(this.userServices.token).then( contacts =>{
+    this.storage.get('user').then((user:User)=>{
+      this.contactServices.getContacts(user.token).then( (contacts: Array<Contact>) =>{
       this.allContacts = contacts;
       this.contacts = this.allContacts;
       this.verif0Contact = (this.contacts.length == 0);
       console.log(contacts)
+    });
     })
+
   }
 
   initializeList() {
     // On récupère l'user en base locale et on lui assigne ses contacts, ensuite on le stocke en base locale avec ses contacts
     this.storage.get('user').then((user: User) => {
       console.log(user.phone);
-      this.contactServices.getContacts(user.token).then(contacts => {
+      this.contactServices.getContacts(user.token).then((contacts:Array<Contact>) => {
         user.contacts = contacts;
         this.storage.set('user', user);
         this.allContacts = contacts;
