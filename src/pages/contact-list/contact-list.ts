@@ -42,6 +42,9 @@ export class ContactListPage {
       this.allContacts = contacts;
       this.contacts = this.allContacts;
       this.verif0Contact = (this.contacts.length == 0);
+
+      user.contacts = contacts;       //Update user
+      this.storage.set('user',user);  //on the database
     });
     })
 
