@@ -76,6 +76,7 @@ export class ApiServicesProvider {
       headers: headers
     })
   }
+
   forgotPassword(phone: string){
     let headers = new HttpHeaders().set("Content-Type","application/json");
       return this.http.post(`${API_BASE_URL}${API_PUBLIC}/forgot-password`,{
@@ -100,6 +101,7 @@ export class ApiServicesProvider {
       headers: headers
     })
   }
+
   createGravatar(mail: string){
     let mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
     return(`https://www.gravatar.com/avatar/${mailMd5}`);

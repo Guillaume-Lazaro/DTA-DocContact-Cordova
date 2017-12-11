@@ -1,12 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import {ApiServicesProvider} from "../api-services/api-services";
-import { Md5 } from "ts-md5/dist/md5"
 import {Contact} from "../../model/Contact";
 import {Storage} from "@ionic/storage";
-import {User} from "../../model/User";
-import {of} from "rxjs/observable/of";
+
 
 @Injectable()
 export class ContactServicesProvider {

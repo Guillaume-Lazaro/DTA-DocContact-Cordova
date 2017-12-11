@@ -27,7 +27,7 @@ export class ContactListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
               public contactServices: ContactServicesProvider, private storage: Storage
               ,public userServices: UserServicesProvider,public callNumber: CallNumber) {
-
+    
     this.menuCtrl.enable(true);
   }
 
