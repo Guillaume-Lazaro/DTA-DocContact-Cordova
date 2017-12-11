@@ -72,22 +72,30 @@ export class EditContactPage {
   handleSubmit() {
     var toastMessage;
     if (this.isInEditMode) {
+      //Modification
       toastMessage = 'Le contact a bien été modifié';
-      //TODO implémenter editContact() depuis contact-services
+
+      this.storage.get('user').then((user:User)=>{
+        this.contactServices.updateContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token, this.contact.id)
+          .then((reponse: any)=>{
+            this.navCtrl.popToRoot(); //TODO à changer dans le futur
+          })
+          .catch(error=>{
+            console.log(error)
+          });
+      })
     } else {
       //Création
       toastMessage = 'Le contact a bien été ajouté';
       this.storage.get('user').then((user:User)=>{
         this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token)
           .then((reponse: any)=>{
-            console.log('Reponse: '+reponse);
+            this.navCtrl.popToRoot();
           })
           .catch(error=>{
             console.log(error)
           });
       })
-
-
     }
 
     let toast = this.toastCtrl.create({
@@ -96,7 +104,6 @@ export class EditContactPage {
       position: 'bottom'
     });
     toast.present();
-    this.navCtrl.pop();
   }
 
   ionViewDidLoad() { }
@@ -116,8 +123,18 @@ export class EditContactPage {
           text: 'Delete',
           handler: () => {
             console.log('Delete clicked');
-            //TODO ajouter deleteContact() depuis le contacts-services
-            this.navCtrl.popToRoot();
+            console.log('Je delete le contact '+this.contact.id);
+
+            this.storage.get('user').then((user:User)=>{
+              this.contactServices.deleteContact(this.contact.id, user.token)
+                .then((reponse: any)=>{
+                  console.log('reponse '+reponse);
+                  this.navCtrl.popToRoot();
+                })
+                .catch(error=>{
+                  console.log(error)
+                });
+            })
           }
         }
       ]

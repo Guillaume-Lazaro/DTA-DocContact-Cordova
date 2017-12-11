@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import {Nav, Platform} from 'ionic-angular';
+import {App, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 // A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -9,6 +9,8 @@ import {ContactListPage} from "../pages/contact-list/contact-list";
 import {UserProfilePage} from "../pages/user-profile/user-profile";
 import {UserServicesProvider} from "../providers/user-services/user-services";
 import {EditUserPage} from "../pages/edit-user/edit-user";
+import {Storage} from "@ionic/storage";
+import {User} from "../model/User";
 
 @Component({
   templateUrl: 'app.html'
@@ -17,27 +19,37 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
+  menuContact: any;
 
-  pages: Array<{title: string, component: any}>;
+  deconnexion: any = {title : "Deconnexion", component: LoginPage};
+  myProfile: any = { title: 'Modifier mon Profil', component: EditUserPage };
+  myContacts : any = { title: 'Mes Contacts', component: ContactListPage };
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public userServices: UserServicesProvider ) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+              public userServices: UserServicesProvider, public app:App, private userService: UserServicesProvider,
+              private storage: Storage) {
          //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
     this.initializeApp();
     //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Modifier mon Profil', component: EditUserPage },
-      { title: 'Mes Contacts', component: ContactListPage },
-      { title: 'Deconnexion', component: LoginPage}
-    ];
 
+    app.viewWillEnter.subscribe(
+      () => {
+        this.checkIfUserInfoCanBeDisplayed()
+      })
+    }
+
+  checkIfUserInfoCanBeDisplayed(){
+    //If a token has been set, we're going to see if we have a user, else we're fetching it
+    if(this.menuContact==undefined || this.menuContact == ""){
+      this.storage.get('user').then((user:User)=>{
+        this.menuContact = user;
+      })
+    }
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -50,7 +62,6 @@ export class MyApp {
     if(page.title == 'Deconnexion'){
 
     }
-
     this.nav.setRoot(page.component);
   }
 }
