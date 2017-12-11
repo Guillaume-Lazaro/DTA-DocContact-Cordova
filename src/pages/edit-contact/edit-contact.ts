@@ -4,6 +4,8 @@ import {ContactServicesProvider} from "../../providers/contact-services/contact-
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
+import {User} from "../../model/User";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the EditContactPage page.
@@ -39,7 +41,7 @@ export class EditContactPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider,
               public userServices: UserServicesProvider, fb: FormBuilder, private toastCtrl: ToastController,
-              public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController) {
+              public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController, private storage: Storage) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -81,13 +83,16 @@ export class EditContactPage {
     } else {
       //Création
       toastMessage = 'Le contact a bien été ajouté';
-      this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, this.userServices.token)
-        .then((reponse: any)=>{
-          console.log('Reponse: '+reponse);
-        })
-        .catch(error=>{
-          console.log(error)
-        });
+      this.storage.get('user').then((user:User)=>{
+        this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token)
+          .then((reponse: any)=>{
+            console.log('Reponse: '+reponse);
+          })
+          .catch(error=>{
+            console.log(error)
+          });
+      })
+
 
     }
 

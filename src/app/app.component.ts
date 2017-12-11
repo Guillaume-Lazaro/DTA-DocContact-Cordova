@@ -44,12 +44,13 @@ export class MyApp {
   }
 
   openPage(page) {
+    // TODO : Gérer la déconnexion
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.title == 'Deconnexion'){
-      this.userServices.token = '';
+
     }
-    console.log('le token est :'+this.userServices.token);
+
     this.nav.setRoot(page.component);
   }
 }
