@@ -42,7 +42,6 @@ export class ContactListPage {
       this.allContacts = contacts;
       this.contacts = this.allContacts;
       this.verif0Contact = (this.contacts.length == 0);
-      console.log(contacts)
     });
     })
 
@@ -58,7 +57,6 @@ export class ContactListPage {
         this.allContacts = contacts;
         this.contacts = this.allContacts;
         this.verif0Contact = (this.contacts.length == 0);
-        console.log(this.contacts)
       })
         .catch(error => console.log("erreur get contacts" + error))
     })

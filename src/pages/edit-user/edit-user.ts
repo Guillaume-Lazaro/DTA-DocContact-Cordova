@@ -46,7 +46,7 @@ export class EditUserPage {
     this.profileCtrl = fb.control('', Validators.required);
 
     this.apiServices.getProfiles().toPromise()
-      .then(profiles =>{
+      .then(profiles => {
         this.profileType = profiles;
       });
 
@@ -56,13 +56,8 @@ export class EditUserPage {
       email: this.emailCtrl,
       profile: this.profileCtrl,
     });
+  }
 
-    this.storage.get('user').then(user=>{
-      this.user=user;
-      this.fillFields()
-    })
-      .catch(error=>console.log("erreur get user edit user"))
-      }
 
   handleSubmit() {
 
@@ -70,22 +65,27 @@ export class EditUserPage {
     this.userServices.updateUser(this.firstName,this.lastName,this.email,this.profile, this.user.token)
       .then((reponse: any)=>{
         console.log(this.userServices.getUser(this.user.token));
+        let toast = this.toastCtrl.create({
+          message: 'Le profile a bien été modifié',
+          duration: 3000,
+          position: 'bottom'
+        });
+        toast.present();
+        this.navCtrl.setRoot(ContactListPage).then();
       })
       .catch(error=>{
         console.log(error)
       });
-
-
-    let toast = this.toastCtrl.create({
-      message: 'Le profile a bien été modifié',
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
-    this.navCtrl.setRoot(ContactListPage).then();
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+    this.storage.get('user').then(user=>{
+      console.log(user.lastName);
+      this.user=user;
+      this.fillFields()
+    })
+      .catch(error=>console.log("erreur get user edit user"))
+  }
 
   fillFields() {
     this.lastName = this.user.lastName;
