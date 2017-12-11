@@ -31,7 +31,10 @@ export class UserServicesProvider {
 
   getUser(token: string){
     return new Promise( resolve =>{
-      this.apiServices.getUser(token).toPromise().then( user=>{
+      this.apiServices.getUser(token).toPromise().then( (userJson:any)=>{
+        let userGravatar = this.apiServices.createGravatar(userJson.email);
+        let user = new User(userJson.firstName, userJson.lastName,userJson.email,userJson.phone,userGravatar,userJson.profile,token,[]);
+        // TODO: récupérer les contacts du User
         resolve(user)}).catch(error=>{
         console.log(error)
       });
@@ -51,10 +54,5 @@ export class UserServicesProvider {
       })
     })
   }
-
-  storeUser(user: User){
-    this.storage.set("user",user);
-  }
-
 
 }

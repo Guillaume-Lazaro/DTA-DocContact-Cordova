@@ -54,33 +54,14 @@ export class LoginPage {
           toast.present();
         }
         if(reponse.token !== undefined){
-          this.userServices.getUser(reponse.token).then((user:any)=> {
-            this.userServices.storeUser(new User(user.firstName,user.lastName,user.email,user.phone,user.gravatar,user.profile,reponse.token,[]));
-            this.storage.get("user").then(user=>{
-              console.log(user.phone)
-            });
-            this.userServices.token=reponse.token; // Variable de debug, faire autrement pour la version finale
-            this.contactServices.getContacts(reponse.token).then( (contacts:any) =>{
-              this.storage.get('user').then(user=>{
-              for (var contact of contacts) {
-                this.contactServices.storeContact(user,
-                  contact.firstName,
-                  contacts.lastName,
-                  contact.phone,
-                  contact.email,
-                  contact.profile,
-                  contact.gravatar,
-                  false,
-                  contact.id)
-              }
-              });
-              this.contacts = contacts;
-              console.log(contacts);
-              this.goToContactList(contacts);
+          // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
+          this.userServices.getUser(reponse.token).then((user:User)=>{
+            this.storage.set('user',user).then(()=>{
+              this.goToContactList()
             })
-              .catch();
+              .catch(error=>console.log("erreur set user local" + error))
           })
-            .catch();
+            .catch(error=>console.log("erreur get user serveur" + error))
         }
       })
       .catch();
@@ -93,10 +74,12 @@ export class LoginPage {
   goToInscription(){
     this.navCtrl.push(InscriptionPage);
   }
-  goToContactList(params){
+  /*goToContactList(params){
     this.navCtrl.setRoot(ContactListPage, {
-      'contacts': this.contacts
+      'user': params
     });
+  }*/
+  goToContactList(){
+    this.navCtrl.setRoot(ContactListPage);
   }
-
 }

@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Md5} from "ts-md5/dist/md5";
 
 
 const API_BASE_URL: string = 'http://familink.cleverapps.io';
@@ -89,6 +90,11 @@ export class ApiServicesProvider {
     },{
       headers: headers
     })
+  }
+  createGravatar(mail: string){
+    var mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
+    var gravatar = `https://www.gravatar.com/avatar/${mailMd5}`;
+    return gravatar;
   }
 
 

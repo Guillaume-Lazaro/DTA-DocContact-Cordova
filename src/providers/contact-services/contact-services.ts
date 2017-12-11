@@ -18,7 +18,11 @@ export class ContactServicesProvider {
   getContacts(token: string){
     return new Promise(resolve => {
       this.apiServices.getContacts(token).toPromise().then((contacts: any)=>{
-        resolve(contacts)
+        let contactsArray = [];
+        for (let contact of contacts){
+          contactsArray.push(new Contact(contact.firstName,contact.lastName,contact.email,contact.phone,contact.gravatar,contact.profile,contact._id,false,false))
+        }
+        resolve(contactsArray)
       })
         .catch(error=>{
           console.log(error)
@@ -27,7 +31,7 @@ export class ContactServicesProvider {
   }
 
   createContact(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string){
-    let gravatar = this.createGravatar(email);
+    let gravatar = this.apiServices.createGravatar(email);
     return new Promise( resolve =>{
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
         resolve(contact)
@@ -40,7 +44,7 @@ export class ContactServicesProvider {
   }
 
   updateContact(firstName: string, lastName: string, phone: string, email: string, profile: string, emergency: boolean, token: string, id: string){
-    let gravatar = this.createGravatar(email);
+    let gravatar = this.apiServices.createGravatar(email);
     return new Promise( resolve =>{
       this.apiServices.updateContact(firstName, lastName, phone, email, profile, gravatar, emergency, token, id).toPromise().then( contact=>{
         resolve(contact)
@@ -61,17 +65,5 @@ export class ContactServicesProvider {
         })
     })
   }
-
-  createGravatar(mail: string){
-    var mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
-    var gravatar = `https://www.gravatar.com/avatar/${mailMd5}`;
-    return gravatar;
-  }
-
-  storeContact(user:User,firstName: string, lastName: string, phone: string, email: string, profile: string, gravatar: string,emergency: boolean, id: string){
-    var contact = new Contact(firstName,lastName,email,phone,gravatar,profile,id, emergency,emergency);
-      user.contacts.push(contact);
-  }
-
 
 }
