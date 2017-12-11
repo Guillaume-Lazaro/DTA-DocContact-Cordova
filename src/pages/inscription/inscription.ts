@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
+import {ApiServicesProvider} from "../../providers/api-services/api-services";
 
 /**
  * Generated class for the InscriptionPage page.
@@ -38,7 +39,7 @@ export class InscriptionPage {
   passwordForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-              public events: Events) {
+              public events: Events, public apiServices: ApiServicesProvider) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -47,12 +48,10 @@ export class InscriptionPage {
     this.profileCtrl = fb.control('', Validators.required);
 
     //TODO récupérer la liste de types de profile via le webservices
-    this.profile = 'senior';  //Valeur par défaut
-    this.profileType = [      //text= ce qui est affiché, value= la "vraie" valeur
-      { text: 'Doctor', value: 'doctor' },
-      { text: 'Senior', value: 'senior' },
-      { text: 'Family', value: 'family' },
-    ];
+    this.apiServices.getProfiles().toPromise()
+      .then(profiles =>{
+        this.profileType = profiles
+      });
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,

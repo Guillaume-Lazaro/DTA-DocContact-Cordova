@@ -51,7 +51,7 @@
       <ion-item>
         <ion-label>Profile : </ion-label>
         <ion-select formControlName="profile" [(ngModel)]="profile" interface="popover" [selectOptions]="profileType">
-          <ion-option *ngFor="let o of profileType" [value]="o.value">{{o.text}}</ion-option>
+          <ion-option *ngFor="let o of profileType" [value]="o">{{o}}</ion-option>
         </ion-select>
       </ion-item>
 
