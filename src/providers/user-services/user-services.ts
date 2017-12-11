@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import {ApiServicesProvider} from "../api-services/api-services";
-import {toPromise} from "rxjs/operator/toPromise";
+import {User} from "../../model/User";
+import {Storage} from "@ionic/storage";
 
 /*
   Generated class for the UserServicesProvider provider.
@@ -13,8 +13,8 @@ import {toPromise} from "rxjs/operator/toPromise";
 @Injectable()
 export class UserServicesProvider {
   token: string; // variable de Debug : a enlever pour la fin !
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
-    console.log('Hello UserServicesProvider Provider');
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
+    console.log("Hello UserServicesProvider Provider");
   }
 
   logTheUser(login: string, password: string){
@@ -31,7 +31,10 @@ export class UserServicesProvider {
 
   getUser(token: string){
     return new Promise( resolve =>{
-      this.apiServices.getUser(token).toPromise().then( user=>{
+      this.apiServices.getUser(token).toPromise().then( (userJson:any)=>{
+        let userGravatar = this.apiServices.createGravatar(userJson.email);
+        let user = new User(userJson.firstName, userJson.lastName,userJson.email,userJson.phone,userGravatar,userJson.profile,token,[]);
+        // TODO: récupérer les contacts du User
         resolve(user)}).catch(error=>{
         console.log(error)
       });
@@ -43,7 +46,7 @@ export class UserServicesProvider {
 
   createUser(phone: string, password: string, firstName: string,lastName: string, email: string, profile: string){
     return new Promise (resolve=>{
-      this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( user=>{
+      this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( (user: any)=>{
         resolve(user)
       })
         .catch(error=>{

@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Md5} from "ts-md5/dist/md5";
 
 
 const API_BASE_URL: string = 'http://familink.cleverapps.io';
@@ -75,6 +76,7 @@ export class ApiServicesProvider {
       headers: headers
     })
   }
+
   forgotPassword(phone: string){
     let headers = new HttpHeaders().set("Content-Type","application/json");
       return this.http.post(`${API_BASE_URL}${API_PUBLIC}/forgot-password`,{
@@ -98,6 +100,11 @@ export class ApiServicesProvider {
     },{
       headers: headers
     })
+  }
+
+  createGravatar(mail: string){
+    let mailMd5 = Md5.hashStr(mail.trim().toLowerCase());
+    return(`https://www.gravatar.com/avatar/${mailMd5}`);
   }
 
   updateUser(firstName: string, lastName: string, email: string, profile: string, token: string){

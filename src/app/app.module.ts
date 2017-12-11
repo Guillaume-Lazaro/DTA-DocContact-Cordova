@@ -18,11 +18,9 @@ import { ContactServicesProvider } from '../providers/contact-services/contact-s
 import { HttpClientModule } from "@angular/common/http";
 import { UserServicesProvider } from '../providers/user-services/user-services';
 import { CallNumber } from '@ionic-native/call-number';
+import {IonicStorageModule} from "@ionic/storage";
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
-
-
-
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
@@ -39,7 +37,8 @@ import { SMS } from '@ionic-native/sms';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

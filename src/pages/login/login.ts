@@ -7,6 +7,8 @@ import {UserServicesProvider} from "../../providers/user-services/user-services"
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 import { ApiServicesProvider } from "../../providers/api-services/api-services";
 import {AlertController} from "ionic-angular";
+import {User} from "../../model/User";
+import {Storage} from "@ionic/storage";
 
 @IonicPage()
 @Component({
@@ -24,7 +26,9 @@ export class LoginPage {
 
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
-              public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController, public contactServices: ContactServicesProvider, public menuCtrl: MenuController) {
+              public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
+              public menuCtrl: MenuController,
+              public menuCtrl: MenuController, private storage: Storage) {
 
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -48,12 +52,14 @@ export class LoginPage {
           toast.present();
         }
         if(response.token !== undefined){
-          this.userServices.getUser(response.token).then(user=> {
-            console.log(user);
-            this.userServices.token=response.token; // Variable de debug, faire autrement pour la version finale
-            this.goToContactList();
-          });
-
+          // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
+          this.userServices.getUser(response.token).then((user:User)=>{
+            this.storage.set('user',user).then(()=>{
+              this.goToContactList()
+            })
+              .catch(error=>console.log("erreur set user local" + error))
+          })
+            .catch(error=>console.log("erreur get user serveur" + error))
         }
       })
       .catch();
