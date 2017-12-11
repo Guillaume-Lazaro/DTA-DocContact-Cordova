@@ -37,7 +37,7 @@
     <div >
       <div class="contactCard">
         <div (click)="goToContactDetails(contact)" class="detailContactClickZone">
-          <img src="http://upload.chatsdumonde.com/img_global/25-adopter-chat/aspects-pratiques-adoption-chat/arrivee-d-un-chaton-a-la-maison-preparer-son-environnement/_big-1334_1338-les-preparatifs-avant-l-arrivee-du-chaton.jpg" alt="">
+          <img src="{{contact.gravatar}}?s=200&d=mm" alt="">
           <div class="contactNameContainer">
           <span class="lastNameDisplay">
             {{contact.lastName}}
