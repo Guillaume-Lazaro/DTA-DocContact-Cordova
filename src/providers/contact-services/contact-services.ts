@@ -35,6 +35,8 @@ export class ContactServicesProvider {
     return new Promise( resolve =>{
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
         resolve(contact)
+      }).catch(error=>{
+        console.log(error)
       })
         .catch(error=>{
           console.log(error)

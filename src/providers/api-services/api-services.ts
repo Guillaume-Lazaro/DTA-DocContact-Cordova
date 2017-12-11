@@ -13,6 +13,7 @@ export class ApiServicesProvider {
   constructor(public http: HttpClient) {
 
   }
+
   SignUpUser(phone, password, firstName, lastName, email, profile){
      return this.http.post(`${API_BASE_URL}${API_PUBLIC}/sign-in?contactsLength=0`,{
         phone: phone,
@@ -53,7 +54,7 @@ export class ApiServicesProvider {
       })
   }
 
-  createContact(firstName: string, lastname: string, phone: string, email: string,profile:string, gravatar: string, emergency, token: string){
+  createContact(firstName: string, lastname: string, phone: string, email: string,profile:string, gravatar: string, emergency:boolean, token: string){
     let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
      return this.http.post(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts`, {
         phone:phone,
@@ -73,6 +74,14 @@ export class ApiServicesProvider {
     let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " + token);
     return this.http.delete(`${API_BASE_URL}${API_PRIVATE_MODIFIER}/contacts/${id}`,{
       headers: headers
+    })
+  }
+  forgotPassword(phone: string){
+    let headers = new HttpHeaders().set("Content-Type","application/json");
+      return this.http.post(`${API_BASE_URL}${API_PUBLIC}/forgot-password`,{
+        phone: phone
+      } ,{
+        headers: headers
     })
   }
 

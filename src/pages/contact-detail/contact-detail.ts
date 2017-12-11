@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {EditContactPage} from "../edit-contact/edit-contact";
 
 /**
  * Generated class for the ContactDetailPage page.
@@ -15,12 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ContactDetailPage {
 
+  contact: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.contact = this.navParams.get('contact');
+    console.log(this.contact);
   }
 
   ionViewDidLoad() {
-    let contact = this.navParams.get('contact');
-    console.log(contact);
+
+  }
+
+  goToEditView(contact){
+    this.navCtrl.push(EditContactPage, { 'contact': this.contact }).then();
   }
 
 }

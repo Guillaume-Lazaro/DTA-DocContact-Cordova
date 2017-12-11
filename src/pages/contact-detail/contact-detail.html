@@ -7,12 +7,50 @@
 <ion-header>
 
   <ion-navbar>
+
     <ion-title>contactDetail</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToEditView()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <div class="detailContainer">
+
+    <div class="photoContainer" >
+      <span class="photoProfil" [style.backgroundImage]="'url(https://cdnfr2.img.sputniknews.com/images/103347/03/1033470339.jpg)'"></span>
+    </div>
+
+    <div class="nameContainer">
+      <span class="detailLastName"> {{contact.lastName}} </span><br>
+      <span class="detailFirstName"> {{contact.firstName}} </span>
+    </div>
+
+    <div class="buttonsContainer">
+      <button class="buttonLeft">Message</button>
+      <button class="buttonCenter">Appeler</button>
+      <button class="buttonRight">Mail</button>
+    </div>
+
+    <div class="detailInformations">
+      <h3>Numéro de Téléphone:</h3>
+      <span class="detailPhone">{{contact.phone}}</span>
+      <h3 class="detailEmail">Email:</h3>
+      <span class="detailMail">{{contact.email}}</span>
+    </div>
+
+
+
+  </div>
+
+
 
 </ion-content>

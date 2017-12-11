@@ -8,6 +8,8 @@ import { InscriptionPage } from '../pages/inscription/inscription';
 import { ContactListPage } from '../pages/contact-list/contact-list';
 import { ContactDetailPage } from '../pages/contact-detail/contact-detail';
 import { EditContactPage } from '../pages/edit-contact/edit-contact';
+import { UserProfilePage } from "../pages/user-profile/user-profile";
+import { EditUserPage } from "../pages/edit-user/edit-user";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,6 +17,7 @@ import { ApiServicesProvider } from '../providers/api-services/api-services';
 import { ContactServicesProvider } from '../providers/contact-services/contact-services';
 import { HttpClientModule } from "@angular/common/http";
 import { UserServicesProvider } from '../providers/user-services/user-services';
+import { CallNumber } from '@ionic-native/call-number';
 import {IonicStorageModule} from "@ionic/storage";
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
@@ -25,7 +28,9 @@ import {IonicStorageModule} from "@ionic/storage";
     InscriptionPage,
     ContactListPage,
     ContactDetailPage,
-    EditContactPage
+    EditContactPage,
+    EditUserPage,
+    UserProfilePage
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,9 @@ import {IonicStorageModule} from "@ionic/storage";
     InscriptionPage,
     ContactListPage,
     ContactDetailPage,
-    EditContactPage
+    EditContactPage,
+    EditUserPage,
+    UserProfilePage
   ],
   providers: [
     StatusBar,
@@ -49,7 +56,8 @@ import {IonicStorageModule} from "@ionic/storage";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
-    UserServicesProvider
+    UserServicesProvider,
+    CallNumber
   ],
 })
 export class AppModule {}
