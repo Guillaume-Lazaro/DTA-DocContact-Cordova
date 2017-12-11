@@ -100,24 +100,16 @@ export class ApiServicesProvider {
     })
   }
 
-
-  // getList() {
-  //   return this.http.get(`${API_BASE_URL}${API_USERS}`);
-  // }
-  //
-  // addTodos(todo){
-  //   return this.http.post(`${API_BASE_URL}${API_USERS}`,todo);
-  // }
-  //
-  // deleteTodos(todo){
-  //   console.log('id à suppr :'+todo.id)
-  //   return this.http.delete(`${API_BASE_URL}${API_USERS}/${todo.id}`);
-  // }
-  //
-  // modifyTodo(todo){
-  //   return this.http.put(`${API_BASE_URL}${API_USERS}/${todo.id}`,todo);
-  //
-  // }
-
+  updateUser(firstName: string, lastName: string, email: string, profile: string, token: string){
+    let headers = new HttpHeaders().set("Content-Type","application/json").set("Authorization","Bearer " +token);
+    return this.http.put(`${API_BASE_URL}${API_PRIVATE_MODIFIER}`, {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      profile: profile
+    }, {
+      headers: headers
+    })
+  }
 
 }

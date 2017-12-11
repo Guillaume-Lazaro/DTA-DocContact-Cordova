@@ -26,7 +26,7 @@
   <div class="detailContainer">
 
     <div class="photoContainer" >
-      <span class="photoProfil" [style.backgroundImage]="'url(https://cdnfr2.img.sputniknews.com/images/103347/03/1033470339.jpg)'"></span>
+      <span class="photoProfil" [style.backgroundImage]="'url(' + contact.gravatar + '?s=200&d=mm' + ')'"></span>
     </div>
 
     <div class="nameContainer">
@@ -35,9 +35,9 @@
     </div>
 
     <div class="buttonsContainer">
-      <button class="buttonLeft">Message</button>
-      <button class="buttonCenter">Appeler</button>
-      <button class="buttonRight">Mail</button>
+      <button class="buttonLeft" (click)="sendMessage()">Message</button>
+      <button class="buttonCenter" (click)="giveCall()">Appeler</button>
+      <button class="buttonRight" (click)="sendMail()">Mail</button>
     </div>
 
     <div class="detailInformations">

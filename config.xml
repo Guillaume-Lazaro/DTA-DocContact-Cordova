@@ -86,4 +86,8 @@
     <allow-navigation href="http://192.168.116.3:8101" />
     <allow-navigation href="http://10.1.2.63:8101" />
     <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <plugin name="call-number" spec="^1.0.1" />
+    <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+    <plugin name="cordova-plugin-email-composer" spec="^0.8.11" />
+    <allow-navigation href="http://192.168.116.2:8100" />
 </widget>

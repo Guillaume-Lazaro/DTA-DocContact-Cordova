@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, Events, IonicPage, NavController, NavOptions, NavParams, ToastController} from 'ionic-angular';
+import { Events, IonicPage, NavController, NavOptions, NavParams, ToastController} from 'ionic-angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactListPage} from "../contact-list/contact-list";
@@ -36,7 +36,7 @@ export class EditUserPage {
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public userServices: UserServicesProvider,
               fb: FormBuilder, private toastCtrl: ToastController,public events: Events,
-              public alertCtrl: AlertController, public apiServices: ApiServicesProvider) {
+              public apiServices: ApiServicesProvider) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -67,16 +67,16 @@ export class EditUserPage {
   }
 
   handleSubmit() {
-    /*
+
     //Modification du profile
-    this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, this.userServices.token)
+    this.userServices.updateUser(this.firstName,this.lastName,this.email,this.profile, this.userServices.token)
       .then((reponse: any)=>{
-        console.log('Reponse: '+reponse);
+        console.log(this.userServices.getUser(this.userServices.token));
       })
       .catch(error=>{
         console.log(error)
       });
-    */
+
 
     let toast = this.toastCtrl.create({
       message: 'Le profile a bien été modifié',
