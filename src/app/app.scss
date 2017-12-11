@@ -14,3 +14,43 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.menuContainer{
+  display:flex;
+  flex-direction: column;
+  //justify-content: space-between;
+  height:90%;
+
+}
+
+.menuPresentationProfil{
+  display: flex;
+  justify-content: center;
+  padding:20px 10px;
+  flex-direction: column;
+  background-color:#414BA8;
+  height:30%;
+
+}
+.photoMenu{
+  margin:10% 0 5% 10%;
+  width:60px;
+  height:60px;
+  border-radius:50%;
+}
+.menuLastName{
+
+}
+.menuCompleteName{
+  width:90%;
+  margin-left:10%;
+  font-size: 18px;
+  color:white;
+
+}
+.menuDeconnexion button{
+  color:red;
+}
+//.menuDeconnexion button{
+//  justify-content: flex-end;
+//}

@@ -1,16 +1,32 @@
 <ion-menu [content]="content" >
   <ion-header>
-    <ion-toolbar>
-      <ion-title>Menu</ion-title>
-    </ion-toolbar>
+
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let page of pages" (click)="openPage(page)">
-        {{page.title}}
-      </button>
-    </ion-list>
+    <div class="menuContainer">
+      <div class="menuPresentationProfil">
+        <img src="https://marketplace.canva.com/MAB2si1vbe4/1/thumbnail/canva-business-people-design-person-icon--MAB2si1vbe4.png" alt="" class="photoMenu">
+        <div class="menuCompleteName">
+          <span class="menuLastName">{{menuContact?.lastName}}</span>
+          <span>{{menuContact?.firstName}}</span> <br>
+        </div>
+      </div>
+
+
+      <ion-list>
+        <button ion-item (click)="openPage(myProfile)"  menuClose> {{myProfile.title}} </button>
+        <button ion-item (click)="openPage(myContacts)" menuClose>  {{myContacts.title}} </button>
+
+      </ion-list>
+    </div>
+      <div class="menuDeconnexion">
+        <ion-list>
+          <button ion-item (click)="openPage(deconnexion)" menuClose>{{deconnexion.title}} </button>
+        </ion-list>
+      </div>
+
+
   </ion-content>
 
 </ion-menu>
