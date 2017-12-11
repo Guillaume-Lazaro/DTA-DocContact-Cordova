@@ -6,6 +6,7 @@ import { ContactDetailPage } from '../contact-detail/contact-detail';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
+import {Contact} from "../../model/Contact";
 
 
 
@@ -18,8 +19,9 @@ export class ContactListPage {
 
   searchQuery: string = '';
   //For tests
-  contacts: any;
+  contacts: Array<Contact>;
   verif0Contact: boolean = false;
+  allContacts:Array<Contact>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public contactServices: ContactServicesProvider, private storage: Storage) {
     this.menuCtrl.enable(true);
@@ -38,7 +40,8 @@ export class ContactListPage {
       this.contactServices.getContacts(user.token).then(contacts => {
         user.contacts = contacts;
         this.storage.set('user', user);
-        this.contacts = contacts;
+        this.allContacts = contacts;
+        this.contacts = this.allContacts;
         this.verif0Contact = (this.contacts.length == 0);
         console.log(this.contacts)
       })
@@ -46,9 +49,12 @@ export class ContactListPage {
     })
       .catch(error => console.log("erreur get user local" + error))
   }
+  resetList(){
+    this.contacts=this.allContacts
+  }
 
   searchFunction(event: any) {
-    this.initializeList();
+    this.resetList();
     let val = event.target.value;
 
     // if the value is an empty string don't filter the items
