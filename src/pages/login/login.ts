@@ -27,7 +27,6 @@ export class LoginPage {
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
-              public menuCtrl: MenuController,
               public menuCtrl: MenuController, private storage: Storage) {
 
     this.menuCtrl.enable(false);
