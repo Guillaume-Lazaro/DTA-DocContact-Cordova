@@ -1,3 +1,93 @@
 page-contact-detail {
 
 }
+.detailContainer{
+  display: flex;
+  flex-direction: column;
+  height:100%;
+  width:100%;
+}
+
+.photoContainer{
+  height:20%;
+  align-content: center;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:10px;
+}
+.photoProfil{
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.nameContainer{
+  margin-top:20px;
+  text-align:center;
+}
+.detailFirstName{
+  font-size: 16px;
+  padding-top:15px;
+}
+.detailLastName{
+  font-size: 20px;
+  font-weight: bold;
+}
+.buttonsContainer{
+  display:flex;
+  margin:8% auto ;
+  height:50px;
+
+}
+.buttonLeft{
+  height:100%;
+  border-radius:0;
+  border: 1px solid black;
+  border-top-left-radius:45%;
+  border-bottom-left-radius: 45%;
+  margin:0;
+  width:70px;
+  font-size:13px;
+}
+.buttonCenter{
+  height:100%;
+  border-radius:0;
+  border-top:1px solid black;
+  border-bottom:1px solid black;
+  margin:0;
+  width:70px;
+
+  font-size:13px;
+}
+.buttonRight{
+  height:100%;
+  border-radius:0;
+  border: 1px solid black;
+  border-top-right-radius:45%;
+  border-bottom-right-radius: 45%;
+  margin:0;
+  width:70px;
+  font-size:13px;
+}
+.detailInformations{
+  display: flex;
+  flex-direction: column;
+  margin-top:5%;
+  padding-left:5%;
+
+}
+.detailPhone{
+  width: 100%;
+  padding-left:5%;
+  margin:5%;
+}
+.detailMail{
+  width: 100%;
+  padding-left:5%;
+  margin:5%;
+}
+

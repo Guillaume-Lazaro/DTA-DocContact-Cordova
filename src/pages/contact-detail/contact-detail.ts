@@ -19,11 +19,12 @@ export class ContactDetailPage {
   contact: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.contact = this.navParams.get('contact');
+    console.log(this.contact);
   }
 
   ionViewDidLoad() {
-    this.contact = this.navParams.get('contact');
-    console.log(this.contact);
+
   }
 
   goToEditView(contact){
