@@ -71,7 +71,6 @@ export class EditUserPage {
     //Modification du profile
     this.userServices.updateUser(this.firstName,this.lastName,this.email,this.profile, this.userServices.token)
       .then((reponse: any)=>{
-        console.log('Reponse: '+reponse);
         console.log(this.userServices.getUser(this.userServices.token));
       })
       .catch(error=>{
