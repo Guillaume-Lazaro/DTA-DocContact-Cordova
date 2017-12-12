@@ -1,0 +1,59 @@
+{
+  "yes" : "Yes",
+  "no" : "No",
+  "back" : "Back",
+  "done" : "Done",
+
+  "detail" : "Detail",
+  "add" : "Add",
+  "modify" : "Modify",
+  "delete" : "Delete",
+  "confirmation" : "Confirmation",
+  "deleteConfirmation" : "Do you want to delete this contact?",
+
+  "phoneNumber" : "Phone number",
+  "password" : "Password",
+  "connection" : "Connection",
+  "forgottenPassword" : "Forgotten password",
+  "signUp" : "Sign up",
+  "login" : "Login",
+  "inscriptionError" : "Inscription error",
+  "loginFailed" : "Login failed",
+  "loginOrPasswordInvalid" : "Incorrect phone number or password",
+
+  "pleaseEnterYourPhoneNumber" : "Please enter your phone number to receive your password",
+  "cancel" : "Cancel",
+  "sendPassword" : "Send password",
+  "passwordSent" : "Your password was sent",
+  "unknownPhone" : "Unknown phone number",
+
+  "lastName" : "Last name",
+  "firstName" : "First Name",
+  "profile" : "Profile",
+  "confirmPassword" : "Confirm password",
+
+  "lastNameRequired" : "The last name is required",
+  "firstNameRequired" : "The first name is required",
+  "phoneNumberInvalid" : "The phone number is invalid",
+  "emailInvalid" : "The email is invalid",
+  "passwordInvalid" : "The password must be 4 caracters long",
+  "phoneNumberRequired" : "The phone number is required",
+  "passwordRequired" : "The password is required",
+  "emailRequired" : "The email address is required",
+  "passwordIncorrect" : "The password is incorrect",
+
+  "modifyMyProfile" : "Modify my Profile",
+  "myContacts" : "My contacts",
+  "disconnect" : "Disconnect",
+
+  "searchBar" : "Search by name or by phone number",
+  "noContacts" : "You don't have any contacts yet",
+  "addFirstContact" : "Add my first contact",
+
+  "call" : "Call",
+  "signUpSuccessful" : "Sign up successful",
+
+  "contactModified" : "The contact has been successfully modified",
+  "contactDeleted"  : "The contact has been successfully deleted",
+  "contactAdded"    : "The contact has been successfully added"
+}
