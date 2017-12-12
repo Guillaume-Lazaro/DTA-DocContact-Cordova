@@ -35,8 +35,20 @@ export class MyApp {
 
     //Initilization du service de traduction:
     platform.ready().then(()=> {
-      this.translateService.setDefaultLang('fr');
-      this.translateService.use('fr');
+      console.log("Langue du navigateur: "+navigator.language);
+      console.log("Langues de l'user du navigateur: "+navigator.languages);
+
+      var lang:string = navigator.language //Langue systéme utilisé par le device
+      lang = lang.substring(0,2);
+
+      if (lang != "en" && lang != "fr") {
+        lang = "fr";  //Langue par défaut
+      }
+
+      this.translateService.setDefaultLang(lang);
+      //this.translateService.use('en');
+
+      console.log("Langue depuis translateService: "+this.translateService.currentLang);
 
     });
 
