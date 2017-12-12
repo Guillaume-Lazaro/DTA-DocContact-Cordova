@@ -17,14 +17,14 @@
 
 
       <ion-list>
-        <button ion-item (click)="openPage(myProfile)"  menuClose> {{myProfile.title}} </button>
-        <button ion-item (click)="openPage(myContacts)" menuClose>  {{myContacts.title}} </button>
+        <button ion-item (click)="openPage(myProfile)"  menuClose> {{'modifyMyProfile' | translate}} </button>
+        <button ion-item (click)="openPage(myContacts)" menuClose>  {{'myContacts' | translate}} </button>
 
       </ion-list>
     </div>
       <div class="menuDeconnexion">
         <ion-list>
-          <button ion-item (click)="openPage(deconnexion)" menuClose>{{deconnexion.title}} </button>
+          <button ion-item (click)="openPage(deconnexion)" menuClose>{{'disconnect' | translate}} </button>
         </ion-list>
       </div>
 

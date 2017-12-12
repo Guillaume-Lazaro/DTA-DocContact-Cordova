@@ -1,13 +1,7 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Login</ion-title>
+    <ion-title>{{'login' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,43 +11,41 @@
     <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire">
     <div>
       <ion-item>
-        <ion-label floating>Phone number: </ion-label>
+        <ion-label floating>{{'phoneNumber' | translate}}</ion-label>
         <ion-input formControlName="phoneNumber" type="number" [(ngModel)]="phoneNumber"></ion-input>
       </ion-item>
 
       <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.errors">
-        The phone number is unvalid
+        {{'phoneNumberInvalid' | translate}}
       </div>
       <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.hasError('required')">
-        The phone number is required
+        {{'phoneNumberRequired' | translate}}
       </div>
 
       <ion-item>
-        <ion-label floating >Password: </ion-label>
+        <ion-label floating >{{'password' | translate}}</ion-label>
         <ion-input type="password" formControlName="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password">
         </ion-input>
       </ion-item>
 
       <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
-        The password must be 4 caracters long
+        {{'passwordInvalid' | translate}}
       </div>
       <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
-        The password is required
+        {{'passwordRequired' | translate}}
       </div>
 
     </div>
 
     <div class="submitButton">
       <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
-        Connection
+        {{'connection' | translate}}
       </button>
     </div>
 
   </form>
-  <button ion-button (click)="forgotPassword()" clear>Mot de passe oublié</button>
-
-
-  <button type="button" name="button" ion-button (click)="goToInscription()"> Inscription </button>
+  <button ion-button (click)="forgotPassword()" clear>{{'forgottenPassword' | translate}}</button>
+  <button type="button" name="button" ion-button (click)="goToInscription()">{{'signUp' | translate}}</button>
 
   </div>
 </ion-content>
