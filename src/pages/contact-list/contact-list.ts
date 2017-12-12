@@ -33,8 +33,10 @@ export class ContactListPage {
 
   ionViewDidLoad() {
     this.initializeList();
+    
 
   }
+
   ionViewWillEnter(){
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
     this.storage.get('user').then((user:User)=>{

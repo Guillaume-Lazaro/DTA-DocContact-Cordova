@@ -35,8 +35,9 @@ export class MyApp {
 
     //Initilization du service de traduction:
     platform.ready().then(()=> {
-      this.translateService.setDefaultLang('en');
+      this.translateService.setDefaultLang('fr');
       this.translateService.use('fr');
+
     });
 
     app.viewWillEnter.subscribe(
