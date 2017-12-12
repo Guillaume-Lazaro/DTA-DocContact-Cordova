@@ -19,7 +19,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
-  menuContact: any;
+  menuUser: any;
 
   deconnexion: any =  {title: 'Deconnexion', component: LoginPage};
   myProfile: any =    {title: 'Modifier mon Profil', component: EditUserPage };
@@ -60,11 +60,9 @@ export class MyApp {
 
   checkIfUserInfoCanBeDisplayed(){
     //If a token has been set, we're going to see if we have a user, else we're fetching it
-    if(this.menuContact==undefined || this.menuContact == ""){
       this.storage.get('user').then((user:User)=>{
-        this.menuContact = user;
+        this.menuUser = user;
       })
-    }
   }
 
   initializeApp() {
@@ -79,8 +77,9 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.title == 'Deconnexion'){
-
+      this.storage.clear().then(()=>{
+        this.nav.setRoot(page.component)
+    })
     }
-    this.nav.setRoot(page.component);
   }
 }
