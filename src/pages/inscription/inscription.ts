@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
+import {TranslateService} from '@ngx-translate/core';
 
 /**
  * Generated class for the InscriptionPage page.
@@ -38,7 +39,7 @@ export class InscriptionPage {
   passwordForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-              public events: Events, public apiServices: ApiServicesProvider) {
+              public events: Events, public apiServices: ApiServicesProvider, private translateService: TranslateService) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -89,17 +90,6 @@ export class InscriptionPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad InscriptionPage');
-  }
-
-  testButton() {
-    let toast = this.toastCtrl.create({
-      message: 'Profile = '+this.profile,
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
-
-    console.log('Profile = '+this.profile);
   }
 
   //Mon propre validator!! (inutilisable pour le moment)

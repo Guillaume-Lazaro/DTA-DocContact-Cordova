@@ -2,8 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import {App, Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-// A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
-
+import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
 import {ContactListPage} from "../pages/contact-list/contact-list";
 import {UserProfilePage} from "../pages/user-profile/user-profile";
@@ -11,6 +10,7 @@ import {UserServicesProvider} from "../providers/user-services/user-services";
 import {EditUserPage} from "../pages/edit-user/edit-user";
 import {Storage} from "@ionic/storage";
 import {User} from "../model/User";
+// A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
   templateUrl: 'app.html'
@@ -21,23 +21,42 @@ export class MyApp {
   rootPage: any = LoginPage;
   menuContact: any;
 
-  deconnexion: any = {title : "Deconnexion", component: LoginPage};
-  myProfile: any = { title: 'Modifier mon Profil', component: EditUserPage };
-  myContacts : any = { title: 'Mes Contacts', component: ContactListPage };
+  deconnexion: any =  {title: 'Deconnexion', component: LoginPage};
+  myProfile: any =    {title: 'Modifier mon Profil', component: EditUserPage };
+  myContacts : any =  {title: 'Mes Contacts', component: ContactListPage };
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public userServices: UserServicesProvider, public app:App, private userService: UserServicesProvider,
-              private storage: Storage) {
-         //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
-    this.initializeApp();
-    //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+              private storage: Storage, private translateService: TranslateService) {
 
+    //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: private screenOrientation: ScreenOrientation
+    this.initializeApp();
+    //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+
+    //Initilization du service de traduction:
+    platform.ready().then(()=> {
+      console.log("Langue du navigateur: "+navigator.language);
+      console.log("Langues de l'user du navigateur: "+navigator.languages);
+
+      var lang:string = navigator.language //Langue systéme utilisé par le device
+      lang = lang.substring(0,2);
+
+      if (lang != "en" && lang != "fr") {
+        lang = "fr";  //Langue par défaut
+      }
+
+      this.translateService.setDefaultLang(lang);
+      //this.translateService.use('en');
+
+      console.log("Langue depuis translateService: "+this.translateService.currentLang);
+
+    });
 
     app.viewWillEnter.subscribe(
       () => {
         this.checkIfUserInfoCanBeDisplayed()
       })
-    }
+  }
 
   checkIfUserInfoCanBeDisplayed(){
     //If a token has been set, we're going to see if we have a user, else we're fetching it

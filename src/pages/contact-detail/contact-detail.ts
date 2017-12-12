@@ -4,6 +4,7 @@ import {EditContactPage} from "../edit-contact/edit-contact";
 import {CallNumber} from "@ionic-native/call-number";
 import {EmailComposer} from "@ionic-native/email-composer";
 import {SMS} from "@ionic-native/sms";
+import { TranslateService } from '@ngx-translate/core';
 
 
 @IonicPage()
@@ -16,7 +17,7 @@ export class ContactDetailPage {
   contact: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber,
-              private emailComposer: EmailComposer, private sms:SMS) {
+              private emailComposer: EmailComposer, private sms:SMS, private translateService: TranslateService) {
     this.contact = navParams.get('contact');
   }
 

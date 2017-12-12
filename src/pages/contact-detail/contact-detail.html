@@ -8,7 +8,7 @@
 
   <ion-navbar>
 
-    <ion-title>Detail</ion-title>
+    <ion-title>{{'detail' | translate}}</ion-title>
 
     <ion-buttons end>
       <button ion-button icon-only (click)="goToEditView()">
@@ -36,21 +36,17 @@
 
     <div class="buttonsContainer">
       <button class="buttonLeft" (click)="sendMessage()">Message</button>
-      <button class="buttonCenter" (click)="giveCall()">Appeler</button>
+      <button class="buttonCenter" (click)="giveCall()">{{'call' | translate}}</button>
       <button class="buttonRight" (click)="sendMail()">Mail</button>
     </div>
 
     <div class="detailInformations">
-      <h3>Numéro de Téléphone:</h3>
+      <h3>{{'phoneNumber' | translate}}</h3>
       <span class="detailPhone">{{contact.phone}}</span>
-      <h3 class="detailEmail">Email:</h3>
+      <h3 class="detailEmail">Email</h3>
       <span class="detailMail">{{contact.email}}</span>
     </div>
 
-
-
   </div>
-
-
 
 </ion-content>
