@@ -19,6 +19,10 @@ import { CallNumber } from '@ionic-native/call-number';
 import {IonicStorageModule} from "@ionic/storage";
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
+import { Contacts } from '@ionic-native/contacts';
+import { ImportServicesProvider } from '../providers/import-services/import-services';
+
+
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
@@ -59,7 +63,9 @@ import { SMS } from '@ionic-native/sms';
     UserServicesProvider,
     CallNumber,
     EmailComposer,
-    SMS
+    SMS,
+    Contacts,
+    ImportServicesProvider
   ],
 })
 export class AppModule {}

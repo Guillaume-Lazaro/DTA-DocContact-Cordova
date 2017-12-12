@@ -6,11 +6,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
 import {ContactListPage} from "../pages/contact-list/contact-list";
-import {UserProfilePage} from "../pages/user-profile/user-profile";
 import {UserServicesProvider} from "../providers/user-services/user-services";
 import {EditUserPage} from "../pages/edit-user/edit-user";
 import {Storage} from "@ionic/storage";
 import {User} from "../model/User";
+import {ImportServicesProvider} from "../providers/import-services/import-services";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,8 +26,8 @@ export class MyApp {
   myContacts : any = { title: 'Mes Contacts', component: ContactListPage };
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public userServices: UserServicesProvider, public app:App, private userService: UserServicesProvider,
-              private storage: Storage) {
+              public app:App, private userService: UserServicesProvider,
+              private storage: Storage, private importServices : ImportServicesProvider) {
          //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
     this.initializeApp();
     //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
@@ -63,5 +63,8 @@ export class MyApp {
 
     }
     this.nav.setRoot(page.component);
+  }
+  importContacts() {
+      this.importServices.importContacts();
   }
 }
