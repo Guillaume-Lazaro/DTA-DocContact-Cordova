@@ -34,7 +34,7 @@
         {{'phoneNumberInvalid' | translate}}
       </div>
       <div *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('required')">
-        The phone number is required
+        {{'phoneNumberRequired' | translate}}
       </div>
 
       <ion-item>
@@ -45,7 +45,7 @@
         {{'emailInvalid' | translate}}
       </div>
       <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">
-        The email is required
+        {{'emailInvalid' | translate}}
       </div>
 
       <ion-item>
@@ -64,7 +64,7 @@
           {{'passwordInvalid' | translate}}
         </div>
         <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
-          The password is required
+          {{'passwordRequired' | translate}}
         </div>
 
         <ion-item>
@@ -72,10 +72,10 @@
           <ion-input formControlName="confirmPassword" type="password" name="confirmPassword" [(ngModel)]="confirmPassword"></ion-input>
         </ion-item>
         <div *ngIf="confirmPasswordCtrl.errors && confirmPasswordCtrl.dirty">
-          The password is incorrect!
+          {{'passwordInvalid' | translate}}
         </div>
         <div *ngIf="confirmPasswordCtrl.dirty && confirmPasswordCtrl.hasError('required')">
-          The password is required
+          {{'passwordRequired' | translate}}
         </div>
       </form >
     </div>

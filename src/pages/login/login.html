@@ -1,9 +1,3 @@
-<!--
-  Generated template for the LoginPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -25,7 +19,7 @@
         {{'phoneNumberInvalid' | translate}}
       </div>
       <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.hasError('required')">
-        The phone number is required
+        {{'phoneNumberRequired' | translate}}
       </div>
 
       <ion-item>
@@ -38,7 +32,7 @@
         {{'passwordInvalid' | translate}}
       </div>
       <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
-        The password is required
+        {{'passwordRequired' | translate}}
       </div>
 
     </div>
@@ -51,8 +45,6 @@
 
   </form>
   <button ion-button (click)="forgotPassword()" clear>{{'forgottenPassword' | translate}}</button>
-
-
   <button type="button" name="button" ion-button (click)="goToInscription()">{{'signUp' | translate}}</button>
 
   </div>

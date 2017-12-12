@@ -36,6 +36,10 @@
   "phoneNumberInvalid" : "The phone number is invalid",
   "emailInvalid" : "The email is invalid",
   "passwordInvalid" : "The password must be 4 caracters long",
+  "phoneNumberRequired" : "The phone number is required",
+  "passwordRequired" : "The password is required",
+  "emailRequired" : "The email address is required",
+  "passwordIncorrect" : "The password is incorrect",
 
   "modifyMyProfile" : "Modify my Profile",
   "myContacts" : "My contacts",
@@ -47,5 +51,7 @@
 
   "call" : "Call",
   "signUpSuccessful" : "Sign up successful"
+
+
 
 }
