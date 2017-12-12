@@ -6,6 +6,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
+import { TranslateService } from '@ngx-translate/core';
 
 /**
  * Generated class for the EditContactPage page.
@@ -41,7 +42,8 @@ export class EditContactPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider,
               public userServices: UserServicesProvider, fb: FormBuilder, private toastCtrl: ToastController,
-              public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController, private storage: Storage) {
+              public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController,
+              private storage: Storage, private translateService: TranslateService) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);

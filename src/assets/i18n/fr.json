@@ -1,0 +1,51 @@
+{
+  "yes" : "Oui",
+  "no" : "Non",
+  "back" : "Retour",
+  "done" : "Valider",
+
+  "detail" : "Détail",
+  "add" : "Ajouter",
+  "modify" : "Modifier",
+  "delete" : "Supprimer",
+  "confirmation" : "Confirmation",
+  "deleteConfirmation" : "Voulez-vous vraiment supprimer ce contact?",
+
+  "phoneNumber" : "Numéro de téléphone",
+  "password" : "Mot de passe",
+  "connection" : "Connexion",
+  "forgottenPassword" : "Mot de passe oublié",
+  "signUp" : "Inscription",
+  "login" : "Login",
+  "inscriptionError" : "Erreur lors de l'inscription",
+  "loginFailed" : "Erreur lors du login",
+
+  "pleaseEnterYourPhoneNumber" : "Entrez votre numéro de téléphone pour recevoir votre mot de passe",
+  "cancel" : "Annuler",
+  "sendPassword" : "Envoyer le mot de passe",
+  "passwordSent" : "Votre mot de passe a été envoyé",
+  "unknownPhone" : "Numéro de téléphone inconnu",
+
+  "lastName" : "Nom",
+  "firstName" : "Prénom",
+  "profile" : "Profil",
+  "confirmPassword" : "Confirmation du mot de passe",
+
+  "lastNameRequired" : "Le nom est requis",
+  "firstNameRequired" : "Le prénom est requis",
+  "phoneNumberInvalid" : "Le numéro de téléphone est invalide",
+  "emailInvalid" : "L'adresse email est invalide",
+  "passwordInvalid" : "Le mot de passe doit faire 4 caractéres de long",
+
+  "modifyMyProfile" : "Modifier mon Profil",
+  "myContacts" : "Mes contacts",
+  "disconnect" : "Déconnexion",
+
+  "searchBar" : "Chercher par nom ou par numéro de téléphone",
+  "noContacts" : "Vous n'avez pas encore de contacts",
+  "addFirstContact" : "Ajouter mon premier contact",
+
+  "call" : "Appeler",
+  "signUpSuccessful" : "Inscription réussie"
+
+}

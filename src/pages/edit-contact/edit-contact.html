@@ -67,7 +67,7 @@
 
     <div class="submitButton" *ngIf="isInEditMode; else addButton" >
       <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
-        Modify
+        {{'modify' | translate}}
       </button>
     </div>
 

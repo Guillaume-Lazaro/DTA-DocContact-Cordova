@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Inscription</ion-title>
+    <ion-title>{{'signUp' | translate}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,45 +11,45 @@
   <form (ngSubmit)="handleSubmit()" [formGroup]="userForm">
     <div>
       <ion-item>
-        <ion-label floating>Last name: </ion-label>
+        <ion-label floating>{{'lastName' | translate}}</ion-label>
         <ion-input formControlName="lastName" [(ngModel)]="lastName"></ion-input>
       </ion-item>
       <div *ngIf="lastNameCtrl.dirty && lastNameCtrl.hasError('required')">
-        The last name is required
+        {{'lastNameRequired' | translate}}
       </div>
 
       <ion-item>
-        <ion-label floating>First name: </ion-label>
+        <ion-label floating>{{'firstName' | translate}}</ion-label>
         <ion-input formControlName="firstName" [(ngModel)]="firstName"></ion-input>
       </ion-item>
       <div *ngIf="firstNameCtrl.dirty && firstNameCtrl.hasError('required')">
-        The first name is required
+        {{'firstNameRequired' | translate}}
       </div>
 
       <ion-item>
-        <ion-label floating>Phone number: </ion-label>
+        <ion-label floating>{{'phoneNumber' | translate}}</ion-label>
         <ion-input formControlName="phone" type="number" [(ngModel)]="phone"></ion-input>
       </ion-item>
       <div *ngIf="phoneCtrl.dirty && phoneCtrl.errors">
-        The phone number is unvalid
+        {{'phoneNumberInvalid' | translate}}
       </div>
       <div *ngIf="phoneCtrl.dirty && phoneCtrl.hasError('required')">
         The phone number is required
       </div>
 
       <ion-item>
-        <ion-label floating>Email: </ion-label>
+        <ion-label floating>Email</ion-label>
         <ion-input formControlName="email" type="email" [(ngModel)]="email"></ion-input>
       </ion-item>
       <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('email')">
-        The email is invalid
+        {{'emailInvalid' | translate}}
       </div>
       <div *ngIf="emailCtrl.dirty && emailCtrl.hasError('required')">
         The email is required
       </div>
 
       <ion-item>
-        <ion-label>Profile : </ion-label>
+        <ion-label>{{'profile' | translate}}</ion-label>
         <ion-select formControlName="profile" [(ngModel)]="profile" interface="popover" [selectOptions]="profileType">
           <ion-option *ngFor="let o of profileType" [value]="o">{{o}}</ion-option>
         </ion-select>
@@ -57,18 +57,18 @@
 
       <form [formGroup]="passwordForm">
         <ion-item>
-          <ion-label floating >Password: </ion-label>
+          <ion-label floating >{{'password' | translate}}</ion-label>
           <ion-input formControlName="password" type="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password"></ion-input>
         </ion-item>
         <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
-          The password must be 4 caracters long
+          {{'passwordInvalid' | translate}}
         </div>
         <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
           The password is required
         </div>
 
         <ion-item>
-          <ion-label floating >Confirm password: </ion-label>
+          <ion-label floating >{{'confirmPassword' | translate}}</ion-label>
           <ion-input formControlName="confirmPassword" type="password" name="confirmPassword" [(ngModel)]="confirmPassword"></ion-input>
         </ion-item>
         <div *ngIf="confirmPasswordCtrl.errors && confirmPasswordCtrl.dirty">
@@ -82,11 +82,9 @@
 
     <div class="submitButton">
       <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
-        Inscription
+        {{'signUp' | translate}}
       </button>
     </div>
   </form>
-
-  <button type="button" name="button" ion-button (click)="testButton()"> Test </button>
 
 </ion-content>
