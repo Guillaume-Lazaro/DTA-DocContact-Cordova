@@ -75,7 +75,7 @@ export class EditContactPage {
     var toastMessage;
     if (this.isInEditMode) {
       //Modification
-      toastMessage = 'Le contact a bien été modifié';
+      toastMessage = this.translateService.instant('contactModified');
 
       this.storage.get('user').then((user:User)=>{
         this.contactServices.updateContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token, this.contact.id)
@@ -88,7 +88,7 @@ export class EditContactPage {
       })
     } else {
       //Création
-      toastMessage = 'Le contact a bien été ajouté';
+      toastMessage = this.translateService.instant('contactAdded');
       this.storage.get('user').then((user:User)=>{
         this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token)
           .then((reponse: any)=>{
@@ -112,30 +112,21 @@ export class EditContactPage {
 
   deleteContact() {
     let alert = this.alertCtrl.create({
-      title: 'Delete ?',
-      message: 'Do you want to delete this contact ?',
+      title: this.translateService.instant('confirmation'),
+      message: this.translateService.instant('deleteConfirmation'),
       buttons: [
         {
-          text: 'No',
-          handler: () => {
-            console.log('No clicked');
-          }
-        },
+          text: this.translateService.instant('no'),
+          handler: () => {}},
         {
-          text: 'Delete',
+          text: this.translateService.instant('delete'),
           handler: () => {
-            console.log('Delete clicked');
-            console.log('Je delete le contact '+this.contact.id);
-
             this.storage.get('user').then((user:User)=>{
               this.contactServices.deleteContact(this.contact.id, user.token)
                 .then((reponse: any)=>{
-                  console.log('reponse '+reponse);
                   this.navCtrl.popToRoot();
                 })
-                .catch(error=>{
-                  console.log(error)
-                });
+                .catch(error=>{ console.log(error) });
             })
           }
         }

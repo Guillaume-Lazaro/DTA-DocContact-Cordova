@@ -19,6 +19,8 @@
   "login" : "Login",
   "inscriptionError" : "Inscription error",
   "loginFailed" : "Login failed",
+  "loginOrPasswordInvalid" : "Incorrect phone number or password",
+
 
   "pleaseEnterYourPhoneNumber" : "Please enter your phone number to receive your password",
   "cancel" : "Cancel",
@@ -50,8 +52,9 @@
   "addFirstContact" : "Add my first contact",
 
   "call" : "Call",
-  "signUpSuccessful" : "Sign up successful"
+  "signUpSuccessful" : "Sign up successful",
 
-
-
+  "contactModified" : "The contact has been successfully modified",
+  "contactDeleted"  : "The contact has been successfully deleted",
+  "contactAdded"    : "The contact has been successfully added"
 }
