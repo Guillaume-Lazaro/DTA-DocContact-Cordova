@@ -3,6 +3,10 @@ import {Events, IonicPage, NavController, NavParams, ToastController} from 'ioni
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {TranslateService} from '@ngx-translate/core';
+import {UserServicesProvider} from "../../providers/user-services/user-services";
+import {Storage} from "@ionic/storage";
+import {User} from "../../model/User";
+import {ContactListPage} from "../contact-list/contact-list";
 
 /**
  * Generated class for the InscriptionPage page.
@@ -39,7 +43,8 @@ export class InscriptionPage {
   passwordForm: FormGroup;
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController,
-              public events: Events, public apiServices: ApiServicesProvider, private translateService: TranslateService) {
+              public events: Events, public apiServices: ApiServicesProvider, private translateService: TranslateService,
+              private userServices: UserServicesProvider, private storage: Storage) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -72,6 +77,24 @@ export class InscriptionPage {
 
   handleSubmit() {
     if (this.password == this.confirmPassword) {
+      this.userServices.createUser(this.phone, this.password, this.firstName, this.lastName, this.email, this.profile)
+        .then((userJson: any) => {
+          this.userServices.logTheUser(userJson.phone, this.password).then((message:any)=>{
+            this.storage.get('user').then((user:User)=>{
+              user.token = message.token;
+              this.storage.set('user',user).then(()=>{
+                this.navCtrl.setRoot(ContactListPage).then()
+                  .catch(error=>console.log(error.error));
+              })
+                .catch(error=>console.log(error.error));
+            })
+              .catch(error=>console.log(error.error));
+          })
+            .catch(error=>console.log(error.error));
+        })
+        .catch(error=>console.log(error.error));
+
+      //Toast pour prevenir
       let toast = this.toastCtrl.create({
         message: 'Vous etes inscrit! Bien joué!',
         duration: 3000,
