@@ -51,10 +51,9 @@ export class EditContactPage {
     this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
     this.profileCtrl = fb.control('', Validators.required);
 
-    this.apiServices.getProfiles().toPromise()
-      .then(profiles =>{
-        this.profileType = profiles
-      });
+    this.storage.get('profiles').then(profiles=>{
+      this.profileType = profiles
+    }).catch(error=>console.log(error));
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,

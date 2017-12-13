@@ -52,11 +52,9 @@ export class InscriptionPage {
     this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
     this.profileCtrl = fb.control('', Validators.required);
 
-
-    this.apiServices.getProfiles().toPromise()
-      .then(profiles =>{
-        this.profileType = profiles
-      });
+    this.storage.get('profiles').then(profiles=>{
+      this.profileType = profiles
+    }).catch(error=>console.log(error));
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,
@@ -96,14 +94,14 @@ export class InscriptionPage {
 
       //Toast pour prevenir
       let toast = this.toastCtrl.create({
-        message: 'Vous etes inscrit! Bien joué!',
+        message: this.translateService.instant('signUpSuccessful'),
         duration: 3000,
         position: 'bottom'
       });
       toast.present();
     } else {
       let toast = this.toastCtrl.create({
-        message: 'The confirm password is incorrect',
+        message: this.translateService.instant('incorrectConfirmPassword'),
         duration: 3000,
         position: 'bottom'
       });
