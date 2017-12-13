@@ -42,6 +42,7 @@ export class LoginPage {
   }
 
   handleSubmit() {
+    this.networkSerices.checkConnection();
     this.userServices.logTheUser(this.phoneNumber, this.password)
       .then((response: any)=>{
         if(response.status === 400){
@@ -70,7 +71,7 @@ export class LoginPage {
   }
 
   logConnection(){
-    if (this.networkSerices.checkConnection()) {
+    if (this.networkSerices.isConnect()) {
       console.log('Online');
     }else{
       console.log('Offline');
@@ -98,7 +99,8 @@ export class LoginPage {
       inputs: [
         {
           name: "phone",
-          placeholder: this.translateService.instant('phoneNumber')
+          placeholder: this.translateService.instant('phoneNumber'),
+          value: this.phoneNumber
         }
       ],
       buttons:[

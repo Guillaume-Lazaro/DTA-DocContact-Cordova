@@ -48,7 +48,9 @@ export class UserServicesProvider {
   createUser(phone: string, password: string, firstName: string,lastName: string, email: string, profile: string){
     return new Promise (resolve=>{
       this.apiServices.SignUpUser(phone, password, firstName, lastName, email, profile).toPromise().then( (user: any)=>{
-        resolve(user)
+        this.storage.set('user',new User(user.firstName,user.lastName,user.email,user.phone,this.apiServices.createGravatar(user.email),user.profile,"",[])).then(()=>{
+          resolve(user)
+        })
       })
         .catch(error=>{
         console.log(error)

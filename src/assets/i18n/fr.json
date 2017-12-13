@@ -52,8 +52,14 @@
 
   "call" : "Appeler",
   "signUpSuccessful" : "Inscription réussie",
+  "incorrectConfirmPassword" : "Le mot de passe de confirmation est incorrect",
 
   "contactModified" : "Le contact a bien été modifié",
+  "contactNotModified": "Contact non modifié car aucune connexion",
   "contactDeleted"  : "Le contact a bien été supprimé",
-  "contactAdded"    : "Le contact a bien été ajouté"
+  "contactAdded"    : "Le contact a bien été ajouté",
+  "contactNotAdded" : "Contact non ajouté car aucune connexion",
+
+  "NETWORK_NONE_MESSAGE" : "Connexion internet perdue",
+  "NETWORK_MESSAGE" : "Connexion internet réussie"
 }

@@ -12,6 +12,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <preference name="ScrollEnabled" value="false" />
+    <preference name="CordovaWebViewEngine" value="CDVUIWebViewEngine" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
@@ -80,6 +81,7 @@
     <allow-navigation href="http://10.1.2.63:8101" />
     <allow-navigation href="http://192.168.116.2:8100" />
     <engine name="android" spec="6.4.0" />
+    <engine name="ios" spec="~4.5.4" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />

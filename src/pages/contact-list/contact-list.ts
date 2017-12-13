@@ -34,7 +34,7 @@ export class ContactListPage {
   }
 
   ionViewDidLoad() {
-    this.networkServices.test();
+    this.networkServices.checkConnection();
     this.initializeList();
 
     this.searchBarPlaceholder = this.translateService.instant('searchBar');
