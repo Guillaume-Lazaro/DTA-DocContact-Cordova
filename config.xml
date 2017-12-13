@@ -91,5 +91,6 @@
     <plugin name="call-number" spec="^1.0.1" />
     <plugin name="cordova-sms-plugin" spec="^0.1.11" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.11" />
+    <plugin name="cordova-plugin-contacts" spec="^3.0.0" />
     <engine name="ios" spec="~4.5.4" />
 </widget>

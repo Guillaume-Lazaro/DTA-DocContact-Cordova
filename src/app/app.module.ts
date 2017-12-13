@@ -21,6 +21,10 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { Contacts } from '@ionic-native/contacts';
+import { ImportServicesProvider } from '../providers/import-services/import-services';
+
+
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
@@ -68,7 +72,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     UserServicesProvider,
     CallNumber,
     EmailComposer,
-    SMS
+    SMS,
+    Contacts,
+    ImportServicesProvider
   ],
 })
 export class AppModule {}
