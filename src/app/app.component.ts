@@ -80,6 +80,8 @@ export class MyApp {
       this.storage.clear().then(()=>{
         this.nav.setRoot(page.component)
     })
+    }else{
+      this.nav.setRoot(page.component);
     }
   }
 }
