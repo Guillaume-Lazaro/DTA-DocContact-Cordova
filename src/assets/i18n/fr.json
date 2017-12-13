@@ -36,7 +36,7 @@
   "firstNameRequired" : "Le prénom est requis",
   "phoneNumberInvalid" : "Le numéro de téléphone est invalide",
   "emailInvalid" : "L'adresse email est invalide",
-  "passwordInvalid" : "Le mot de passe doit faire 4 caractéres de long",
+  "passwordInvalid" : "Le mot de passe doit faire 4 caractères de long",
   "phoneNumberRequired" : "Le numéro de téléphone est requis",
   "passwordRequired" : "Le mot de passe est requis",
   "emailRequired" : "L'adresse email est requise",
@@ -57,8 +57,12 @@
   "contactModified" : "Le contact a bien été modifié",
   "contactNotModified": "Contact non modifié car aucune connexion",
   "contactDeleted"  : "Le contact a bien été supprimé",
+  "contactNotDeleted" : "Contact non supprimé car aucune connexion",
   "contactAdded"    : "Le contact a bien été ajouté",
   "contactNotAdded" : "Contact non ajouté car aucune connexion",
+
+  "userProfileModified" : "Profile modifié",
+  "userProfileNotModified" : "Profile non modifié car aucune connexion",
 
   "NETWORK_NONE_MESSAGE" : "Connexion internet perdue",
   "NETWORK_MESSAGE" : "Connexion internet réussie"
