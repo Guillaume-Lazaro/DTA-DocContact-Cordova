@@ -33,6 +33,7 @@
     "android-versions": "^1.2.1",
     "call-number": "^1.0.1",
     "cordova-android": "^6.4.0",
+    "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-email-composer": "^0.8.11",
     "cordova-plugin-ionic-webview": "^1.1.16",
@@ -44,7 +45,7 @@
     "ionic-angular": "3.9.2",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
-    "mx.ferreyra.callnumber": "~0.0.2",
+    "mx.ferreyra.callnumber": "0.0.2",
     "rxjs": "5.5.2",
     "sw-toolbox": "3.6.0",
     "ts-md5": "^1.2.2",
@@ -69,7 +70,8 @@
       "cordova-plugin-email-composer": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
