@@ -1,15 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
-import {App, Nav, Platform} from 'ionic-angular';
+import { App, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
-import {ContactListPage} from "../pages/contact-list/contact-list";
-import {UserServicesProvider} from "../providers/user-services/user-services";
-import {EditUserPage} from "../pages/edit-user/edit-user";
-import {Storage} from "@ionic/storage";
-import {User} from "../model/User";
-import {ApiServicesProvider} from "../providers/api-services/api-services";
+import { ContactListPage } from "../pages/contact-list/contact-list";
+import { UserServicesProvider } from "../providers/user-services/user-services";
+import { EditUserPage } from "../pages/edit-user/edit-user";
+import { Storage } from "@ionic/storage";
+import { User } from "../model/User";
+import { ApiServicesProvider } from "../providers/api-services/api-services";
 // A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
