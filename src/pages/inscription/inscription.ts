@@ -122,7 +122,7 @@ export class InscriptionPage {
     } else {
       return {
         confirmError: {
-          errorMessage: "Incorrect confirm password asshole!"
+          errorMessage: "Incorrect confirm password"
         }
       }
     }
