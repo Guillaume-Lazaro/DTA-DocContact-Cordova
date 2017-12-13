@@ -10,6 +10,7 @@ import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import {Contact} from "../../model/Contact";
 import { TranslateService } from '@ngx-translate/core';
+import {NetworkProvider} from "../../providers/network-services/network-services";
 
 @IonicPage()
 @Component({
@@ -27,12 +28,13 @@ export class ContactListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
               public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
-              public userServices: UserServicesProvider,public callNumber: CallNumber) {
+              public networkServices: NetworkProvider,public callNumber: CallNumber) {
 
     this.menuCtrl.enable(true);
   }
 
   ionViewDidLoad() {
+    this.networkServices.test();
     this.initializeList();
 
     this.searchBarPlaceholder = this.translateService.instant('searchBar');
