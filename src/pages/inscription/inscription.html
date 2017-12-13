@@ -78,6 +78,9 @@
           {{'passwordRequired' | translate}}
         </div>
       </form >
+      <div *ngIf="passwordForm.hasError('confirmError')">
+        {{'incorrectConfirmPassword' | translate}}
+      </div>
     </div>
 
     <div class="submitButton">
