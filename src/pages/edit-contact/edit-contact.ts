@@ -7,6 +7,7 @@ import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import { TranslateService } from '@ngx-translate/core';
+import {NetworkProvider} from "../../providers/network-services/network-services";
 
 /**
  * Generated class for the EditContactPage page.
@@ -43,7 +44,7 @@ export class EditContactPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider,
               fb: FormBuilder, private toastCtrl: ToastController,
               public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController,
-              private storage: Storage, private translateService: TranslateService) {
+              private storage: Storage, private translateService: TranslateService, public networkServices: NetworkProvider) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -51,10 +52,9 @@ export class EditContactPage {
     this.emailCtrl = fb.control('', [Validators.email, Validators.required]);
     this.profileCtrl = fb.control('', Validators.required);
 
-    this.apiServices.getProfiles().toPromise()
-      .then(profiles =>{
-        this.profileType = profiles
-      });
+    this.storage.get('profiles').then(profiles=>{
+      this.profileType = profiles
+    }).catch(error=>console.log(error));
 
     this.userForm = fb.group({
       lastName: this.lastNameCtrl,
@@ -75,32 +75,39 @@ export class EditContactPage {
     var toastMessage;
     if (this.isInEditMode) {
       //Modification
-      toastMessage = this.translateService.instant('contactModified');
       // TODO: verifier connexion
+      if (this.networkServices.isConnect()) {
+        toastMessage = this.translateService.instant('contactModified');
 
-
-      this.storage.get('user').then((user:User)=>{
-        this.contactServices.updateContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token, this.contact.id)
-          .then((reponse: any)=>{
-            this.navCtrl.popToRoot(); //TODO à changer dans le futur
-          })
-          .catch(error=>{
-            console.log(error)
-          });
-      })
+        this.storage.get('user').then((user: User) => {
+          this.contactServices.updateContact(this.firstName, this.lastName, this.phone, this.email, this.profile, false, user.token, this.contact.id)
+            .then((reponse: any) => {
+              this.navCtrl.popToRoot(); //TODO à changer dans le futur
+            })
+            .catch(error => {
+              console.log(error)
+            });
+        })
+      } else{
+          toastMessage = this.translateService.instant('contactNotModified');
+      }
     } else {
       //Création
-      toastMessage = this.translateService.instant('contactAdded');
-      // TODO: verifier connexion
-      this.storage.get('user').then((user:User)=>{
-        this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token)
-          .then((reponse: any)=>{
-            this.navCtrl.popToRoot();
-          })
-          .catch(error=>{
-            console.log(error)
-          });
-      })
+      if (this.networkServices.isConnect()) {
+        toastMessage = this.translateService.instant('contactAdded');
+        // TODO: verifier connexion
+        this.storage.get('user').then((user: User) => {
+          this.contactServices.createContact(this.firstName, this.lastName, this.phone, this.email, this.profile, false, user.token)
+            .then((reponse: any) => {
+              this.navCtrl.popToRoot();
+            })
+            .catch(error => {
+              console.log(error)
+            });
+        })
+      } else {
+        toastMessage = this.translateService.instant('contactNotAdded');
+      }
     }
 
     let toast = this.toastCtrl.create({

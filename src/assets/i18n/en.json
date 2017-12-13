@@ -52,8 +52,12 @@
 
   "call" : "Call",
   "signUpSuccessful" : "Sign up successful",
+  "incorrectConfirmPassword" : "The confirm password is incorrect",
 
   "contactModified" : "The contact has been successfully modified",
   "contactDeleted"  : "The contact has been successfully deleted",
-  "contactAdded"    : "The contact has been successfully added"
+  "contactAdded"    : "The contact has been successfully added",
+
+  "NETWORK_NONE_MESSAGE" : "You're offline",
+  "NETWORK_MESSAGE" : "You're online"
 }
