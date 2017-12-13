@@ -1,10 +1,27 @@
 page-login {
+}
+.loginLogo{
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 
+}
+.loginLogo img{
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.loginLogo h3{
+  font-family: "Domine";
+  font-size: 2em;
 }
 .mainWindow{
   display: flex;
   width:100%;
-  height: 100%;
+  height:70%;
   justify-content: space-around;
   flex-direction: column;
 }
