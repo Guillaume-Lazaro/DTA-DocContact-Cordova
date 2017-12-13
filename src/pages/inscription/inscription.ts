@@ -96,14 +96,14 @@ export class InscriptionPage {
 
       //Toast pour prevenir
       let toast = this.toastCtrl.create({
-        message: 'Vous etes inscrit! Bien joué!',
+        message: this.translateService.instant('signUpSuccessful'),
         duration: 3000,
         position: 'bottom'
       });
       toast.present();
     } else {
       let toast = this.toastCtrl.create({
-        message: 'The confirm password is incorrect',
+        message: this.translateService.instant('incorrectConfirmPassword'),
         duration: 3000,
         position: 'bottom'
       });

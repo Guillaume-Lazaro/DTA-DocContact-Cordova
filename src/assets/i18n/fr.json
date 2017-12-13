@@ -52,6 +52,7 @@
 
   "call" : "Appeler",
   "signUpSuccessful" : "Inscription réussie",
+  "incorrectConfirmPassword" : "Le mot de passe de confirmation est incorrect",
 
   "contactModified" : "Le contact a bien été modifié",
   "contactDeleted"  : "Le contact a bien été supprimé",
