@@ -23,6 +23,7 @@ export class ContactListPage {
   contacts: Array<Contact>;
   verif0Contact: boolean = false;
   allContacts:Array<Contact>;
+  //groupedContacts = [];
   searchBarPlaceholder:string = 'Bla';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
@@ -42,14 +43,15 @@ export class ContactListPage {
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
     this.storage.get('user').then((user:User)=>{
       this.contactServices.getContacts(user.token).then( (contacts: Array<Contact>) =>{
-      this.allContacts = contacts;
-      this.contacts = this.allContacts;
-      this.verif0Contact = (this.contacts.length == 0);
-      user.contacts = contacts;       //Update user
-      this.storage.set('user',user);  //on the database
-    });
+        this.allContacts = contacts;
+        //this.contacts = this.allContacts; //OLD
+        //NEW : La liste est triée et groupée par ordre alphabétique:
+        this.contacts = this.groupContacts(this.allContacts);
+        this.verif0Contact = (this.contacts.length == 0);
+        user.contacts = contacts;       //Update user
+        this.storage.set('user',user);  //on the database
+      });
     })
-
   }
 
   initializeList() {
@@ -81,6 +83,45 @@ export class ContactListPage {
         }
       })
     }
+  }
+
+  groupContacts(contacts) {
+    let groupedContacts = [];
+
+    contacts.forEach((value,index) => { //TODO remplacer ça par une refactorisation des formulaires
+      value.lastName = value.lastName[0].toUpperCase() + value.lastName.substring(1)
+    });
+
+    let sortedContacts = contacts.sort(this.compare);
+    let currentLetter = false;
+    let currentContacts = [];
+
+    sortedContacts.forEach((value, index) => {
+      let valueName = value.lastName;
+      if(valueName.charAt(0) != currentLetter) {
+        currentLetter = valueName.charAt(0);
+
+        let newGroup = {
+          letter: currentLetter,
+          contacts: []
+        };
+
+        currentContacts = newGroup.contacts;
+        groupedContacts.push(newGroup);
+      }
+
+      currentContacts.push(value);
+    });
+
+    return groupedContacts;
+  }
+
+  compare(a,b) {
+    if (a.lastName < b.lastName)
+      return -1;
+    if (a.lastName > b.lastName)
+      return 1;
+    return 0;
   }
 
   callContact(phone){
