@@ -89,7 +89,8 @@ export class LoginPage {
       inputs: [
         {
           name: "phone",
-          placeholder: this.translateService.instant('phoneNumber')
+          placeholder: this.translateService.instant('phoneNumber'),
+          value: this.phoneNumber
         }
       ],
       buttons:[
