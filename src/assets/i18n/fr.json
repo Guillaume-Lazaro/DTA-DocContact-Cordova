@@ -56,5 +56,16 @@
 
   "contactModified" : "Le contact a bien été modifié",
   "contactDeleted"  : "Le contact a bien été supprimé",
-  "contactAdded"    : "Le contact a bien été ajouté"
+  "contactAdded"    : "Le contact a bien été ajouté",
+
+  "importContacts" : "Importer mes contacts",
+  "addContact1" : "ajout de ",
+  "addContact2" : " en cours",
+  "contactProblem" : "Il y a eu un problème avec les contacts : ",
+  "singleContactAdded" : " contact a été ajouté",
+  "multContactAdded" : " contacts ont étés ajoutés",
+  "allContactsAdded" : "Tous les contacts de votre répertoire ont déjà été ajoutés",
+  "incorrectEmail" : "L'adresse mail d'un de vos contacts est erronée "
+
+
 }
