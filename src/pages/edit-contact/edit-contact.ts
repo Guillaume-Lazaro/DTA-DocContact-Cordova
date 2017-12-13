@@ -41,7 +41,7 @@ export class EditContactPage {
   userForm:     FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public contactServices: ContactServicesProvider,
-              public userServices: UserServicesProvider, fb: FormBuilder, private toastCtrl: ToastController,
+              fb: FormBuilder, private toastCtrl: ToastController,
               public events: Events, public apiServices: ApiServicesProvider, public alertCtrl: AlertController,
               private storage: Storage, private translateService: TranslateService) {
 
@@ -76,6 +76,8 @@ export class EditContactPage {
     if (this.isInEditMode) {
       //Modification
       toastMessage = this.translateService.instant('contactModified');
+      // TODO: verifier connexion
+
 
       this.storage.get('user').then((user:User)=>{
         this.contactServices.updateContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token, this.contact.id)
@@ -89,6 +91,7 @@ export class EditContactPage {
     } else {
       //Création
       toastMessage = this.translateService.instant('contactAdded');
+      // TODO: verifier connexion
       this.storage.get('user').then((user:User)=>{
         this.contactServices.createContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token)
           .then((reponse: any)=>{

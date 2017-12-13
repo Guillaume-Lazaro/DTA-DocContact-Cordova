@@ -10,6 +10,7 @@ import {AlertController} from "ionic-angular";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import { TranslateService } from '@ngx-translate/core';
+import {NetworkProvider} from "../../providers/network-services/network-services";
 
 @IonicPage()
 @Component({
@@ -28,7 +29,8 @@ export class LoginPage {
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
-              public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService) {
+              public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService,
+              public networkSerices: NetworkProvider) {
 
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -66,6 +68,14 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+  }
+
+  logConnection(){
+    if (this.networkSerices.checkConnection()) {
+      console.log('Online');
+    }else{
+      console.log('Offline');
+    }
   }
 
   goToInscription(){
