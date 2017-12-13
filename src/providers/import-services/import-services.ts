@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import {Injectable, ViewChild} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { User } from "../../model/User";
 import { Contact } from "../../model/Contact";
 import { Contacts } from "@ionic-native/contacts";
 import { ContactServicesProvider } from "../contact-services/contact-services";
 import { ApiServicesProvider } from "../api-services/api-services";
 import { Storage } from "@ionic/storage";
-import {Nav, ToastController} from "ionic-angular";
+import { AlertController, ToastController } from "ionic-angular";
 
 @Injectable()
 export class ImportServicesProvider {
@@ -18,12 +18,13 @@ export class ImportServicesProvider {
   nbContactsAjoutes = 0;
 
   constructor(public http: HttpClient, private contacts: Contacts, private contactServices: ContactServicesProvider,
-              private storage: Storage, private apiServices: ApiServicesProvider, private toastCtrl: ToastController) {
-
+              private storage: Storage, private apiServices: ApiServicesProvider, private toastCtrl: ToastController,
+              private alertCtrl: AlertController) {
     this.getProfileTypes();
   }
 
   importContacts(){
+    return new Promise((resolve) => {
     this.wrongContacts = [];
     this.nbContactsAjoutes = 0;
     this.contacts.find([name]).then((repertoireContacts : any) =>{                      // Get contacts from phone book
@@ -33,9 +34,7 @@ export class ImportServicesProvider {
       this.storage.get('user').then((user: User) => {                                         // Get remote contacts
         this.token = user.token;
         this.contactServices.getContacts(user.token).then((contacts:Array<Contact>) => {
-
-          // Loop over the contacts from the phone book in order to find the ones that share a phone number with the remote db
-          let knownContactsArray = repertoireContacts.map((contact : any)=>{
+          let knownContactsArray = repertoireContacts.map((contact : any)=>{                            // Loop over the contacts from the phone book in order to find the ones that share a phone number with the remote db
             const result = contacts.filter((serverContact: any)=> {
               return contact.phoneNumbers[0].value === serverContact.phone;
             });
@@ -75,59 +74,42 @@ export class ImportServicesProvider {
           console.log('ajout de '+this.contactsAddedCount+ " en cours");
           if(this.contactsAddedCount>0){                                                                  // If some contacts need to be added
             this.createTheNewUsers(newContacts).then(()=>{
-              console.log(this.wrongContacts);
-              console.log(this.wrongContacts.length);
-
-              if(this.wrongContacts.length>0){
+              if(this.wrongContacts.length>0){                                                            // If there are some contacts that were not added, we prepare a special alert
                 let names = '';
+                let title='';
                 this.wrongContacts.forEach((contact)=>{
                   names += contact.displayName + ', ';
                 });
-                let message = "Les contacts "+names+" ne peuvent pas être ajoutés car ils ne sont pas valides. Il y a donc"+this.nbContactsAjoutes+" contacts qui ont étés ajoutés";
-                this.sendToast(message);
+                names = names.substring(0, names.length-2);
+                let message = "Il y a eu un problème avec les contacts : "+names;
+                if(this.nbContactsAjoutes == 1){
+                  title = this.nbContactsAjoutes+" contact a été ajouté";
+                }else{
+                  title = this.nbContactsAjoutes+" contacts ont étés ajoutés";
+                }
+                this.showAlert(title, message);
               }
               console.log('traitement fini');
+              resolve();                                                                                    // End of the import
             });
           }else{
             let message = 'Tous les contacts de votre répertoire ont déjà été ajoutés';
             this.sendToast(message);
           }
-
-
-
-
-          // A faire quand la liste est bien
-          //user.contacts = contacts;
-          //this.storage.set('user', user);
         })
           .catch(error => console.log("erreur get contacts" + error))
       })
         .catch(error => console.log("erreur get user local" + error))
 
     })
-
-// Ajouter à la base distante les nouveaux contacts
-
-//get base distante
-
-//remplacer les users
-
-//rafraichir la vue
-
+    })
   }
 
-  saveContact(contact){
-    if(contact.name != undefined && contact.phoneNumbers.length != 0 ){
 
 
-
-    }
-  }
-
-// Here we check if the contact has at least a firstName, lastName and a phone number
-  filterUnwantedContacts(contactArray){
+  filterUnwantedContacts(contactArray){                                                                    // Here we check if the contact has at least a firstName, lastName and a phone number
     let filteredArray = contactArray.filter((contact)=> {
-      return contact.name.familyName!=null && contact.name.givenName!=null && contact.phoneNumbers != null && contact.phoneNumbers[0].value != null
+      return contact.name.familyName!=null && contact.name.givenName!=null && contact.phoneNumbers != null ;
     });
     filteredArray = filteredArray.map((contact)=> {
       contact.phoneNumbers[0].value = contact.phoneNumbers[0].value.replace(/ /g, '');
@@ -156,72 +138,78 @@ export class ImportServicesProvider {
   }
 
   createTheNewUsers(newContacts : Array<any>){
-    return new Promise((resolve)=>{
+    return new Promise((resolve)=>{                                                                 // Promise used in order to wait for all contacts to be added
       let i = 0;
       let indicateur = newContacts.length;
       newContacts.map((contact)=>{
-        let email = "example@example.fr";
         let phone =  contact.phoneNumbers[0].value;
         let profile = this.profiles[0];
         let isEmergencyUser = false;
+        let email: any;
 
+        let verif = this.verifIfValidContact(contact);                                                      // Verification if the informations of the contact are valid
+        email = verif.mail;
 
-        let verif = this.verifIfValidContact(contact);
-
-        if(verif){
+        if(verif.verif){                                                                                    // If it's verified, we add the contact to the remote db
           console.log("On va ajouter : "+ contact.name.givenName, contact.name.familyName, phone, email, profile, isEmergencyUser, this.token);
+          this.nbContactsAjoutes+=1;
           this.contactServices.createContact(contact.name.givenName, contact.name.familyName, phone, email, profile, isEmergencyUser, this.token)
             .then(()=> {
-              this.nbContactsAjoutes+=1;
-              let message = this.contactsAddedCount + ' contacts ont été ajoutés';
+              console.log(contact +' a été ajoutés');
               //this.sendToast(message);
               // this.nav.setRoot(ContactListPage);
             })
             .catch((e)=>console.error(e));
         }else{
           console.log('un contact n\'est pas valide');
-          this.wrongContacts.push(contact);
+          this.wrongContacts.push(contact);                                                                 // If the contact is not valid, we keep track of it
         }
         if(i == indicateur-1){
-          resolve();
+          resolve();                                                                                         // Get out of the promise when all the contacts were checked
         }
         i++;
       });
-
     })
-
   }
 
   verifIfValidContact(contact){
     let email = "example@example.fr";
     let phone =  contact.phoneNumbers[0].value;
-
     let verif = true;
 
-    if(contact.emails!== null){
-      //TODO check if it's a real mail
-      email = contact.emails[0].value;
-    }else{
+    if(contact.emails !== null && contact.emails[0].value !== null){                                          // Verif the mail
       verif = this.validateEmail(contact.emails[0].value);
-      if(!verif){
-        let message= "L'adresse mail d'un de vos contacts est erronée ";
+      if(!verif) {
+        console.log("L'adresse mail d'un de vos contacts est erronée ");
         // this.sendToast(message);
+      }else{
+        email = contact.emails[0].value;
       }
     }
-
-    if(phone.lengh != 10){
+    if(phone.length !== 10){                                                                                  // Verif the phone
       verif = false;
-      let message= "Le numéro d'un contact n'est pas valide";
-      //  this.sendToast(message);
+      console.log("Le numéro d'un contact n'est pas valide, il a "+phone.length+ " num ");
     }
-
-    return verif;
+    let reponse = {
+      verif : verif,
+      mail : email
+    };
+    return reponse;
   }
 
   validateEmail(email) {
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log("le mail est valide ? "+re.test(email));
     return re.test(email);
   }
 
+  showAlert(titre, message){
+      let alert = this.alertCtrl.create({
+        title: titre,
+        subTitle: message,
+        buttons: ['Retour']
+      });
+      alert.present();
+  }
 
 }

@@ -65,6 +65,8 @@ export class MyApp {
     this.nav.setRoot(page.component);
   }
   importContacts() {
-      this.importServices.importContacts();
+      this.importServices.importContacts().then(()=>{
+        this.nav.setRoot(ContactListPage);
+      });
   }
 }
