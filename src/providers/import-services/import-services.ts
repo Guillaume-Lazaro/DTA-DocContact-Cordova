@@ -7,6 +7,7 @@ import { ContactServicesProvider } from "../contact-services/contact-services";
 import { ApiServicesProvider } from "../api-services/api-services";
 import { Storage } from "@ionic/storage";
 import { AlertController, ToastController } from "ionic-angular";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class ImportServicesProvider {
@@ -19,7 +20,7 @@ export class ImportServicesProvider {
 
   constructor(public http: HttpClient, private contacts: Contacts, private contactServices: ContactServicesProvider,
               private storage: Storage, private apiServices: ApiServicesProvider, private toastCtrl: ToastController,
-              private alertCtrl: AlertController) {
+              private alertCtrl: AlertController, private translateService: TranslateService) {
     this.getProfileTypes();
   }
 
@@ -28,7 +29,7 @@ export class ImportServicesProvider {
     this.wrongContacts = [];
     this.nbContactsAjoutes = 0;
     this.contacts.find([name]).then((repertoireContacts : any) =>{                      // Get contacts from phone book
-      let distantList;
+  
       repertoireContacts= this.filterUnwantedContacts(repertoireContacts);                              // Clean the list of contacts
 
       this.storage.get('user').then((user: User) => {                                         // Get remote contacts
@@ -71,7 +72,7 @@ export class ImportServicesProvider {
           console.log(newContacts);
 
           this.contactsAddedCount = newContacts.length;
-          console.log('ajout de '+this.contactsAddedCount+ " en cours");
+          console.log(this.translateService.instant("addContact1")+this.contactsAddedCount+ this.translateService.instant("addContact2"));
           if(this.contactsAddedCount>0){                                                                  // If some contacts need to be added
             this.createTheNewUsers(newContacts).then(()=>{
               if(this.wrongContacts.length>0){                                                            // If there are some contacts that were not added, we prepare a special alert
@@ -81,11 +82,11 @@ export class ImportServicesProvider {
                   names += contact.displayName + ', ';
                 });
                 names = names.substring(0, names.length-2);
-                let message = "Il y a eu un problème avec les contacts : "+names;
+                let message = this.translateService.instant("contactProblem") +names;
                 if(this.nbContactsAjoutes == 1){
-                  title = this.nbContactsAjoutes+" contact a été ajouté";
+                  title = this.nbContactsAjoutes + this.translateService.instant("singleContactAdded");
                 }else{
-                  title = this.nbContactsAjoutes+" contacts ont étés ajoutés";
+                  title = this.nbContactsAjoutes + this.translateService.instant("multContactAdded");
                 }
                 this.showAlert(title, message);
               }
@@ -93,7 +94,7 @@ export class ImportServicesProvider {
               resolve();                                                                                    // End of the import
             });
           }else{
-            let message = 'Tous les contacts de votre répertoire ont déjà été ajoutés';
+            let message = this.translateService.instant("allContactsAdded");
             this.sendToast(message);
           }
         })
@@ -180,7 +181,7 @@ export class ImportServicesProvider {
     if(contact.emails !== null && contact.emails[0].value !== null){                                          // Verif the mail
       verif = this.validateEmail(contact.emails[0].value);
       if(!verif) {
-        console.log("L'adresse mail d'un de vos contacts est erronée ");
+        console.log( this.translateService.instant("incorrectEmail"));
         // this.sendToast(message);
       }else{
         email = contact.emails[0].value;
@@ -199,7 +200,6 @@ export class ImportServicesProvider {
 
   validateEmail(email) {
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    console.log("le mail est valide ? "+re.test(email));
     return re.test(email);
   }
 
@@ -207,7 +207,7 @@ export class ImportServicesProvider {
       let alert = this.alertCtrl.create({
         title: titre,
         subTitle: message,
-        buttons: ['Retour']
+        buttons: [this.translateService.instant("back")]
       });
       alert.present();
   }

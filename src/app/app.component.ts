@@ -28,12 +28,10 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public app:App, private userService: UserServicesProvider,
-              private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider) {
-
+              private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider,
+              private importServices : ImportServicesProvider) {
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: private screenOrientation: ScreenOrientation
-              public app:App, private userService: UserServicesProvider,
-              private storage: Storage, private importServices : ImportServicesProvider) {
-         //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE   private screenOrientation: ScreenOrientation
+
     this.initializeApp();
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
