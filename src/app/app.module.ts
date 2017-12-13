@@ -13,12 +13,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ApiServicesProvider } from '../providers/api-services/api-services';
 import { ContactServicesProvider } from '../providers/contact-services/contact-services';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HttpClient } from "@angular/common/http";
 import { UserServicesProvider } from '../providers/user-services/user-services';
 import { CallNumber } from '@ionic-native/call-number';
 import {IonicStorageModule} from "@ionic/storage";
 import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Contacts } from '@ionic-native/contacts';
 import { ImportServicesProvider } from '../providers/import-services/import-services';
 
@@ -39,6 +41,13 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     HttpClientModule,
     IonicStorageModule.forRoot()
   ],
@@ -69,3 +78,7 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
   ],
 })
 export class AppModule {}
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/','.json');
+}

@@ -1,0 +1,60 @@
+{
+  "yes" : "Oui",
+  "no" : "Non",
+  "back" : "Retour",
+  "done" : "Valider",
+
+  "detail" : "Détail",
+  "add" : "Ajouter",
+  "modify" : "Modifier",
+  "delete" : "Supprimer",
+  "confirmation" : "Confirmation",
+  "deleteConfirmation" : "Voulez-vous vraiment supprimer ce contact?",
+
+  "phoneNumber" : "Numéro de téléphone",
+  "password" : "Mot de passe",
+  "connection" : "Connexion",
+  "forgottenPassword" : "Mot de passe oublié",
+  "signUp" : "Inscription",
+  "login" : "Login",
+  "inscriptionError" : "Erreur lors de l'inscription",
+  "loginFailed" : "Erreur lors du login",
+  "loginOrPasswordInvalid" : "Le numéro de téléphone ou le mot de passe est incorrect",
+
+  "pleaseEnterYourPhoneNumber" : "Entrez votre numéro de téléphone pour recevoir votre mot de passe",
+  "cancel" : "Annuler",
+  "sendPassword" : "Envoyer le mot de passe",
+  "passwordSent" : "Votre mot de passe a été envoyé",
+  "unknownPhone" : "Numéro de téléphone inconnu",
+
+  "lastName" : "Nom",
+  "firstName" : "Prénom",
+  "profile" : "Profil",
+  "confirmPassword" : "Confirmation du mot de passe",
+
+  "lastNameRequired" : "Le nom est requis",
+  "firstNameRequired" : "Le prénom est requis",
+  "phoneNumberInvalid" : "Le numéro de téléphone est invalide",
+  "emailInvalid" : "L'adresse email est invalide",
+  "passwordInvalid" : "Le mot de passe doit faire 4 caractéres de long",
+  "phoneNumberRequired" : "Le numéro de téléphone est requis",
+  "passwordRequired" : "Le mot de passe est requis",
+  "emailRequired" : "L'adresse email est requise",
+  "passwordIncorrect" : "Le mot de passe est incorrect",
+
+  "modifyMyProfile" : "Modifier mon Profil",
+  "myContacts" : "Mes contacts",
+  "disconnect" : "Déconnexion",
+
+  "searchBar" : "Chercher par nom ou par numéro de téléphone",
+  "noContacts" : "Vous n'avez pas encore de contacts",
+  "addFirstContact" : "Ajouter mon premier contact",
+
+  "call" : "Appeler",
+  "signUpSuccessful" : "Inscription réussie",
+  "incorrectConfirmPassword" : "Le mot de passe de confirmation est incorrect",
+
+  "contactModified" : "Le contact a bien été modifié",
+  "contactDeleted"  : "Le contact a bien été supprimé",
+  "contactAdded"    : "Le contact a bien été ajouté"
+}

@@ -9,6 +9,7 @@ import { ApiServicesProvider } from "../../providers/api-services/api-services";
 import {AlertController} from "ionic-angular";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -27,7 +28,7 @@ export class LoginPage {
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
-              public menuCtrl: MenuController, private storage: Storage) {
+              public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService) {
 
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -44,7 +45,7 @@ export class LoginPage {
       .then((response: any)=>{
         if(response.status === 400){
           let toast = this.toastCtrl.create({
-            message: 'Le nom d\'utilisateur ou le mot de passe est incorrect',
+            message: this.translateService.instant('loginOrPasswordInvalid'),
             duration: 3000,
             position: 'bottom'
           });
@@ -83,30 +84,30 @@ export class LoginPage {
       console.log(data);
     });
     let alert = this.alertCtrl.create({
-      title: 'Forgot Password',
-      message: 'Please enter your phone number to receive your password',
+      title: this.translateService.instant('forgottenPassword'),
+      message: this.translateService.instant('pleaseEnterYourPhoneNumber'),
       inputs: [
         {
           name: "phone",
-          placeholder: "Phone number"
+          placeholder: this.translateService.instant('phoneNumber'),
+          value: this.phoneNumber
         }
       ],
       buttons:[
         {
-          text: "Cancel",
+          text: this.translateService.instant('cancel'),
           role: "cancel",
           handler:() => {
             console.log('cancel ');
           }
         },
         {
-          text: "Send password",
+          text: this.translateService.instant('sendPassword'),
           handler: data => {
             this.apiServices.forgotPassword(data.phone).toPromise()
               .then(()=> {
-                console.log("password sent")
                 let toast = this.toastCtrl.create({
-                  message: 'Your password has been sent',
+                  message: this.translateService.instant('passwordSent'),
                   duration: 3000,
                   position: 'bottom'
                 });
@@ -115,7 +116,7 @@ export class LoginPage {
               .catch(error => {
                 console.log(error);
                 let toast = this.toastCtrl.create({
-                  message: 'Invalid number',
+                  message: this.translateService.instant('unknownPhone'),
                   duration: 3000,
                   position: 'bottom'
                 });

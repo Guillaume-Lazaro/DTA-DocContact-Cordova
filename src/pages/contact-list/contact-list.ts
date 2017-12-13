@@ -9,7 +9,7 @@ import { CallNumber } from '@ionic-native/call-number';
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import {Contact} from "../../model/Contact";
-
+import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -23,10 +23,11 @@ export class ContactListPage {
   contacts: Array<Contact>;
   verif0Contact: boolean = false;
   allContacts:Array<Contact>;
+  searchBarPlaceholder:string = 'Bla';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
-              public contactServices: ContactServicesProvider, private storage: Storage
-              ,public userServices: UserServicesProvider,public callNumber: CallNumber) {
+              public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
+              public userServices: UserServicesProvider,public callNumber: CallNumber) {
 
     this.menuCtrl.enable(true);
   }
@@ -34,7 +35,9 @@ export class ContactListPage {
   ionViewDidLoad() {
     this.initializeList();
 
+    this.searchBarPlaceholder = this.translateService.instant('searchBar');
   }
+
   ionViewWillEnter(){
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
     this.storage.get('user').then((user:User)=>{
@@ -42,7 +45,6 @@ export class ContactListPage {
       this.allContacts = contacts;
       this.contacts = this.allContacts;
       this.verif0Contact = (this.contacts.length == 0);
-
       user.contacts = contacts;       //Update user
       this.storage.set('user',user);  //on the database
     });
@@ -80,12 +82,14 @@ export class ContactListPage {
       })
     }
   }
+
   callContact(phone){
     this.callNumber.callNumber(phone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
 
   }
+
   goToAddContact(){
     this.navCtrl.push(EditContactPage).then();
   }
