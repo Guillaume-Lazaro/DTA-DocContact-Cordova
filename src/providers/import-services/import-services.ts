@@ -20,19 +20,17 @@ export class ImportServicesProvider {
 
   constructor(public http: HttpClient, private contacts: Contacts, private contactServices: ContactServicesProvider,
               private storage: Storage, private apiServices: ApiServicesProvider, private toastCtrl: ToastController) {
-    console.log('Hello ImportContactsProvider Provider');
+    // Get the profiles at the beginning
     this.getProfileTypes();
   }
 
   importContacts(){
-    this.contacts.find([name]).then((repertoireContacts : any) =>{
+    this.contacts.find([name]).then((repertoireContacts : any) =>{                                      // Get contacts from phone book
       let distantList;
-      repertoireContacts= this.filterUnwantedContacts(repertoireContacts);
+      repertoireContacts= this.filterUnwantedContacts(repertoireContacts);                              // Clean the list of contacts
 
-      // Get base distante
-      this.storage.get('user').then((user: User) => {
+      this.storage.get('user').then((user: User) => {                                         // Get remote ccontacts
         this.token = user.token;
-
         this.contactServices.getContacts(user.token).then((contacts:Array<Contact>) => {
           let contactsAddedCount;
           distantList = contacts;
@@ -109,18 +107,18 @@ export class ImportServicesProvider {
                 email = contact.emails;
               }
               console.log("On va ajouter : "+ contact.name.givenName, contact.name.familyName,  contact.phoneNumbers[0].value, email)
-              // this.contactServices.createContact(contact.name.givenName, contact.name.familyName, contact.phoneNumbers[0].value, email, profile, isEmergencyUser, this.token)
-              //   .then(()=> {
-              //     let message = contactsAddedCount + 'contacts qui ont été ajoutés';
-              //     let toast = this.toastCtrl.create({
-              //       message: message,
-              //       duration: 3000,
-              //       position: 'bottom'
-              //     });
-              //     toast.present();
-              //
-              //     // this.nav.setRoot(ContactListPage);
-              //   });
+              this.contactServices.createContact(contact.name.givenName, contact.name.familyName, contact.phoneNumbers[0].value, email, profile, isEmergencyUser, this.token)
+                .then(()=> {
+                  let message = contactsAddedCount + 'contacts qui ont été ajoutés';
+                  let toast = this.toastCtrl.create({
+                    message: message,
+                    duration: 3000,
+                    position: 'bottom'
+                  });
+                  toast.present();
+
+                  // this.nav.setRoot(ContactListPage);
+                });
 
             });
           }else{
