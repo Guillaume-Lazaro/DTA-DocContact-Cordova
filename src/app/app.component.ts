@@ -5,11 +5,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
 import {ContactListPage} from "../pages/contact-list/contact-list";
-import {UserProfilePage} from "../pages/user-profile/user-profile";
 import {UserServicesProvider} from "../providers/user-services/user-services";
 import {EditUserPage} from "../pages/edit-user/edit-user";
 import {Storage} from "@ionic/storage";
 import {User} from "../model/User";
+import {ApiServicesProvider} from "../providers/api-services/api-services";
 // A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @Component({
@@ -26,19 +26,19 @@ export class MyApp {
   myContacts : any =  {title: 'Mes Contacts', component: ContactListPage };
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public userServices: UserServicesProvider, public app:App, private userService: UserServicesProvider,
-              private storage: Storage, private translateService: TranslateService) {
+              public app:App, private userService: UserServicesProvider,
+              private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider) {
 
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: private screenOrientation: ScreenOrientation
     this.initializeApp();
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     //Initilization du service de traduction:
-    platform.ready().then(()=> {
+    this.platform.ready().then(()=> {
       console.log("Langue du navigateur: "+navigator.language);
       console.log("Langues de l'user du navigateur: "+navigator.languages);
 
-      var lang:string = navigator.language //Langue systéme utilisé par le device
+      let lang:string = navigator.language //Langue systéme utilisé par le device
       lang = lang.substring(0,2);
 
       if (lang != "en" && lang != "fr") {
@@ -69,6 +69,9 @@ export class MyApp {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.apiServices.getProfiles().toPromise().then(profiles=>{
+        this.storage.set('profiles',profiles).then().catch(error=>console.log(error))
+      }).catch(error=>console.log(error))
     });
   }
 
@@ -77,7 +80,7 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     if(page.title == 'Deconnexion'){
-      this.storage.clear().then(()=>{
+      this.storage.set('user',undefined).then(()=>{
         this.nav.setRoot(page.component)
     })
     }else{
