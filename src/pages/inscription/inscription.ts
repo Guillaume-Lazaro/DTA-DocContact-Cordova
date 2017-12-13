@@ -22,13 +22,13 @@ import {ContactListPage} from "../contact-list/contact-list";
 })
 export class InscriptionPage {
 
-  lastName:   string;
-  firstName:  string;
-  phone:      string;
-  email:      string;
-  profile:    string;
-  password:   string;
-  confirmPassword: string;
+  lastName:   string="";
+  firstName:  string="";
+  phone:      string="";
+  email:      string="";
+  profile:    string="";
+  password:   string="";
+  confirmPassword: string="";
   profileType: any; //Tableau contenant les types de profile
 
   lastNameCtrl:   FormControl;
@@ -65,12 +65,12 @@ export class InscriptionPage {
     });
 
     this.passwordCtrl = fb.control('', [Validators.minLength(4), Validators.maxLength(4), Validators.required]);
-    this.confirmPasswordCtrl = fb.control('', [Validators.required,]);
+    this.confirmPasswordCtrl = fb.control('', Validators.required);
 
     this.passwordForm = fb.group({
       password: this.passwordCtrl,
       confirmPassword: this.confirmPasswordCtrl
-    }, {/*validator: this.matchingPasswords('password', 'confirmPassword')*/});
+    }, {validator: this.passwordsMatch});
   }
 
   handleSubmit() {
@@ -109,18 +109,22 @@ export class InscriptionPage {
     }
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad InscriptionPage');
-  }
+  ionViewDidLoad() { }
 
-  //Mon propre validator!! (inutilisable pour le moment)
-  static passwordsMatch(cg: FormGroup): {[err: string]: any} {
-    let pwd1 = cg.get('password');
-    let pwd2 = cg.get('confirmPassword');
-    let rv: {[error: string]: any} = {};
-    if ((pwd1.touched || pwd2.touched) && pwd1.value !== pwd2.value) {
-      rv['passwordMismatch'] = true;
+  passwordsMatch(control: AbstractControl) {
+    let basePassword = control.get('password');
+    let confirmPassword = control.get('confirmPassword');
+
+    if (!basePassword || !confirmPassword) return null;
+
+    if (basePassword.value === confirmPassword.value) {
+      return null;
+    } else {
+      return {
+        confirmError: {
+          errorMessage: "Incorrect confirm password asshole!"
+        }
+      }
     }
-    return rv;
   }
 }
