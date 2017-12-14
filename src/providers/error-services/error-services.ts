@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import {AlertController, ToastController} from "ionic-angular";
+import {Injectable} from '@angular/core';
+import {AlertController, Events, ToastController} from "ionic-angular";
 import {TranslateService} from "@ngx-translate/core";
 import {Storage} from "@ionic/storage";
 import {User} from "../../model/User";
 import {ApiServicesProvider} from "../api-services/api-services";
+import {LoginPage} from "../../pages/login/login";
 
 /*
   Generated class for the ErrorServicesProvider provider.
@@ -16,7 +17,7 @@ import {ApiServicesProvider} from "../api-services/api-services";
 export class ErrorServicesProvider {
 
   constructor(public http: HttpClient, public alertCtrl: AlertController, public translateService: TranslateService,
-              private storage: Storage, public apiServices:ApiServicesProvider, public toastCtrl: ToastController) {
+              private storage: Storage, public apiServices:ApiServicesProvider, public toastCtrl: ToastController, public events:Events ) {
 
     console.log('Hello ErrorServicesProvider Provider');
   }
@@ -35,6 +36,7 @@ export class ErrorServicesProvider {
         {
           text: this.translateService.instant('no'),
           handler: () => {
+            this.events.publish('no login')
           }
         }
       ]
@@ -60,6 +62,7 @@ export class ErrorServicesProvider {
             text: this.translateService.instant('cancel'),
             role: "cancel",
             handler:() => {
+              this.events.publish('no login');
               console.log('cancel ');
             }
           },

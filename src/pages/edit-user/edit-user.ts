@@ -6,6 +6,7 @@ import {ContactListPage} from "../contact-list/contact-list";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the EditUserPage page.
@@ -78,6 +79,9 @@ export class EditUserPage {
   }
 
   ionViewDidLoad() {
+    this.events.subscribe('no login',()=>{
+      this.navCtrl.setRoot(LoginPage)
+    })
     this.storage.get('user').then(user=>{
       console.log(user.lastName);
       this.user=user;

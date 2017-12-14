@@ -7,6 +7,7 @@ import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import { TranslateService } from '@ngx-translate/core';
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the EditContactPage page.
@@ -110,7 +111,11 @@ export class EditContactPage {
     }
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+    this.events.subscribe('no login' , ()=>{
+      this.navCtrl.setRoot(LoginPage)
+    })
+  }
 
   deleteContact() {
     let alert = this.alertCtrl.create({
