@@ -1,5 +1,4 @@
 page-contact-list {
-
 }
 
 .contactSearchBar{
@@ -8,8 +7,8 @@ page-contact-list {
 .contactCard{
   border: 1px solid lightgrey;
   padding:10px ;
-  width: 94%;
-  margin: 10px;
+  width: 100%;
+  margin: 5px;
   max-height:100px;
   display: flex;
   flex-direction: row;
@@ -96,4 +95,23 @@ page-contact-list {
 }
 .alertOContacts button{
   align-self: end;
+}
+
+ion-item-group {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+ion-item-divider {
+  margin: 0px !important;
+  padding-left: 3% !important;
+}
+
+ion-item {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+ion-content {
+  padding: 0px !important;
 }
