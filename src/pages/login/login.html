@@ -4,49 +4,56 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div class="loginLogo">
-    <img src="assets/imgs/logoDocContact.png" alt="logo" width="100" height="100">
-    <h3>DocContact</h3>
-  </div>
-  <div class="mainWindow">
-    <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire">
-    <div>
-      <ion-item>
-        <ion-label floating>{{'phoneNumber' | translate}}</ion-label>
-        <ion-input formControlName="phoneNumber" type="number" [(ngModel)]="phoneNumber"></ion-input>
-      </ion-item>
+<ion-content >
+  <div class="loginContainer">
+    <div class="loginLogo">
+      <img src="assets/imgs/logoDocContact.png" alt="logo" width="100" height="100">
+      <h3>DocContact</h3>
+    </div>
+    <div class="mainWindow">
+      <div>
+        <form (ngSubmit)="handleSubmit()" [formGroup]="userForm" class="formulaire">
 
-      <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.errors">
-        {{'phoneNumberInvalid' | translate}}
-      </div>
-      <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.hasError('required')">
-        {{'phoneNumberRequired' | translate}}
-      </div>
+          <ion-item>
+            <ion-label floating>{{'phoneNumber' | translate}}</ion-label>
+            <ion-input formControlName="phoneNumber" type="number" [(ngModel)]="phoneNumber"></ion-input>
+          </ion-item>
 
-      <ion-item>
-        <ion-label floating >{{'password' | translate}}</ion-label>
-        <ion-input type="password" formControlName="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password">
-        </ion-input>
-      </ion-item>
+          <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.errors">
+            {{'phoneNumberInvalid' | translate}}
+          </div>
+          <div *ngIf="phoneNumberCtrl.dirty && phoneNumberCtrl.hasError('required')">
+            {{'phoneNumberRequired' | translate}}
+          </div>
 
-      <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
-        {{'passwordInvalid' | translate}}
-      </div>
-      <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
-        {{'passwordRequired' | translate}}
+          <ion-item>
+            <ion-label floating >{{'password' | translate}}</ion-label>
+            <ion-input type="password" formControlName="password" minlength="4" maxlength="4" name="password" [(ngModel)]="password">
+            </ion-input>
+          </ion-item>
+
+          <div *ngIf="passwordCtrl.errors && passwordCtrl.dirty">
+            {{'passwordInvalid' | translate}}
+          </div>
+          <div *ngIf="passwordCtrl.dirty && passwordCtrl.hasError('required')">
+            {{'passwordRequired' | translate}}
+          </div>
+
+
+          <div class="submitButton">
+            <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+              {{'connection' | translate}}
+            </button>
+          </div>
+
+        </form>
       </div>
     </div>
-
-    <div class="submitButton">
-      <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
-        {{'connection' | translate}}
-      </button>
+    <div class="loginButtonsContainer" padding-left padding-right="">
+      <button ion-button (click)="forgotPassword()" >{{'forgottenPassword' | translate}}</button>
+      <button type="button" name="button" ion-button (click)="goToInscription()">{{'signUp' | translate}}</button>
     </div>
 
-  </form>
-  <button ion-button (click)="forgotPassword()" >{{'forgottenPassword' | translate}}</button>
-  <button type="button" name="button" ion-button (click)="goToInscription()">{{'signUp' | translate}}</button>
-
   </div>
+
 </ion-content>

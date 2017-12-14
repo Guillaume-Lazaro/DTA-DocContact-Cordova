@@ -65,7 +65,7 @@
   "singleContactAdded" : " contact a été ajouté",
   "multContactAdded" : " contacts ont étés ajoutés",
   "allContactsAdded" : "Tous les contacts de votre répertoire ont déjà été ajoutés",
-  "incorrectEmail" : "L'adresse mail d'un de vos contacts est erronée "
+  "incorrectEmail" : "L'adresse mail d'un de vos contacts est erronée ",
 
-
+  "pressAgainToExit" : "Appuyez encore une fois sur retour pour quitter"
 }

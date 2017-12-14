@@ -65,7 +65,7 @@
   "singleContactAdded" : " contact was added",
   "multContactAdded" : " contacts were added",
   "allContactsAdded" : "All the contacts in your phone book were already added",
-  "incorrectEmail" : "The email of one of your contact is incorrect "
+  "incorrectEmail" : "The email of one of your contact is incorrect ",
 
-
+  "pressAgainToExit" : "Press again the back button to exit the app"
 }

@@ -26,8 +26,7 @@
 .menuContainer{
   display:flex;
   flex-direction: column;
-  height:90%;
-
+  height:100%;
 }
 
 .menuPresentationProfil{
@@ -36,7 +35,14 @@
   padding:20px 10px;
   flex-direction: column;
   background-color:#414BA8;
-  height:30%;
+  height:35%;
+
+}
+.iconMenu{
+  height:55%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 
 }
 .photoMenu{
@@ -58,6 +64,12 @@
 .menuDetails{
   font-size: 12px;
   line-height: 105%;
+}
+.menuDeconnexion{
+  height: 10%;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
 }
 .menuDeconnexion button{
   color:red;
