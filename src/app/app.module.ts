@@ -22,6 +22,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Contacts } from '@ionic-native/contacts';
 import { ImportServicesProvider } from '../providers/import-services/import-services';
+import { AboutPage } from "../pages/about/about";
 
 
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -34,7 +35,8 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     ContactListPage,
     ContactDetailPage,
     EditContactPage,
-    EditUserPage
+    EditUserPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     ContactListPage,
     ContactDetailPage,
     EditContactPage,
-    EditUserPage
+    EditUserPage,
+    AboutPage
   ],
   providers: [
     StatusBar,
