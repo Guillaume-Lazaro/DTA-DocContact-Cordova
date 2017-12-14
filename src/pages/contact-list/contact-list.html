@@ -35,11 +35,14 @@
 
   <ion-item-group *ngFor="let group of contacts">
 
-    <ion-item-divider>{{group.letter}}</ion-item-divider>
+    <ion-item-divider color="docBlue">
+      {{group.letter}}
+    </ion-item-divider>
     <ion-item *ngFor="let contact of group.contacts">
+
       <div class="contactCard">
         <div (click)="goToContactDetails(contact)" class="detailContactClickZone">
-          <div class="cellImage">
+          <div class="cellImage" padding-left>
             <img src="{{contact.gravatar}}?s=200&d=mm" alt="profileImage">
           </div>
           <div class="contactNameContainer">

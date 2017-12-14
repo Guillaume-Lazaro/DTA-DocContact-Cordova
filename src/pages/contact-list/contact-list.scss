@@ -5,16 +5,15 @@ page-contact-list {
 }
 
 .contactCard{
-  border: 1px solid lightgrey;
-  padding:10px ;
+  //border: 1px solid lightgrey;
+  //padding:10px ;
   width: 100%;
-  margin: 5px;
   max-height:100px;
   display: flex;
   flex-direction: row;
-  -webkit-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
-  -moz-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
-  box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
+  //-webkit-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
+  //-moz-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
+  //box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
 }
 .detailContactClickZone{
   display: flex;
@@ -33,9 +32,10 @@ page-contact-list {
 }
 
 .contactNameContainer{
-  padding:5px 10px 5px 15px;
+  padding:0px 10px 0px 15px;
   width:80%;
   max-width: 80%;
+  overflow: hidden;
   justify-content: center;
 }
 .lastNameDisplay{
@@ -103,8 +103,9 @@ ion-item-group {
 }
 
 ion-item-divider {
-  margin: 0px !important;
-  padding-left: 3% !important;
+  //margin: 0px !important;
+  //padding-left: 3% !important;
+  //background-color: #414BA8;
 }
 
 ion-item {
