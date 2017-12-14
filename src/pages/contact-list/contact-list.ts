@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import {IonicPage, MenuController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
-import {Events, IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
-
+import {Events,IonicPage, MenuController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import { EditContactPage } from '../edit-contact/edit-contact';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
-import {UserServicesProvider} from "../../providers/user-services/user-services";
 import { CallNumber } from '@ionic-native/call-number';
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
@@ -28,8 +25,8 @@ export class ContactListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform,
               public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
-              public userServices: UserServicesProvider, public callNumber: CallNumber, public toastCtrl: ToastController) {
-              public userServices: UserServicesProvider,public callNumber: CallNumber, public events:Events) {
+              public callNumber: CallNumber, public toastCtrl: ToastController,
+              public events:Events) {
 
     this.menuCtrl.enable(true);
 

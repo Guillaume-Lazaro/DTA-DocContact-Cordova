@@ -68,7 +68,7 @@
   "allContactsAdded" : "Tous les contacts de votre répertoire ont déjà été ajoutés",
   "incorrectEmail" : "L'adresse mail d'un de vos contacts est erronée ",
 
-  "pressAgainToExit" : "Appuyez encore une fois sur retour pour quitter"
+  "pressAgainToExit" : "Appuyez encore une fois sur retour pour quitter",
   "sessionExpiredTitle" : "Session expirée",
   "sessionExpired" : "Votre session a expirée, voulez vous vous reconnecter?"
 }
