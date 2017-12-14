@@ -23,7 +23,6 @@ export class ContactListPage {
   contacts: Array<Contact>;
   verif0Contact: boolean = false;
   allContacts:Array<Contact>;
-  //groupedContacts = [];
   searchBarPlaceholder:string = 'Bla';
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
