@@ -121,29 +121,41 @@ export class EditContactPage {
   ionViewDidLoad() { }
 
   deleteContact() {
-    let alert = this.alertCtrl.create({
-      title: this.translateService.instant('confirmation'),
-      message: this.translateService.instant('deleteConfirmation'),
-      buttons: [
-        {
-          text: this.translateService.instant('no'),
-          handler: () => {}},
-        {
-          text: this.translateService.instant('delete'),
-          handler: () => {
-            this.storage.get('user').then((user:User)=>{
-              this.contactServices.deleteContact(this.contact.id, user.token)
-                .then((reponse: any)=>{
-                  this.navCtrl.popToRoot();
-                })
-                .catch(error=>{ console.log(error) });
-            })
+    var toastMessage;
+    if (this.networkServices.isConnect()){
+      let alert = this.alertCtrl.create({
+        title: this.translateService.instant('confirmation'),
+        message: this.translateService.instant('deleteConfirmation'),
+        buttons: [
+          {
+            text: this.translateService.instant('no'),
+            handler: () => {}},
+          {
+            text: this.translateService.instant('delete'),
+            handler: () => {
+              this.storage.get('user').then((user:User)=>{
+                this.contactServices.deleteContact(this.contact.id, user.token)
+                  .then((reponse: any)=>{
+                    this.navCtrl.popToRoot();
+                  })
+                  .catch(error=>{ console.log(error) });
+              })
+            }
           }
-        }
-      ]
-    });
-
+        ]
+      });
     alert.present();
+    toastMessage = this.translateService.instant('contactDeleted');
+  } else {
+    toastMessage = this.translateService.instant('contactNotDeleted');
+    }
+
+    let toast = this.toastCtrl.create({
+      message: toastMessage,
+      duration: 3000,
+      position: 'bottom'
+    });
+    toast.present();
   }
 
   fillFields() {

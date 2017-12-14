@@ -61,8 +61,8 @@
   "contactAdded"    : "Le contact a bien été ajouté",
   "contactNotAdded" : "Contact non ajouté car aucune connexion",
 
-  "userProfileModified" : "Profile modifié",
-  "userProfileNotModified" : "Profile non modifié car aucune connexion",
+  "userProfileModified" : "Profil modifié",
+  "userProfileNotModified" : "Profil non modifié car aucune connexion",
 
   "NETWORK_NONE_MESSAGE" : "Connexion internet perdue",
   "NETWORK_MESSAGE" : "Connexion internet réussie"
