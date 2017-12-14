@@ -9,6 +9,7 @@ import {AlertController} from "ionic-angular";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import { TranslateService } from '@ngx-translate/core';
+import {NetworkProvider} from "../../providers/network-services/network-services";
 
 @IonicPage()
 @Component({
@@ -26,7 +27,8 @@ export class LoginPage {
 
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
-              public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService) {
+              public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService,
+              public networkServices: NetworkProvider) {
 
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -39,31 +41,49 @@ export class LoginPage {
   }
 
   handleSubmit() {
-    this.userServices.logTheUser(this.phoneNumber, this.password)
-      .then((response: any)=>{
-        if(response.status === 400){
-          let toast = this.toastCtrl.create({
+    if(this.networkServices.isConnect()) {
+      this.userServices.logTheUser(this.phoneNumber, this.password)
+        .then((response: any) => {
+          if (response.status === 400) {
+            let toast = this.toastCtrl.create({
               message: this.translateService.instant('loginOrPasswordInvalid'),
               duration: 3000,
               position: 'bottom'
-          });
-          toast.present();
-        }
-        if(response.token !== undefined){
-          // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
-          this.userServices.getUser(response.token).then((user:User)=>{
-            this.storage.set('user',user).then(()=>{
-              this.goToContactList()
+            });
+            toast.present();
+          }
+          if (response.token !== undefined) {
+            // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
+            this.userServices.getUser(response.token).then((user: User) => {
+              this.storage.set('user', user).then(() => {
+                this.goToContactList()
+              })
+                .catch(error => console.log("erreur set user local" + error))
             })
-              .catch(error=>console.log("erreur set user local" + error))
-          })
-            .catch(error=>console.log("erreur get user serveur" + error))
-        }
-      })
-      .catch();
+              .catch(error => console.log("erreur get user serveur" + error))
+          }
+        })
+        .catch();
+    } else {
+      let toast = this.toastCtrl.create({
+        message: this.translateService.instant('loginFailedNetwork'),
+        duration: 3000,
+        position:'bottom'
+      });
+      toast.present();
+    }
   }
 
   ionViewDidLoad() {
+    this.networkServices.checkConnection();
+  }
+
+  logConnection(){
+    if (this.networkServices.isConnect()) {
+      console.log('Online');
+    }else{
+      console.log('Offline');
+    }
   }
 
   goToInscription(){
@@ -75,54 +95,60 @@ export class LoginPage {
   }
 
   forgotPassword(){
-    this.apiServices.getProfiles().toPromise()
-    .then(data => {
-      console.log(data);
-    });
-    let alert = this.alertCtrl.create({
-      title: this.translateService.instant('forgottenPassword'),
-      message: this.translateService.instant('pleaseEnterYourPhoneNumber'),
-      inputs: [
-        {
-          name: "phone",
-          placeholder: this.translateService.instant('phoneNumber'),
-          value: this.phoneNumber
-        }
-      ],
-      buttons:[
-        {
-          text: this.translateService.instant('cancel'),
-          role: "cancel",
-          handler:() => {
-            console.log('cancel ');
+    if(this.networkServices.isConnect()) {
+      let alert = this.alertCtrl.create({
+        title: this.translateService.instant('forgottenPassword'),
+        message: this.translateService.instant('pleaseEnterYourPhoneNumber'),
+        inputs: [
+          {
+            name: "phone",
+            placeholder: this.translateService.instant('phoneNumber'),
+            value: this.phoneNumber
           }
-        },
-        {
-          text: this.translateService.instant('sendPassword'),
-          handler: data => {
-            this.apiServices.forgotPassword(data.phone).toPromise()
-              .then(()=> {
-                let toast = this.toastCtrl.create({
-                  message: this.translateService.instant('passwordSent'),
-                  duration: 3000,
-                  position: 'bottom'
-                });
-                toast.present().then();
-              })
-              .catch(error => {
-                console.log(error);
-                let toast = this.toastCtrl.create({
-                  message: this.translateService.instant('unknownPhone'),
-                  duration: 3000,
-                  position: 'bottom'
-                });
-                toast.present().then();
-              })
+        ],
+        buttons: [
+          {
+            text: this.translateService.instant('cancel'),
+            role: "cancel",
+            handler: () => {
+              console.log('cancel ');
+            }
+          },
+          {
+            text: this.translateService.instant('sendPassword'),
+            handler: data => {
+              this.apiServices.forgotPassword(data.phone).toPromise()
+                .then(() => {
+                  let toast = this.toastCtrl.create({
+                    message: this.translateService.instant('passwordSent'),
+                    duration: 3000,
+                    position: 'bottom'
+                  });
+                  toast.present().then();
+                })
+                .catch(error => {
+                  console.log(error);
+                  let toast = this.toastCtrl.create({
+                    message: this.translateService.instant('unknownPhone'),
+                    duration: 3000,
+                    position: 'bottom'
+                  });
+                  toast.present().then();
+                })
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ],
+        enableBackdropDismiss: false
+      });
+      alert.present();
+    } else {
+      let toast = this.toastCtrl.create({
+        message: this.translateService.instant('passwordNetworkFailed'),
+        duration: 3000,
+        position: 'bottom'
+      });
+      toast.present();
+    }
   }
 
   goToAccueil(){

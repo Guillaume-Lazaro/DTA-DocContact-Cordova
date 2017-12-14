@@ -20,6 +20,7 @@
   "inscriptionError" : "Inscription error",
   "loginFailed" : "Login failed",
   "loginOrPasswordInvalid" : "Incorrect phone number or password",
+  "loginFailedNetwork" : "Login impossible due to connection lost",
   "PasswordInvalid" : "Incorrect password",
 
   "pleaseEnterYourPhoneNumber" : "Please enter your phone number to receive your password",
@@ -27,6 +28,7 @@
   "sendPassword" : "Send password",
   "passwordSent" : "Your password was sent",
   "unknownPhone" : "Unknown phone number",
+  "passwordNetworkFailed" : "Action impossible due to connection lost",
 
   "lastName" : "Last name",
   "firstName" : "First Name",
@@ -53,13 +55,23 @@
 
   "call" : "Call",
   "signUpSuccessful" : "Sign up successful",
+  "signUpFailed" : "Sign up impossible due to connection lost",
   "incorrectConfirmPassword" : "The confirm password is incorrect",
 
   "contactModified" : "The contact has been successfully modified",
+  "contactNotModified": "Contact not modified due to connection lost",
   "contactDeleted"  : "The contact has been successfully deleted",
+  "contactNotDeleted" : "Contact not deleted due to connection lost",
   "sessionExpiredTitle" : "Session expired",
   "sessionExpired" : "Your session expired, do you want to log in again?",
   "contactAdded"    : "The contact has been successfully added",
+  "contactNotAdded" : "Contact not added due to connection lost",
+
+  "userProfileModified" : "Profile modified",
+  "userProfileNotModified" : "Profile not modified due to connection lost",
+
+  "NETWORK_NONE_MESSAGE" : "You're offline",
+  "NETWORK_MESSAGE" : "You're online",
 
   "importContacts" : "Import my contacts",
   "addContact1" : "adding ",

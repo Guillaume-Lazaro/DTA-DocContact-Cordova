@@ -8,6 +8,7 @@ import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import {Contact} from "../../model/Contact";
 import { TranslateService } from '@ngx-translate/core';
+import {NetworkProvider} from "../../providers/network-services/network-services";
 import {LoginPage} from "../login/login";
 
 @IonicPage()
@@ -25,6 +26,7 @@ export class ContactListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform,
               public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
+              public toastCtrl: ToastController, public callNumber: CallNumber) {
               public callNumber: CallNumber, public toastCtrl: ToastController,
               public events:Events) {
 
