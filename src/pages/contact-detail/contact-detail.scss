@@ -6,9 +6,8 @@ page-contact-detail {
   flex-direction: column;
   height:100%;
   width:100%;
-  margin-top:8%;
+  padding-top:8%;
 }
-
 .photoContainer{
   height:20%;
   align-content: center;
@@ -41,37 +40,45 @@ page-contact-detail {
   display:flex;
   margin:8% auto ;
   height:50px;
+  width: 70%;
 
 }
 .buttonLeft{
   height:100%;
   border-radius:0;
-  border: 1px solid #3a3b3d;
-  border-top-left-radius:45%;
-  border-bottom-left-radius: 45%;
+  border: 3px solid #414BA8;
+  border-top-left-radius:25%;
+  border-bottom-left-radius: 25%;
   margin:0;
-  width:70px;
-  font-size:13px;
+  width:33%;
+  font-size:15px;
+  color: #414BA8;
+  background-color: white;
 }
 .buttonCenter{
   height:100%;
   border-radius:0;
-  border-top:1px solid #3a3b3d;
-  border-bottom:1px solid #3a3b3d;
+  border-top:3px solid #414BA8;
+  border-bottom:3px solid #414BA8;
   margin:0;
-  width:70px;
+  width:33%;
+  color: #414BA8;
+  font-size:15px;
+  background-color: white;
 
-  font-size:13px;
 }
 .buttonRight{
   height:100%;
   border-radius:0;
-  border: 1px solid #3a3b3d;
-  border-top-right-radius:45%;
-  border-bottom-right-radius: 45%;
+  border: 3px solid #414BA8;
+  border-top-right-radius:25%;
+  border-bottom-right-radius: 25%;
   margin:0;
-  width:70px;
-  font-size:13px;
+  width:33%;
+  font-size:15px;
+  color: #414BA8;
+  background-color: white;
+
 }
 .detailInformations{
   display: flex;
