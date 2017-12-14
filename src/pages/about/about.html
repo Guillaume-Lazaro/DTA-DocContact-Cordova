@@ -28,7 +28,13 @@
   <br>
   <br>
   <br>
-  <button ion-button><a href="https://github.com/deltahammerfest/DTA-DocContact-Cordova">Lien vers le Projet</a></button>
+  <button ion-button (click)="goToGitHub()" block >Lien vers le Projet</button>
 
+  <lottie-animation-view
+    [options]="lottieConfig"
+    [width]="100"
+    [height]="100"
+    (animCreated)="handleAnimation($event)">
+  </lottie-animation-view>
 
 </ion-content>

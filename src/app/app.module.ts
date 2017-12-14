@@ -23,6 +23,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Contacts } from '@ionic-native/contacts';
 import { ImportServicesProvider } from '../providers/import-services/import-services';
 import { AboutPage } from "../pages/about/about";
+import { LottieAnimationViewModule } from 'ng-lottie';
+import { BrowserTab } from '@ionic-native/browser-tab';
 
 
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
@@ -49,7 +51,8 @@ import { AboutPage } from "../pages/about/about";
       }
     }),
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    LottieAnimationViewModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -74,7 +77,8 @@ import { AboutPage } from "../pages/about/about";
     EmailComposer,
     SMS,
     Contacts,
-    ImportServicesProvider
+    ImportServicesProvider,
+    BrowserTab
   ],
 })
 export class AppModule {}
