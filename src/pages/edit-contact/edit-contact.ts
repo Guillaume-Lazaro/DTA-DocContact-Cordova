@@ -72,7 +72,7 @@ export class EditContactPage {
   }
 
   handleSubmit() {
-    var toastMessage;
+    let toastMessage;
     if (this.isInEditMode) {
       //Modification
       // TODO: verifier connexion
@@ -121,7 +121,7 @@ export class EditContactPage {
   ionViewDidLoad() { }
 
   deleteContact() {
-    var toastMessage;
+    let toastMessage;
     if (this.networkServices.isConnect()){
       let alert = this.alertCtrl.create({
         title: this.translateService.instant('confirmation'),
@@ -133,19 +133,22 @@ export class EditContactPage {
           {
             text: this.translateService.instant('delete'),
             handler: () => {
-              this.storage.get('user').then((user:User)=>{
-                this.contactServices.deleteContact(this.contact.id, user.token)
-                  .then((reponse: any)=>{
-                    this.navCtrl.popToRoot();
-                  })
-                  .catch(error=>{ console.log(error) });
-              })
+                this.storage.get('user').then((user: User) => {
+                  this.contactServices.deleteContact(this.contact.id, user.token)
+                    .then((reponse: any) => {
+                      this.navCtrl.popToRoot();
+                    })
+                    .catch(error => {
+                      console.log(error)
+                    });
+                })
             }
           }
-        ]
+        ],
+        enableBackdropDismiss: false
       });
     alert.present();
-    toastMessage = this.translateService.instant('contactDeleted');
+
   } else {
     toastMessage = this.translateService.instant('contactNotDeleted');
     }

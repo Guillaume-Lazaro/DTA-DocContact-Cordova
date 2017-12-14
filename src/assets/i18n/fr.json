@@ -52,12 +52,13 @@
 
   "call" : "Appeler",
   "signUpSuccessful" : "Inscription réussie",
+  "signUpFailed" : "Inscription impossible car aucune connexion",
   "incorrectConfirmPassword" : "Le mot de passe de confirmation est incorrect",
 
   "contactModified" : "Le contact a bien été modifié",
   "contactNotModified": "Contact non modifié car aucune connexion",
   "contactDeleted"  : "Le contact a bien été supprimé",
-  "contactNotDeleted" : "Contact non supprimé car aucune connexion",
+  "contactNotDeleted" : "Suppression impossible car aucune connexion",
   "contactAdded"    : "Le contact a bien été ajouté",
   "contactNotAdded" : "Contact non ajouté car aucune connexion",
 

@@ -61,7 +61,7 @@ export class EditUserPage {
 
 
   handleSubmit() {
-    var toastMessage;
+    let toastMessage;
     if (this.networkServices.isConnect()) {
       toastMessage = this.translateServices.instant('userProfileModified');
       //Modification du profile
