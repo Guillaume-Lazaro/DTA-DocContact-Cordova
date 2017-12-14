@@ -8,7 +8,7 @@ import { Storage } from "@ionic/storage";
 @Injectable()
 export class ContactServicesProvider {
 
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
     console.log('Hello ContactServicesProvider Provider');
   }
 
