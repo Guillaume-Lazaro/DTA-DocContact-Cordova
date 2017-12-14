@@ -68,7 +68,7 @@
   "userProfileNotModified" : "Profil non modifié car aucune connexion",
 
   "NETWORK_NONE_MESSAGE" : "Connexion internet perdue",
-  "NETWORK_MESSAGE" : "Connexion internet réussie"
+  "NETWORK_MESSAGE" : "Connexion internet réussie",
 
   "importContacts" : "Importer mes contacts",
   "addContact1" : "ajout de ",

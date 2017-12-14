@@ -73,7 +73,7 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     EmailComposer,
     SMS,
     Contacts,
-    ImportServicesProvider
+    ImportServicesProvider,
     Network,
     NetworkProvider
   ],

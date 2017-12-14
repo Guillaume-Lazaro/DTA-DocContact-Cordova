@@ -68,7 +68,7 @@
   "userProfileNotModified" : "Profile not modified due to connection lost",
 
   "NETWORK_NONE_MESSAGE" : "You're offline",
-  "NETWORK_MESSAGE" : "You're online"
+  "NETWORK_MESSAGE" : "You're online",
 
   "importContacts" : "Import my contacts",
   "addContact1" : "adding ",
