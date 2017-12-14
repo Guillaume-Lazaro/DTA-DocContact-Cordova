@@ -76,15 +76,8 @@ export class EditContactPage {
       //Modification
       toastMessage = this.translateService.instant('contactModified');
       this.storage.get('user').then((user:User)=>{
-        // Pour le test de token a supprimer
-        user.token ="";
-        // supprimer les lignes
         this.contactServices.updateContact(this.firstName,this.lastName,this.phone,this.email,this.profile, false, user.token, this.contact.id)
           .then((reponse: any)=>{
-            this.events.subscribe("tokenError",(message)=>{
-              console.log("coucou");
-              console.log(message)
-            });
             let toast = this.toastCtrl.create({
               message: toastMessage,
               duration: 3000,
@@ -94,10 +87,6 @@ export class EditContactPage {
             this.navCtrl.popToRoot(); //TODO à changer dans le futur
           })
           .catch(error=>{
-            this.events.subscribe("tokenError",(message)=>{
-
-              console.log(message)
-            });
             console.log(error)});
       })
     } else {
@@ -123,28 +112,6 @@ export class EditContactPage {
 
   ionViewDidLoad() { }
 
-  alertSession(){
-    let alert = this.alertCtrl.create({
-      title: this.translateService.instant('sessionExpiredTitle'),
-      message: this.translateService.instant('sessionExpired'),
-      buttons: [
-        {
-          text: this.translateService.instant('yes'),
-          handler: () => {
-            // TODO AlertLogin
-          }
-        },
-        {
-          text: this.translateService.instant('no'),
-          handler: () => {}
-        }
-      ]
-    })
-    alert.present
-  }
-  alertLogin(){
-
-  }
   deleteContact() {
     let alert = this.alertCtrl.create({
       title: this.translateService.instant('confirmation'),

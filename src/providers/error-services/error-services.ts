@@ -4,7 +4,7 @@ import {AlertController, ToastController} from "ionic-angular";
 import {TranslateService} from "@ngx-translate/core";
 import {Storage} from "@ionic/storage";
 import {User} from "../../model/User";
-import {UserServicesProvider} from "../user-services/user-services";
+import {ApiServicesProvider} from "../api-services/api-services";
 
 /*
   Generated class for the ErrorServicesProvider provider.
@@ -16,34 +16,35 @@ import {UserServicesProvider} from "../user-services/user-services";
 export class ErrorServicesProvider {
 
   constructor(public http: HttpClient, public alertCtrl: AlertController, public translateService: TranslateService,
-              private storage: Storage, public userServices:UserServicesProvider, public toastCtrl: ToastController) {
+              private storage: Storage, public apiServices:ApiServicesProvider, public toastCtrl: ToastController) {
+
     console.log('Hello ErrorServicesProvider Provider');
   }
 
-invalidToken() {
-  let alert = this.alertCtrl.create({
-    title: this.translateService.instant('sessionExpiredTitle'),
-    message: this.translateService.instant('sessionExpired'),
-    buttons: [
-      {
-        text: this.translateService.instant('yes'),
-        handler: () => {
-          this.logAlert()
-          // TODO AlertLogin
+  invalidToken() {
+    let alert = this.alertCtrl.create({
+      title: this.translateService.instant('sessionExpiredTitle'),
+      message: this.translateService.instant('sessionExpired'),
+      buttons: [
+        {
+          text: this.translateService.instant('yes'),
+          handler: () => {
+            this.logAlert()
+          }
+        },
+        {
+          text: this.translateService.instant('no'),
+          handler: () => {
+          }
         }
-      },
-      {
-        text: this.translateService.instant('no'),
-        handler: () => {
-        }
-      }
-    ]
-  })
-  alert.present()
-}
+      ]
+    });
+    alert.present().then();
+  }
 
-logAlert(){
+  logAlert(){
     this.storage.get('user').then((user:User)=>{
+      console.log(user.phone)
       let alert = this.alertCtrl.create({
         title: this.translateService.instant('forgottenPassword'),
         message: this.translateService.instant('pleaseEnterYourPhoneNumber'),
@@ -63,53 +64,39 @@ logAlert(){
             }
           },
           {
-            // TODO : Modifier messages
             text: this.translateService.instant('sendPassword'),
             handler: data => {
-              this.userServices.logTheUser(user.phone,data.password)
+              this.apiServices.logUser(user.phone,data.password).toPromise()
                 .then((reponse:any)=> {
                   if(reponse.token!== undefined){
                     user.token = reponse.token;
-                    this.storage.set('user',user);
-                    let toast = this.toastCtrl.create({
+                    this.storage.set('user',user).then();
+                    let toastValid = this.toastCtrl.create({
                       message: this.translateService.instant('passwordSent'),
                       duration: 3000,
                       position: 'bottom'
                     });
-                    toast.present().then();
-                  } else {
-                    let toast = this.toastCtrl.create({
-                      message: this.translateService.instant('loginOrPasswordInvalid'),
+                    toastValid.present().then();
+                  }
+                })
+                .catch(error => {
+                  if(error.status = 400){
+                    let toastInvalid = this.toastCtrl.create({
+                      message: this.translateService.instant('PasswordInvalid'),
                       duration: 3000,
                       position: 'bottom'
                     });
-                    toast.present();
-                    this.logAlert()
+                    toastInvalid.present().then(()=>{
+                      this.logAlert()
+                    });
                   }
-                  user.token = reponse.token;
-                  this.storage.set('user',user)
-                  let toast = this.toastCtrl.create({
-                    message: this.translateService.instant('passwordSent'),
-                    duration: 3000,
-                    position: 'bottom'
-                  });
-                  toast.present().then();
-                })
-                .catch(error => {
-                  console.log(error);
-                  let toast = this.toastCtrl.create({
-                    message: this.translateService.instant('unknownPhone'),
-                    duration: 3000,
-                    position: 'bottom'
-                  });
-                  toast.present().then();
                 })
             }
           }
         ]
       });
-      alert.present();
+      alert.present().then();
     })
 
-}
+  }
 }

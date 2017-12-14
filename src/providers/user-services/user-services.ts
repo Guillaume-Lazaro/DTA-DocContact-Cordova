@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {ApiServicesProvider} from "../api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
+import {ErrorServicesProvider} from "../error-services/error-services";
 
 /*
   Generated class for the UserServicesProvider provider.
@@ -13,7 +14,7 @@ import {Storage} from "@ionic/storage";
 @Injectable()
 export class UserServicesProvider {
   // token: string; // variable de Debug : a enlever pour la fin !
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage,public errorServices: ErrorServicesProvider) {
     console.log("Hello UserServicesProvider Provider");
   }
 
@@ -24,6 +25,7 @@ export class UserServicesProvider {
           resolve(message);
         })
         .catch( error=> {
+          this.errorServices.logAlert()
         console.log(error)
       })
     })
