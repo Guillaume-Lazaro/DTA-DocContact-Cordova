@@ -83,18 +83,21 @@ page-contact-detail {
 .detailInformations{
   display: flex;
   flex-direction: column;
-  margin-top:5%;
+  margin-top:3%;
   padding-left:5%;
 
+}
+detailInformations span{
+  font-size:15px;
 }
 .detailPhone{
   width: 100%;
   padding-left:5%;
-  margin:5%;
+  margin:3%;
 }
 .detailMail{
   width: 100%;
   padding-left:5%;
-  margin:5%;
+  margin:3%;
 }
 

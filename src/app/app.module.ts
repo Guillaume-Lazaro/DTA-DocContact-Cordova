@@ -20,12 +20,14 @@ import { EmailComposer } from '@ionic-native/email-composer';
 import { SMS } from '@ionic-native/sms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { Network } from '@ionic-native/network';
+import { NetworkProvider } from '../providers/network-services/network-services';
+
 import { Contacts } from '@ionic-native/contacts';
 import { ImportServicesProvider } from '../providers/import-services/import-services';
 import { AboutPage } from "../pages/about/about";
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { BrowserTab } from '@ionic-native/browser-tab';
-
 
 //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
@@ -78,6 +80,8 @@ import { BrowserTab } from '@ionic-native/browser-tab';
     SMS,
     Contacts,
     ImportServicesProvider,
+    Network,
+    NetworkProvider
     BrowserTab
   ],
 })
