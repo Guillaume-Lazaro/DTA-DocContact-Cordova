@@ -27,6 +27,7 @@
   "sendPassword" : "Envoyer le mot de passe",
   "passwordSent" : "Votre mot de passe a été envoyé",
   "unknownPhone" : "Numéro de téléphone inconnu",
+  "passwordNetworkFailed" : "Action impossible car aucune connexion",
 
   "lastName" : "Nom",
   "firstName" : "Prénom",

@@ -48,6 +48,7 @@ export class NetworkProvider {
       console.log('Offline Network');
       this.initMessage();
       this.showMessage();
+      //this.toast.dismiss();
       this.events.publish('disconnected');
     },                                    (error) => {
       console.error(error);

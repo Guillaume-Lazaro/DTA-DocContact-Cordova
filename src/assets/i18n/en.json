@@ -27,6 +27,7 @@
   "sendPassword" : "Send password",
   "passwordSent" : "Your password was sent",
   "unknownPhone" : "Unknown phone number",
+  "passwordNetworkFailed" : "Action impossible due to connection lost",
 
   "lastName" : "Last name",
   "firstName" : "First Name",

@@ -76,6 +76,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
+    this.networkServices.checkConnection();
   }
 
   logConnection(){
@@ -97,54 +98,60 @@ export class LoginPage {
   }
 
   forgotPassword(){
-    this.apiServices.getProfiles().toPromise()
-    .then(data => {
-      console.log(data);
-    });
-    let alert = this.alertCtrl.create({
-      title: this.translateService.instant('forgottenPassword'),
-      message: this.translateService.instant('pleaseEnterYourPhoneNumber'),
-      inputs: [
-        {
-          name: "phone",
-          placeholder: this.translateService.instant('phoneNumber'),
-          value: this.phoneNumber
-        }
-      ],
-      buttons:[
-        {
-          text: this.translateService.instant('cancel'),
-          role: "cancel",
-          handler:() => {
-            console.log('cancel ');
+    if(this.networkServices.isConnect()) {
+      let alert = this.alertCtrl.create({
+        title: this.translateService.instant('forgottenPassword'),
+        message: this.translateService.instant('pleaseEnterYourPhoneNumber'),
+        inputs: [
+          {
+            name: "phone",
+            placeholder: this.translateService.instant('phoneNumber'),
+            value: this.phoneNumber
           }
-        },
-        {
-          text: this.translateService.instant('sendPassword'),
-          handler: data => {
-            this.apiServices.forgotPassword(data.phone).toPromise()
-              .then(()=> {
-                let toast = this.toastCtrl.create({
-                  message: this.translateService.instant('passwordSent'),
-                  duration: 3000,
-                  position: 'bottom'
-                });
-                toast.present().then();
-              })
-              .catch(error => {
-                console.log(error);
-                let toast = this.toastCtrl.create({
-                  message: this.translateService.instant('unknownPhone'),
-                  duration: 3000,
-                  position: 'bottom'
-                });
-                toast.present().then();
-              })
+        ],
+        buttons: [
+          {
+            text: this.translateService.instant('cancel'),
+            role: "cancel",
+            handler: () => {
+              console.log('cancel ');
+            }
+          },
+          {
+            text: this.translateService.instant('sendPassword'),
+            handler: data => {
+              this.apiServices.forgotPassword(data.phone).toPromise()
+                .then(() => {
+                  let toast = this.toastCtrl.create({
+                    message: this.translateService.instant('passwordSent'),
+                    duration: 3000,
+                    position: 'bottom'
+                  });
+                  toast.present().then();
+                })
+                .catch(error => {
+                  console.log(error);
+                  let toast = this.toastCtrl.create({
+                    message: this.translateService.instant('unknownPhone'),
+                    duration: 3000,
+                    position: 'bottom'
+                  });
+                  toast.present().then();
+                })
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ],
+        enableBackdropDismiss: false
+      });
+      alert.present();
+    } else {
+      let toast = this.toastCtrl.create({
+        message: this.translateService.instant('passwordNetworkFailed'),
+        duration: 3000,
+        position: 'bottom'
+      });
+      toast.present();
+    }
   }
 
   goToAccueil(){
