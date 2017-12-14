@@ -4,7 +4,6 @@ import { InscriptionPage } from '../inscription/inscription';
 import { ContactListPage } from '../contact-list/contact-list';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
-import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
 import { ApiServicesProvider } from "../../providers/api-services/api-services";
 import {AlertController} from "ionic-angular";
 import {User} from "../../model/User";
