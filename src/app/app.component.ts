@@ -37,7 +37,8 @@ export class MyApp {
 
     //Initilization du service de traduction:
     this.platform.ready().then(()=> {
-      let lang:string = navigator.language //Langue systéme utilisé par le device
+      let lang:string = navigator.language; //Langue systéme utilisé par le device
+      
       lang = lang.substring(0,2);
 
       if (lang != "en" && lang != "fr") {
@@ -45,7 +46,6 @@ export class MyApp {
       }
 
       this.translateService.setDefaultLang(lang);
-      //this.translateService.use('en');
 
     });
 

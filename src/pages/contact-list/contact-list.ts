@@ -76,7 +76,6 @@ export class ContactListPage {
       this.storage.set('user',user);  //on the database
     });
     })
-
   }
 
   initializeList() {
@@ -114,7 +113,6 @@ export class ContactListPage {
     this.callNumber.callNumber(phone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
-
   }
 
   goToAddContact(){

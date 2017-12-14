@@ -71,7 +71,9 @@ export class EditContactPage {
   }
 
   handleSubmit() {
-    var toastMessage;
+    let toastMessage;
+    this.lastName = this.capitalize(this.lastName);
+
     if (this.isInEditMode) {
       //Modification
       toastMessage = this.translateService.instant('contactModified');
@@ -143,4 +145,9 @@ export class EditContactPage {
     this.profile = this.contact.profile;
   }
 
+  //ça sert juste à mettre en lettre capitale la premiére lettre du nom de famille, afin de faciliter le tri alphabétique
+  capitalize(name:string): string {
+    let firstLetter = name.charAt(0).toLocaleUpperCase();
+    return firstLetter + name.substring(1);
+  }
 }
