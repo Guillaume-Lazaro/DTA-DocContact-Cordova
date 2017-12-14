@@ -11,7 +11,8 @@ import { Storage } from "@ionic/storage";
 import { User } from "../model/User";
 import { ApiServicesProvider } from "../providers/api-services/api-services";
 // A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import {ImportServicesProvider} from "../providers/import-services/import-services";
+import { ImportServicesProvider } from "../providers/import-services/import-services";
+import { AboutPage } from "../pages/about/about";
 
 @Component({
   templateUrl: 'app.html'
@@ -25,6 +26,7 @@ export class MyApp {
   deconnexion: any =  {title: 'Deconnexion', component: LoginPage};
   myProfile: any =    {title: 'Modifier mon Profil', component: EditUserPage };
   myContacts : any =  {title: 'Mes Contacts', component: ContactListPage };
+  about: any = {title: 'A propos', component: AboutPage };
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public app:App, private userService: UserServicesProvider,
@@ -38,7 +40,7 @@ export class MyApp {
     //Initilization du service de traduction:
     this.platform.ready().then(()=> {
       let lang:string = navigator.language; //Langue systéme utilisé par le device
-      
+
       lang = lang.substring(0,2);
 
       if (lang != "en" && lang != "fr") {

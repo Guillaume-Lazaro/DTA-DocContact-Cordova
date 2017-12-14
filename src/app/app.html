@@ -29,6 +29,7 @@
       </div>
       <div class="menuDeconnexion">
         <ion-list>
+          <button ion-item (click)="openPage(about)" menuClose color="dark"> <ion-icon name="paper"></ion-icon> {{'about' | translate }} </button>
           <button ion-item (click)="openPage(deconnexion)" menuClose>  <ion-icon name="log-out"></ion-icon> &nbsp; {{'disconnect' | translate}} </button>
         </ion-list>
       </div>
