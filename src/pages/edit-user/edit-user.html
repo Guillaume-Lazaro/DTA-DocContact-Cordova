@@ -58,10 +58,12 @@
       </ion-item>
 
     </div>
+    <div padding-right>
+      <button  ion-button type="submit" block [disabled]="userForm.invalid" margin="auto">
+        {{'modify' | translate}}
+      </button>
+    </div>
 
-    <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
-      {{'modify' | translate}}
-    </button>
 
   </form>
 

@@ -61,15 +61,15 @@
 
     </div>
 
-    <div class="submitButton" *ngIf="isInEditMode; else addButton" >
-      <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+    <div class="submitButton" *ngIf="isInEditMode; else addButton" padding-right >
+      <button ion-button type="submit" block [disabled]="userForm.invalid" margin="auto">
         {{'modify' | translate}}
       </button>
     </div>
 
     <ng-template #addButton>
-      <div class="submitButton">
-        <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+      <div class="submitButton" padding-right >
+        <button ion-button type="submit" block [disabled]="userForm.invalid" margin="auto">
           {{'add' | translate}}
         </button>
       </div>
@@ -77,8 +77,8 @@
 
   </form>
 
-  <div *ngIf="isInEditMode">
-    <button type="button" name="button" ion-button (click)="deleteContact()" color="danger" > Supprimer </button>
+  <div *ngIf="isInEditMode" padding-left >
+    <button type="button" name="button" block ion-button (click)="deleteContact()" color="danger" > Supprimer </button>
   </div>
 
 </ion-content>
