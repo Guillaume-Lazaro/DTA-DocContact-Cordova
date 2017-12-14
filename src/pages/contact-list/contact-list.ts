@@ -19,7 +19,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class ContactListPage {
 
   searchQuery: string = '';
-  //For tests
   contacts: Array<Contact>;
   verif0Contact: boolean = false;
   allContacts:Array<Contact>;
@@ -41,19 +40,20 @@ export class ContactListPage {
         navCtrl.pop();
       } else {
         if(new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
-          console.log('J ai appuyé sur back 2 fois et je quitte');
-
+          //Double appui sur back: on quitte l'appli
           this.platform.exitApp();
+
         } else {
+          //Premier appui: on prévient l'utilisateur
           let toast = this.toastCtrl.create({
-            message:  'Appuyer encore une fois pour quitter',
+            message:  this.translateService.instant('pressAgainToExit'),
             duration: 2000,
             position: 'bottom'
           });
+
           toast.present();
 
           lastTimeBackPress = new Date().getTime();
-          console.log('J ai appuyé sur back 1 fois et le temps est '+lastTimeBackPress);
         }
       }
     });
