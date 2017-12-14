@@ -71,7 +71,7 @@ export class EditContactPage {
   }
 
   handleSubmit() {
-    var toastMessage;
+    let toastMessage;
     this.lastName = this.capitalize(this.lastName);
 
     if (this.isInEditMode) {
