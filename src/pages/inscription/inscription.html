@@ -1,9 +1,7 @@
 <ion-header>
-
-  <ion-navbar>
+  <ion-navbar color="docBlue">
     <ion-title>{{'signUp' | translate}}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 <ion-content padding>
@@ -78,10 +76,13 @@
           {{'passwordRequired' | translate}}
         </div>
       </form >
+      <div *ngIf="passwordForm.hasError('confirmError')">
+        {{'incorrectConfirmPassword' | translate}}
+      </div>
     </div>
 
-    <div class="submitButton">
-      <button ion-button type="submit" [disabled]="userForm.invalid" margin="auto">
+    <div class="submitButton" padding-right>
+      <button ion-button type="submit" block [disabled]="userForm.invalid" margin="auto">
         {{'signUp' | translate}}
       </button>
     </div>

@@ -25,7 +25,6 @@ export class LoginPage {
   passwordCtrl: FormControl;
   userForm: FormGroup;
 
-
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
               public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService) {
@@ -72,10 +71,8 @@ export class LoginPage {
     this.navCtrl.push(InscriptionPage).then();
   }
 
-
   goToContactList(){
     this.navCtrl.setRoot(ContactListPage).then();
-
   }
 
   forgotPassword(){
@@ -132,5 +129,4 @@ export class LoginPage {
   goToAccueil(){
     this.navCtrl.push(ContactListPage).then();
   }
-
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {IonicPage, MenuController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {Events, IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
 
 import { EditContactPage } from '../edit-contact/edit-contact';
@@ -20,17 +21,45 @@ import {LoginPage} from "../login/login";
 export class ContactListPage {
 
   searchQuery: string = '';
-  //For tests
   contacts: Array<Contact>;
   verif0Contact: boolean = false;
   allContacts:Array<Contact>;
   searchBarPlaceholder:string = 'Bla';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform,
               public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
+              public userServices: UserServicesProvider, public callNumber: CallNumber, public toastCtrl: ToastController) {
               public userServices: UserServicesProvider,public callNumber: CallNumber, public events:Events) {
 
     this.menuCtrl.enable(true);
+
+    let lastTimeBackPress = 0;
+    let timePeriodToExit  = 2000;
+
+    //Ajout d'un comportement spécial quand on clique :
+    //Si l'on clique une seconde fois, l'appli se quitte
+    platform.registerBackButtonAction(() => {
+      if (navCtrl.canGoBack()) {
+        navCtrl.pop();
+      } else {
+        if(new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+          //Double appui sur back: on quitte l'appli
+          this.platform.exitApp();
+
+        } else {
+          //Premier appui: on prévient l'utilisateur
+          let toast = this.toastCtrl.create({
+            message:  this.translateService.instant('pressAgainToExit'),
+            duration: 2000,
+            position: 'bottom'
+          });
+
+          toast.present();
+
+          lastTimeBackPress = new Date().getTime();
+        }
+      }
+    });
   }
 
   ionViewDidLoad() {
@@ -53,7 +82,6 @@ export class ContactListPage {
       this.storage.set('user',user);  //on the database
     });
     })
-
   }
 
   initializeList() {
@@ -91,7 +119,6 @@ export class ContactListPage {
     this.callNumber.callNumber(phone, true)
       .then(() => console.log('Launched dialer!'))
       .catch(() => console.log('Error launching dialer'));
-
   }
 
   goToAddContact(){
