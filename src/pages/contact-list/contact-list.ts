@@ -94,9 +94,9 @@ export class ContactListPage {
         this.contacts = this.allContacts;
         this.verif0Contact = (this.contacts.length == 0);
       })
-        .catch(error => console.log("erreur get contacts" + error))
+        .catch(error => console.log(error))
     })
-      .catch(error => console.log("erreur get user local" + error))
+      .catch(error => console.log(error))
   }
 
   // on créé une liste de contact filtrée suivant la recherche effectuée

@@ -10,7 +10,7 @@ import {ErrorServicesProvider} from "../error-services/error-services";
 @Injectable()
 export class ContactServicesProvider {
 
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage, public event: Events, public errorServices: ErrorServicesProvider) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, public event: Events, public errorServices: ErrorServicesProvider) {
     console.log('Hello ContactServicesProvider Provider');
   }
 
