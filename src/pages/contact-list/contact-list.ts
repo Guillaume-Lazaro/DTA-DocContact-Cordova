@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, MenuController, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, MenuController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 
 import { EditContactPage } from '../edit-contact/edit-contact';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
@@ -25,11 +25,38 @@ export class ContactListPage {
   allContacts:Array<Contact>;
   searchBarPlaceholder:string = 'Bla';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController,
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform,
               public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
-              public userServices: UserServicesProvider,public callNumber: CallNumber) {
+              public userServices: UserServicesProvider, public callNumber: CallNumber, public toastCtrl: ToastController) {
 
     this.menuCtrl.enable(true);
+
+    let lastTimeBackPress = 0;
+    let timePeriodToExit  = 2000;
+
+    //Ajout d'un comportement spécial quand on clique :
+    //Si l'on clique une seconde fois, l'appli se quitte
+    platform.registerBackButtonAction(() => {
+      if (navCtrl.canGoBack()) {
+        navCtrl.pop();
+      } else {
+        if(new Date().getTime() - lastTimeBackPress < timePeriodToExit) {
+          console.log('J ai appuyé sur back 2 fois et je quitte');
+
+          this.platform.exitApp();
+        } else {
+          let toast = this.toastCtrl.create({
+            message:  'Appuyer encore une fois pour quitter',
+            duration: 2000,
+            position: 'bottom'
+          });
+          toast.present();
+
+          lastTimeBackPress = new Date().getTime();
+          console.log('J ai appuyé sur back 1 fois et le temps est '+lastTimeBackPress);
+        }
+      }
+    });
   }
 
   ionViewDidLoad() {
