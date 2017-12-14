@@ -69,4 +69,15 @@
 
   "NETWORK_NONE_MESSAGE" : "Connexion internet perdue",
   "NETWORK_MESSAGE" : "Connexion internet réussie"
+
+  "importContacts" : "Importer mes contacts",
+  "addContact1" : "ajout de ",
+  "addContact2" : " en cours",
+  "contactProblem" : "Il y a eu un problème avec les contacts : ",
+  "singleContactAdded" : " contact a été ajouté",
+  "multContactAdded" : " contacts ont étés ajoutés",
+  "allContactsAdded" : "Tous les contacts de votre répertoire ont déjà été ajoutés",
+  "incorrectEmail" : "L'adresse mail d'un de vos contacts est erronée ",
+
+  "pressAgainToExit" : "Appuyez encore une fois sur retour pour quitter"
 }

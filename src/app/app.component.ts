@@ -1,16 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
-import {App, Nav, Platform} from 'ionic-angular';
+import { App, Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 import { LoginPage } from '../pages/login/login';
-import {ContactListPage} from "../pages/contact-list/contact-list";
-import {UserServicesProvider} from "../providers/user-services/user-services";
-import {EditUserPage} from "../pages/edit-user/edit-user";
-import {Storage} from "@ionic/storage";
-import {User} from "../model/User";
-import {ApiServicesProvider} from "../providers/api-services/api-services";
+import { ContactListPage } from "../pages/contact-list/contact-list";
+import { UserServicesProvider } from "../providers/user-services/user-services";
+import { EditUserPage } from "../pages/edit-user/edit-user";
+import { Storage } from "@ionic/storage";
+import { User } from "../model/User";
+import { ApiServicesProvider } from "../providers/api-services/api-services";
 // A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import {ImportServicesProvider} from "../providers/import-services/import-services";
 
 @Component({
   templateUrl: 'app.html'
@@ -27,18 +28,17 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               public app:App, private userService: UserServicesProvider,
-              private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider) {
-
+              private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider,
+              private importServices : ImportServicesProvider) {
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: private screenOrientation: ScreenOrientation
+
     this.initializeApp();
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     //Initilization du service de traduction:
     this.platform.ready().then(()=> {
-      console.log("Langue du navigateur: "+navigator.language);
-      console.log("Langues de l'user du navigateur: "+navigator.languages);
-
-      let lang:string = navigator.language //Langue systéme utilisé par le device
+      let lang:string = navigator.language; //Langue systéme utilisé par le device
+      
       lang = lang.substring(0,2);
 
       if (lang != "en" && lang != "fr") {
@@ -46,9 +46,6 @@ export class MyApp {
       }
 
       this.translateService.setDefaultLang(lang);
-      //this.translateService.use('en');
-
-      console.log("Langue depuis translateService: "+this.translateService.currentLang);
 
     });
 
@@ -86,5 +83,10 @@ export class MyApp {
     }else{
       this.nav.setRoot(page.component);
     }
+  }
+  importContacts() {
+      this.importServices.importContacts().then(()=>{
+        this.nav.setRoot(ContactListPage);
+      });
   }
 }

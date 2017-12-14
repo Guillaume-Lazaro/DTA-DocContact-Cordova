@@ -69,4 +69,15 @@
 
   "NETWORK_NONE_MESSAGE" : "You're offline",
   "NETWORK_MESSAGE" : "You're online"
+
+  "importContacts" : "Import my contacts",
+  "addContact1" : "adding ",
+  "addContact2" : " currently",
+  "contactProblem" : "There was some problems with those contacts : ",
+  "singleContactAdded" : " contact was added",
+  "multContactAdded" : " contacts were added",
+  "allContactsAdded" : "All the contacts in your phone book were already added",
+  "incorrectEmail" : "The email of one of your contact is incorrect ",
+
+  "pressAgainToExit" : "Press again the back button to exit the app"
 }

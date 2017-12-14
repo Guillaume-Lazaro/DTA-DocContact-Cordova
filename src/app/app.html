@@ -5,6 +5,7 @@
 
   <ion-content>
     <div class="menuContainer">
+
       <div class="menuPresentationProfil">
         <img src="{{menuUser?.gravatar}}?s=200&d=mm" alt="" class="photoMenu">
         <div class="menuCompleteName">
@@ -15,19 +16,23 @@
         </div>
       </div>
 
-
-      <ion-list>
-        <button ion-item (click)="openPage(myProfile)"  menuClose> {{'modifyMyProfile' | translate}} </button>
-        <button ion-item (click)="openPage(myContacts)" menuClose>  {{'myContacts' | translate}} </button>
-
-      </ion-list>
-    </div>
-      <div class="menuDeconnexion">
+      <div class="iconMenu">
         <ion-list>
-          <button ion-item (click)="openPage(deconnexion)" menuClose>{{'disconnect' | translate}} </button>
+          <button ion-item (click)="openPage(myProfile)"  menuClose>   <ion-icon name="home"></ion-icon> &nbsp; {{'modifyMyProfile' | translate}} </button>
+          <button ion-item (click)="openPage(myContacts)" menuClose>   <ion-icon name="people"></ion-icon> &nbsp; {{'myContacts' | translate}} </button>
+
+        </ion-list>
+        <ion-list>
+          <button ion-item (click)="importContacts()" menuClose>  <ion-icon name="cloud-download"></ion-icon> &nbsp;  {{'importContacts' | translate}} </button>
+
         </ion-list>
       </div>
-
+      <div class="menuDeconnexion">
+        <ion-list>
+          <button ion-item (click)="openPage(deconnexion)" menuClose>  <ion-icon name="log-out"></ion-icon> &nbsp; {{'disconnect' | translate}} </button>
+        </ion-list>
+      </div>
+    </div>
 
   </ion-content>
 
