@@ -6,6 +6,8 @@ import {ContactListPage} from "../contact-list/contact-list";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
+import {NetworkProvider} from "../../providers/network-services/network-services";
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * Generated class for the EditUserPage page.
@@ -38,7 +40,7 @@ export class EditUserPage {
 
   constructor(public navCtrl: NavController,public navParams: NavParams,public userServices: UserServicesProvider,
               fb: FormBuilder, private toastCtrl: ToastController,public events: Events,
-              public apiServices: ApiServicesProvider, private storage: Storage) {
+              public apiServices: ApiServicesProvider, public translateServices: TranslateService, private storage: Storage, public networkServices: NetworkProvider) {
 
     this.lastNameCtrl = fb.control('', [Validators.required]);
     this.firstNameCtrl = fb.control('', [Validators.required]);
@@ -59,23 +61,31 @@ export class EditUserPage {
 
 
   handleSubmit() {
+    let toastMessage;
+    if (this.networkServices.isConnect()) {
+      toastMessage = this.translateServices.instant('userProfileModified');
+      //Modification du profile
+      this.userServices.updateUser(this.firstName, this.lastName, this.email, this.profile, this.user.token)
+        .then((reponse: any) => {
+          console.log(this.userServices.getUser(this.user.token));
 
-    //Modification du profile
-    this.userServices.updateUser(this.firstName,this.lastName,this.email,this.profile, this.user.token)
-      .then((reponse: any)=>{
-        console.log(this.userServices.getUser(this.user.token));
-        let toast = this.toastCtrl.create({
-          message: 'Le profile a bien été modifié',
-          duration: 3000,
-          position: 'bottom'
+          this.navCtrl.setRoot(ContactListPage).then();
+        })
+        .catch(error => {
+          console.log(error)
         });
-        toast.present();
-        this.navCtrl.setRoot(ContactListPage).then();
-      })
-      .catch(error=>{
-        console.log(error)
+    } else {
+      toastMessage = this.translateServices.instant('userProfileNotModified');
+    }
+
+      let toast = this.toastCtrl.create({
+        message: toastMessage,
+        duration: 3000,
+        position: 'bottom'
       });
-  }
+      toast.present();
+    }
+
 
   ionViewDidLoad() {
     this.storage.get('user').then(user=>{

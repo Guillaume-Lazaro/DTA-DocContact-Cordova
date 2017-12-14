@@ -20,12 +20,14 @@
   "inscriptionError" : "Erreur lors de l'inscription",
   "loginFailed" : "Erreur lors du login",
   "loginOrPasswordInvalid" : "Le numéro de téléphone ou le mot de passe est incorrect",
+  "loginFailedNetwork" : "Login impossible car aucune connexion",
 
   "pleaseEnterYourPhoneNumber" : "Entrez votre numéro de téléphone pour recevoir votre mot de passe",
   "cancel" : "Annuler",
   "sendPassword" : "Envoyer le mot de passe",
   "passwordSent" : "Votre mot de passe a été envoyé",
   "unknownPhone" : "Numéro de téléphone inconnu",
+  "passwordNetworkFailed" : "Action impossible car aucune connexion",
 
   "lastName" : "Nom",
   "firstName" : "Prénom",
@@ -36,7 +38,7 @@
   "firstNameRequired" : "Le prénom est requis",
   "phoneNumberInvalid" : "Le numéro de téléphone est invalide",
   "emailInvalid" : "L'adresse email est invalide",
-  "passwordInvalid" : "Le mot de passe doit faire 4 caractéres de long",
+  "passwordInvalid" : "Le mot de passe doit faire 4 caractères de long",
   "phoneNumberRequired" : "Le numéro de téléphone est requis",
   "passwordRequired" : "Le mot de passe est requis",
   "emailRequired" : "L'adresse email est requise",
@@ -52,11 +54,21 @@
 
   "call" : "Appeler",
   "signUpSuccessful" : "Inscription réussie",
+  "signUpFailed" : "Inscription impossible car aucune connexion",
   "incorrectConfirmPassword" : "Le mot de passe de confirmation est incorrect",
 
   "contactModified" : "Le contact a bien été modifié",
+  "contactNotModified": "Contact non modifié car aucune connexion",
   "contactDeleted"  : "Le contact a bien été supprimé",
+  "contactNotDeleted" : "Suppression impossible car aucune connexion",
   "contactAdded"    : "Le contact a bien été ajouté",
+  "contactNotAdded" : "Contact non ajouté car aucune connexion",
+
+  "userProfileModified" : "Profil modifié",
+  "userProfileNotModified" : "Profil non modifié car aucune connexion",
+
+  "NETWORK_NONE_MESSAGE" : "Connexion internet perdue",
+  "NETWORK_MESSAGE" : "Connexion internet réussie",
 
   "importContacts" : "Importer mes contacts",
   "addContact1" : "ajout de ",
