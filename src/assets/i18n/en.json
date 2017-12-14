@@ -56,5 +56,8 @@
 
   "contactModified" : "The contact has been successfully modified",
   "contactDeleted"  : "The contact has been successfully deleted",
-  "contactAdded"    : "The contact has been successfully added"
+  "contactAdded"    : "The contact has been successfully added",
+
+  "sessionExpiredTitle" : "Session expired",
+  "sessionExpired" : "Your session expired, do you want to log in again?"
 }

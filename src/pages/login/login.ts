@@ -45,9 +45,9 @@ export class LoginPage {
       .then((response: any)=>{
         if(response.status === 400){
           let toast = this.toastCtrl.create({
-            message: this.translateService.instant('loginOrPasswordInvalid'),
-            duration: 3000,
-            position: 'bottom'
+              message: this.translateService.instant('loginOrPasswordInvalid'),
+              duration: 3000,
+              position: 'bottom'
           });
           toast.present();
         }
