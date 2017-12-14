@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ApiServicesProvider} from "../api-services/api-services";
-import {Contact} from "../../model/Contact";
-import {Storage} from "@ionic/storage";
+import { ApiServicesProvider } from "../api-services/api-services";
+import { Contact } from "../../model/Contact";
+import { Storage } from "@ionic/storage";
 
 
 @Injectable()
 export class ContactServicesProvider {
 
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider) {
     console.log('Hello ContactServicesProvider Provider');
   }
 

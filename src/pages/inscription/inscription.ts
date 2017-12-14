@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Events, IonicPage, NavController, ToastController} from 'ionic-angular';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {TranslateService} from '@ngx-translate/core';

@@ -1,6 +1,6 @@
-import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {Md5} from "ts-md5/dist/md5";
+import { Md5 } from "ts-md5/dist/md5";
 
 
 const API_BASE_URL: string = 'http://familink.cleverapps.io';
