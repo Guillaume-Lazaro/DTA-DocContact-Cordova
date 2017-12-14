@@ -20,6 +20,7 @@
   "inscriptionError" : "Inscription error",
   "loginFailed" : "Login failed",
   "loginOrPasswordInvalid" : "Incorrect phone number or password",
+  "loginFailedNetwork" : "Login impossible due to connection lost",
 
   "pleaseEnterYourPhoneNumber" : "Please enter your phone number to receive your password",
   "cancel" : "Cancel",

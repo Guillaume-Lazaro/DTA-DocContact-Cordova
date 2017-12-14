@@ -20,6 +20,7 @@
   "inscriptionError" : "Erreur lors de l'inscription",
   "loginFailed" : "Erreur lors du login",
   "loginOrPasswordInvalid" : "Le numéro de téléphone ou le mot de passe est incorrect",
+  "loginFailedNetwork" : "Login impossible car aucune connexion",
 
   "pleaseEnterYourPhoneNumber" : "Entrez votre numéro de téléphone pour recevoir votre mot de passe",
   "cancel" : "Annuler",

@@ -29,7 +29,7 @@ export class LoginPage {
   constructor(fb: FormBuilder, private toastCtrl: ToastController, public navCtrl : NavController, public events: Events,
               public userServices : UserServicesProvider, public apiServices: ApiServicesProvider, private alertCtrl: AlertController,
               public menuCtrl: MenuController, private storage: Storage, private translateService: TranslateService,
-              public networkSerices: NetworkProvider) {
+              public networkServices: NetworkProvider) {
 
     this.menuCtrl.enable(false);
     this.phoneNumberCtrl = fb.control('', [Validators.maxLength(10), Validators.required]);
@@ -42,36 +42,44 @@ export class LoginPage {
   }
 
   handleSubmit() {
-    this.networkSerices.checkConnection();
-    this.userServices.logTheUser(this.phoneNumber, this.password)
-      .then((response: any)=>{
-        if(response.status === 400){
-          let toast = this.toastCtrl.create({
-            message: this.translateService.instant('loginOrPasswordInvalid'),
-            duration: 3000,
-            position: 'bottom'
-          });
-          toast.present();
-        }
-        if(response.token !== undefined){
-          // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
-          this.userServices.getUser(response.token).then((user:User)=>{
-            this.storage.set('user',user).then(()=>{
-              this.goToContactList()
+    if(this.networkServices.isConnect()) {
+      this.userServices.logTheUser(this.phoneNumber, this.password)
+        .then((response: any) => {
+          if (response.status === 400) {
+            let toast = this.toastCtrl.create({
+              message: this.translateService.instant('loginOrPasswordInvalid'),
+              duration: 3000,
+              position: 'bottom'
+            });
+            toast.present();
+          }
+          if (response.token !== undefined) {
+            // On récupère le user correspondant et on le stocke en base locale avant de passer à la vue suivante
+            this.userServices.getUser(response.token).then((user: User) => {
+              this.storage.set('user', user).then(() => {
+                this.goToContactList()
+              })
+                .catch(error => console.log("erreur set user local" + error))
             })
-              .catch(error=>console.log("erreur set user local" + error))
-          })
-            .catch(error=>console.log("erreur get user serveur" + error))
-        }
-      })
-      .catch();
+              .catch(error => console.log("erreur get user serveur" + error))
+          }
+        })
+        .catch();
+    } else {
+      let toast = this.toastCtrl.create({
+        message: this.translateService.instant('loginFailedNetwork'),
+        duration: 3000,
+        position:'bottom'
+      });
+      toast.present();
+    }
   }
 
   ionViewDidLoad() {
   }
 
   logConnection(){
-    if (this.networkSerices.isConnect()) {
+    if (this.networkServices.isConnect()) {
       console.log('Online');
     }else{
       console.log('Offline');
