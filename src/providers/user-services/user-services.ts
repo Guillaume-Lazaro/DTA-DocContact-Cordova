@@ -39,6 +39,9 @@ export class UserServicesProvider {
         resolve(user)
       })
         .catch(error=>{
+          if(error.status ==401){
+            this.errorServices.invalidToken()
+          }
         console.log(error)
       });
     })
@@ -67,8 +70,19 @@ export class UserServicesProvider {
           this.storage.set('user',new User(user.firstName,user.lastName,user.email,user.phone,this.apiServices.createGravatar(user.email),user.profile,token,userloc.contacts)).then(()=>
           resolve(userloc))
         })
-          .catch(error=>console.log("erreur get user update user"));
+          .catch(error=>{
+            if(error.status ==401){
+              this.errorServices.invalidToken()
+            }
+            console.log(error)
+          });
       })
+        .catch(error=>{
+          if(error.status ==401){
+            this.errorServices.invalidToken()
+          }
+          console.log(error)
+        });
     })
       .catch(error=>{
         console.log(error)

@@ -24,6 +24,9 @@ export class ContactServicesProvider {
         resolve(contactsArray)
       })
         .catch(error=>{
+          if(error.status ==401){
+            this.errorServices.invalidToken()
+          }
           console.log(error)
         })
     })
@@ -35,11 +38,11 @@ export class ContactServicesProvider {
       this.apiServices.createContact(firstName, lastName, phone, email, profile, gravatar, emergency, token).toPromise().then( contact=>{
         resolve(contact)
       }).catch(error=>{
+        if(error.status ==401){
+          this.errorServices.invalidToken()
+        }
         console.log(error)
       })
-        .catch(error=>{
-          console.log(error)
-        })
     })
 
   }
@@ -53,8 +56,6 @@ export class ContactServicesProvider {
         .catch(error => {
           if(error.status ==401){
             this.errorServices.invalidToken()
-            console.log("erreur");
-            this.event.publish('tokenError',"token non valide")
           }
         console.log(error.status)
       })
@@ -67,6 +68,9 @@ export class ContactServicesProvider {
         resolve(reponse)
       })
         .catch(error=>{
+          if(error.status ==401){
+            this.errorServices.invalidToken()
+          }
           console.log(error)
         })
     })
