@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ApiServicesProvider} from "../api-services/api-services";
-import {Contact} from "../../model/Contact";
-import {Storage} from "@ionic/storage";
+import { ApiServicesProvider } from "../api-services/api-services";
+import { Contact } from "../../model/Contact";
+import { Storage } from "@ionic/storage";
 
 
 @Injectable()
