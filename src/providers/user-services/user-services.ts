@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ApiServicesProvider} from "../api-services/api-services";
-import {User} from "../../model/User";
-import {Storage} from "@ionic/storage";
 import {ErrorServicesProvider} from "../error-services/error-services";
+import {Storage} from "@ionic/storage";
+import {User} from "../../model/User";
+import {ApiServicesProvider} from "../api-services/api-services";
 
 /*
   Generated class for the UserServicesProvider provider.

@@ -1,21 +1,14 @@
 page-contact-list {
-
 }
 
 .contactSearchBar{
 }
 
 .contactCard{
-  border: 1px solid lightgrey;
-  padding:10px ;
-  width: 94%;
-  margin: 10px;
+  width: 100%;
   max-height:100px;
   display: flex;
   flex-direction: row;
-  -webkit-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
-  -moz-box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
-  box-shadow: -5px 5px 15px 0px rgba(133,133,133,1);
 }
 .detailContactClickZone{
   display: flex;
@@ -34,9 +27,10 @@ page-contact-list {
 }
 
 .contactNameContainer{
-  padding:5px 10px 5px 15px;
-  width:80%;
-  max-width: 80%;
+  padding:0px 10px 0px 15px;
+  width:65%;
+  max-width: 60%;
+  overflow: hidden;
   justify-content: center;
 }
 .lastNameDisplay{
@@ -96,4 +90,21 @@ page-contact-list {
 }
 .alertOContacts button{
   align-self: end;
+}
+
+ion-item-group {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+ion-item-divider {
+}
+
+ion-item {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+ion-content {
+  padding: 0px !important;
 }

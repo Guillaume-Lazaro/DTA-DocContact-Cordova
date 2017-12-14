@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Events, IonicPage, NavController, NavOptions, NavParams, ToastController} from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {ContactListPage} from "../contact-list/contact-list";
