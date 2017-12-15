@@ -81,7 +81,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     ImportServicesProvider,
     Network,
     NetworkProvider,
-    BrowserTab
+    BrowserTab,
     ErrorServicesProvider
   ],
 })
