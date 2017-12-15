@@ -9,6 +9,7 @@ import {Storage} from "@ionic/storage";
 import {Contact} from "../../model/Contact";
 import { TranslateService } from '@ngx-translate/core';
 import {LoginPage} from "../login/login";
+import {ImportServicesProvider} from "../../providers/import-services/import-services";
 
 @IonicPage()
 @Component({
@@ -24,7 +25,6 @@ export class ContactListPage {
   searchBarPlaceholder:string = 'Bla';
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               public menuCtrl: MenuController,
               public platform: Platform,
               public contactServices: ContactServicesProvider,
@@ -32,7 +32,8 @@ export class ContactListPage {
               private translateService:TranslateService,
               public toastCtrl: ToastController,
               public callNumber: CallNumber,
-              public events:Events) {
+              public events:Events,
+              private importServices : ImportServicesProvider) {
 
     this.menuCtrl.enable(true);
 
@@ -68,7 +69,7 @@ export class ContactListPage {
   ionViewDidLoad() {
     this.events.subscribe('no login',()=>{
       this.navCtrl.setRoot(LoginPage)
-    })
+    });
     this.initializeList();
 
     this.searchBarPlaceholder = this.translateService.instant('searchBar');
@@ -107,17 +108,8 @@ export class ContactListPage {
 
   // on créé une liste de contact filtrée suivant la recherche effectuée
   searchFunction(event: any) {
-    this.contacts=this.allContacts;
     let val = event.target.value;
-
-    // if the value is an empty string don't filter the items
-    if (val && val.trim() != '') {
-      this.contacts = this.contacts.filter((item) => {
-        if (item.firstName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.lastName.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.phone.indexOf(val) > -1) {
-          return item;
-        }
-      })
-    }
+    this.contacts = this.groupAndSortContacts(this.allContacts, val);
   }
 
   groupContacts(contacts) {
@@ -131,7 +123,7 @@ export class ContactListPage {
     let currentLetter = false;
     let currentContacts = [];
 
-    sortedContacts.forEach((value, index) => {
+    sortedContacts.forEach((value) => {
       let valueName = value.lastName;
       if(valueName.charAt(0) != currentLetter) {
         currentLetter = valueName.charAt(0);
@@ -147,6 +139,46 @@ export class ContactListPage {
 
       currentContacts.push(value);
     });
+
+    return groupedContacts;
+  }
+
+  groupAndSortContacts(contacts, input){
+    let groupedContacts = [];
+
+    contacts.forEach((value,index) => { //TODO remplacer ça par une refactorisation des formulaires
+      value.lastName = value.lastName[0].toUpperCase() + value.lastName.substring(1)
+    });
+    let sortedContacts = contacts.sort(this.compare);
+    let currentLetter = false;
+    let currentContacts = [];
+    if (input && input.trim() != '') {
+      sortedContacts = sortedContacts.filter((item) => {
+        if (item.firstName.toLowerCase().indexOf(input.toLowerCase()) > -1 || item.lastName.toLowerCase().indexOf(input.toLowerCase()) > -1 || item.phone.indexOf(input) > -1) {
+          return item;
+        }
+      });
+      console.log(contacts);
+    }
+
+    sortedContacts.forEach((value) => {
+      let valueName = value.lastName;
+      if(valueName.charAt(0) != currentLetter) {
+        currentLetter = valueName.charAt(0);
+
+        let newGroup = {
+          letter: currentLetter,
+          contacts: []
+        };
+
+        currentContacts = newGroup.contacts;
+        groupedContacts.push(newGroup);
+      }
+
+      currentContacts.push(value);
+    });
+    console.log("L'index est ", input);
+    console.log(groupedContacts);
 
     return groupedContacts;
   }
@@ -171,5 +203,10 @@ export class ContactListPage {
 
   goToContactDetails(contact){
     this.navCtrl.push(ContactDetailPage, { 'contact': contact}).then();
+  }
+  makeImportContacts() {
+    this.importServices.importContacts().then(()=>{
+      this.navCtrl.setRoot(ContactListPage);
+    });
   }
 }
