@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {AlertController, Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
-import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import { TranslateService } from '@ngx-translate/core';
 import {NetworkProvider} from "../../providers/network-services/network-services";
+import {LoginPage} from "../login/login";
 
 /**
  * Generated class for the EditContactPage page.
@@ -77,7 +77,6 @@ export class EditContactPage {
 
     if (this.isInEditMode) {
       //Modification
-      // TODO: verifier connexion
       if (this.networkServices.isConnect()) {
         toastMessage = this.translateService.instant('contactModified');
 
@@ -97,7 +96,6 @@ export class EditContactPage {
       //Création
       if (this.networkServices.isConnect()) {
         toastMessage = this.translateService.instant('contactAdded');
-        // TODO: verifier connexion
         this.storage.get('user').then((user: User) => {
           this.contactServices.createContact(this.firstName, this.lastName, this.phone, this.email, this.profile, false, user.token)
             .then((reponse: any) => {
@@ -111,16 +109,13 @@ export class EditContactPage {
         toastMessage = this.translateService.instant('contactNotAdded');
       }
     }
-
-    let toast = this.toastCtrl.create({
-      message: toastMessage,
-      duration: 3000,
-      position: 'bottom'
-    });
-    toast.present();
   }
 
-  ionViewDidLoad() { }
+  ionViewDidLoad() {
+    this.events.subscribe('no login' , ()=>{
+      this.navCtrl.setRoot(LoginPage)
+    })
+  }
 
   deleteContact() {
     let toastMessage;

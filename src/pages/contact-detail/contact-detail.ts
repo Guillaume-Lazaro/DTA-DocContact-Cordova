@@ -17,7 +17,7 @@ export class ContactDetailPage {
   contact: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private callNumber: CallNumber,
-              private emailComposer: EmailComposer, private sms:SMS, private translateService: TranslateService) {
+              private emailComposer: EmailComposer, private sms:SMS) {
     this.contact = navParams.get('contact');
   }
 

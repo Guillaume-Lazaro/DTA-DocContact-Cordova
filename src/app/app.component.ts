@@ -31,14 +31,13 @@ export class MyApp {
               private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider,
               private importServices : ImportServicesProvider) {
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: private screenOrientation: ScreenOrientation
-
     this.initializeApp();
     //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     //Initilization du service de traduction:
     this.platform.ready().then(()=> {
       let lang:string = navigator.language; //Langue systéme utilisé par le device
-      
+
       lang = lang.substring(0,2);
 
       if (lang != "en" && lang != "fr") {

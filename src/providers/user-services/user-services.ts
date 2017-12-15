@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ApiServicesProvider } from "../api-services/api-services";
-import { User } from "../../model/User";
-import { Storage } from "@ionic/storage";
+import {ErrorServicesProvider} from "../error-services/error-services";
+import {Storage} from "@ionic/storage";
+import {User} from "../../model/User";
+import {ApiServicesProvider} from "../api-services/api-services";
 
 /*
   Generated class for the UserServicesProvider provider.
@@ -13,7 +14,7 @@ import { Storage } from "@ionic/storage";
 @Injectable()
 export class UserServicesProvider {
   // token: string; // variable de Debug : a enlever pour la fin !
-  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage) {
+  constructor(public http: HttpClient, public apiServices: ApiServicesProvider, private storage: Storage,public errorServices: ErrorServicesProvider) {
     console.log("Hello UserServicesProvider Provider");
   }
 
@@ -24,6 +25,7 @@ export class UserServicesProvider {
           resolve(message);
         })
         .catch( error=> {
+          this.errorServices.logAlert()
         console.log(error)
       })
     })
@@ -37,6 +39,9 @@ export class UserServicesProvider {
         resolve(user)
       })
         .catch(error=>{
+          if(error.status ==401){
+            this.errorServices.invalidToken()
+          }
         console.log(error)
       });
     })
@@ -65,8 +70,19 @@ export class UserServicesProvider {
           this.storage.set('user',new User(user.firstName,user.lastName,user.email,user.phone,this.apiServices.createGravatar(user.email),user.profile,token,userloc.contacts)).then(()=>
           resolve(userloc))
         })
-          .catch(error=>console.log("erreur get user update user"));
+          .catch(error=>{
+            if(error.status ==401){
+              this.errorServices.invalidToken()
+            }
+            console.log(error)
+          });
       })
+        .catch(error=>{
+          if(error.status ==401){
+            this.errorServices.invalidToken()
+          }
+          console.log(error)
+        });
     })
       .catch(error=>{
         console.log(error)
