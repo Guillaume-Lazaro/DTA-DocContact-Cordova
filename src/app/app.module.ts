@@ -28,8 +28,7 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
 import { AboutPage } from "../pages/about/about";
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { BrowserTab } from '@ionic-native/browser-tab';
-
-//   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -70,7 +69,7 @@ import { BrowserTab } from '@ionic-native/browser-tab';
   providers: [
     StatusBar,
     SplashScreen,
-    //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE    ScreenOrientation,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
@@ -81,7 +80,7 @@ import { BrowserTab } from '@ionic-native/browser-tab';
     Contacts,
     ImportServicesProvider,
     Network,
-    NetworkProvider
+    NetworkProvider,
     BrowserTab
   ],
 })

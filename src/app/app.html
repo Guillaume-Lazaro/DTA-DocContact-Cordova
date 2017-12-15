@@ -22,15 +22,12 @@
           <button ion-item (click)="openPage(myContacts)" menuClose>   <ion-icon name="people"></ion-icon> &nbsp; {{'myContacts' | translate}} </button>
 
         </ion-list>
+      </div>
+      <div>
         <ion-list>
           <button ion-item (click)="importContacts()" menuClose>  <ion-icon name="cloud-download"></ion-icon> &nbsp;  {{'importContacts' | translate}} </button>
-
-        </ion-list>
-      </div>
-      <div class="menuDeconnexion">
-        <ion-list>
-          <button ion-item (click)="openPage(about)" menuClose color="dark"> <ion-icon name="paper"></ion-icon> {{'about' | translate }} </button>
-          <button ion-item (click)="openPage(deconnexion)" menuClose>  <ion-icon name="log-out"></ion-icon> &nbsp; {{'disconnect' | translate}} </button>
+          <button ion-item (click)="openPage(about)" menuClose> <ion-icon name="paper"></ion-icon> {{'about' | translate }} </button>
+          <button ion-item (click)="openPage(deconnexion)" menuClose class="menuDeconnexion">  <ion-icon name="log-out"></ion-icon> &nbsp; {{'disconnect' | translate}} </button>
         </ion-list>
       </div>
     </div>

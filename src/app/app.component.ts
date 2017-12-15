@@ -10,7 +10,7 @@ import { EditUserPage } from "../pages/edit-user/edit-user";
 import { Storage } from "@ionic/storage";
 import { User } from "../model/User";
 import { ApiServicesProvider } from "../providers/api-services/api-services";
-// A LAISSER - DECOMMENTER DANS LA VERSION FINALE     import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { ImportServicesProvider } from "../providers/import-services/import-services";
 import { AboutPage } from "../pages/about/about";
 
@@ -29,13 +29,12 @@ export class MyApp {
   about: any = {title: 'A propos', component: AboutPage };
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              public app:App, private userService: UserServicesProvider,
+              public app:App, private userService: UserServicesProvider,private screenOrientation: ScreenOrientation,
               private storage: Storage, private translateService: TranslateService, public apiServices: ApiServicesProvider,
               private importServices : ImportServicesProvider) {
-    //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: private screenOrientation: ScreenOrientation
 
     this.initializeApp();
-    //A LAISSER - DECOMMENTER DANS LA VERSION FINALE: this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
     //Initilization du service de traduction:
     this.platform.ready().then(()=> {
