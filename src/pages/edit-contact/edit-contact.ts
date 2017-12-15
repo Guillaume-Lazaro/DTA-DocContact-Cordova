@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {AlertController, Events, IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
-import {UserServicesProvider} from "../../providers/user-services/user-services";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ApiServicesProvider} from "../../providers/api-services/api-services";
 import {User} from "../../model/User";

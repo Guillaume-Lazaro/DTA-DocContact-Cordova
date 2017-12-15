@@ -74,7 +74,7 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     Contacts,
     ImportServicesProvider,
     Network,
-    NetworkProvider
+    NetworkProvider,
     ErrorServicesProvider
   ],
 })

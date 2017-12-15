@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {ApiServicesProvider} from "../api-services/api-services";
 import {Contact} from "../../model/Contact";
-import {Storage} from "@ionic/storage";
 import {Events} from "ionic-angular";
 import {ErrorServicesProvider} from "../error-services/error-services";
 

@@ -5,7 +5,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {Storage} from "@ionic/storage";
 import {User} from "../../model/User";
 import {ApiServicesProvider} from "../api-services/api-services";
-import {LoginPage} from "../../pages/login/login";
 
 /*
   Generated class for the ErrorServicesProvider provider.
