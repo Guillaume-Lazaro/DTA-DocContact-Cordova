@@ -82,5 +82,6 @@
 
   "pressAgainToExit" : "Appuyez encore une fois sur retour pour quitter",
   "sessionExpiredTitle" : "Session expirée",
-  "sessionExpired" : "Votre session a expirée, voulez vous vous reconnecter?"
+  "sessionExpired" : "Votre session a expirée, voulez vous vous reconnecter?",
+  "about": "A propos"
 }
