@@ -21,6 +21,7 @@
   "loginFailed" : "Login failed",
   "loginOrPasswordInvalid" : "Incorrect phone number or password",
   "loginFailedNetwork" : "Login impossible due to connection lost",
+  "PasswordInvalid" : "Incorrect password",
 
   "pleaseEnterYourPhoneNumber" : "Please enter your phone number to receive your password",
   "cancel" : "Cancel",
@@ -61,6 +62,8 @@
   "contactNotModified": "Contact not modified due to connection lost",
   "contactDeleted"  : "The contact has been successfully deleted",
   "contactNotDeleted" : "Contact not deleted due to connection lost",
+  "sessionExpiredTitle" : "Session expired",
+  "sessionExpired" : "Your session expired, do you want to log in again?",
   "contactAdded"    : "The contact has been successfully added",
   "contactNotAdded" : "Contact not added due to connection lost",
 

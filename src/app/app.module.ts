@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import {IonicApp, IonicErrorHandler, IonicModule, ViewController} from 'ionic-angular';
 import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { InscriptionPage } from '../pages/inscription/inscription';
@@ -22,7 +22,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Network } from '@ionic-native/network';
 import { NetworkProvider } from '../providers/network-services/network-services';
-
+import { ErrorServicesProvider } from '../providers/error-services/error-services';
 import { Contacts } from '@ionic-native/contacts';
 import { ImportServicesProvider } from '../providers/import-services/import-services';
 import { AboutPage } from "../pages/about/about";
@@ -82,6 +82,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     Network,
     NetworkProvider,
     BrowserTab
+    ErrorServicesProvider
   ],
 })
 export class AppModule {}

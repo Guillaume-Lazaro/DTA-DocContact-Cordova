@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import {IonicPage, MenuController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
-
+import {Events,IonicPage, MenuController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import { EditContactPage } from '../edit-contact/edit-contact';
 import { ContactDetailPage } from '../contact-detail/contact-detail';
 import {ContactServicesProvider} from "../../providers/contact-services/contact-services";
-import {UserServicesProvider} from "../../providers/user-services/user-services";
 import { CallNumber } from '@ionic-native/call-number';
 import {User} from "../../model/User";
 import {Storage} from "@ionic/storage";
 import {Contact} from "../../model/Contact";
 import { TranslateService } from '@ngx-translate/core';
-import {NetworkProvider} from "../../providers/network-services/network-services";
+import {LoginPage} from "../login/login";
 
 @IonicPage()
 @Component({
@@ -25,9 +23,16 @@ export class ContactListPage {
   allContacts:Array<Contact>;
   searchBarPlaceholder:string = 'Bla';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public platform: Platform,
-              public contactServices: ContactServicesProvider, private storage: Storage, private translateService:TranslateService,
-              public toastCtrl: ToastController, public callNumber: CallNumber) {
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public menuCtrl: MenuController,
+              public platform: Platform,
+              public contactServices: ContactServicesProvider,
+              private storage: Storage,
+              private translateService:TranslateService,
+              public toastCtrl: ToastController,
+              public callNumber: CallNumber,
+              public events:Events) {
 
     this.menuCtrl.enable(true);
 
@@ -61,6 +66,9 @@ export class ContactListPage {
   }
 
   ionViewDidLoad() {
+    this.events.subscribe('no login',()=>{
+      this.navCtrl.setRoot(LoginPage)
+    })
     this.initializeList();
 
     this.searchBarPlaceholder = this.translateService.instant('searchBar');
@@ -92,9 +100,9 @@ export class ContactListPage {
         this.contacts = this.allContacts;
         this.verif0Contact = (this.contacts.length == 0);
       })
-        .catch(error => console.log("erreur get contacts" + error))
+        .catch(error => console.log(error))
     })
-      .catch(error => console.log("erreur get user local" + error))
+      .catch(error => console.log(error))
   }
 
   // on créé une liste de contact filtrée suivant la recherche effectuée

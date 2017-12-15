@@ -20,6 +20,7 @@
   "inscriptionError" : "Erreur lors de l'inscription",
   "loginFailed" : "Erreur lors du login",
   "loginOrPasswordInvalid" : "Le numéro de téléphone ou le mot de passe est incorrect",
+  "PasswordInvalid" : "Le mot de passe est incorrect",
   "loginFailedNetwork" : "Login impossible car aucune connexion",
 
   "pleaseEnterYourPhoneNumber" : "Entrez votre numéro de téléphone pour recevoir votre mot de passe",
@@ -80,6 +81,7 @@
   "incorrectEmail" : "L'adresse mail d'un de vos contacts est erronée ",
 
   "pressAgainToExit" : "Appuyez encore une fois sur retour pour quitter",
-
+  "sessionExpiredTitle" : "Session expirée",
+  "sessionExpired" : "Votre session a expirée, voulez vous vous reconnecter?"
   "about": "A propos"
 }
