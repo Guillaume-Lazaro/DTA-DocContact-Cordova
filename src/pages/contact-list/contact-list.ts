@@ -34,8 +34,7 @@ export class ContactListPage {
               public toastCtrl: ToastController,
               public callNumber: CallNumber,
               public events:Events,
-              private importServices : ImportServicesProvider) {
-              public events:Events,
+              private importServices : ImportServicesProvider,
               public networkServices: NetworkProvider) {
 
     this.menuCtrl.enable(true);
