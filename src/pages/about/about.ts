@@ -13,7 +13,6 @@ export class AboutPage {
 
   public lottieConfig: Object;
   private anim: any;
-  private animationSpeed: number = 1;
 
   constructor(public navCtrl: NavController, private browserTab: BrowserTab) {
     this.lottieConfig = {
@@ -21,44 +20,17 @@ export class AboutPage {
       autoplay: true,
       loop: true
     };
-
-
   }
-
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad AboutPage');
   }
 
 
-
-
-
   handleAnimation(anim: any) {
     this.anim = anim;
     this.anim.setSpeed(1)
   }
-
-  // stop() {
-  //   this.anim.stop();
-  // }
-  //
-  // play() {
-  //   this.anim.play();
-  // }
-  //
-  // pause() {
-  //   this.anim.pause();
-  // }
-  //
-  // setSpeed(speed: number) {
-  //   this.animationSpeed = speed;
-  //   this.anim.setSpeed(speed);
-  // }
-
-
-
 
   goToContactList() {
     this.navCtrl.setRoot(ContactListPage, {}, {animate:true});
