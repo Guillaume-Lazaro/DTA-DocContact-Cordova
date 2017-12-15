@@ -25,7 +25,10 @@ import { NetworkProvider } from '../providers/network-services/network-services'
 import { ErrorServicesProvider } from '../providers/error-services/error-services';
 import { Contacts } from '@ionic-native/contacts';
 import { ImportServicesProvider } from '../providers/import-services/import-services';
-//   A LAISSER - DECOMMENTER DANS LA VERSION FINALE  import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { AboutPage } from "../pages/about/about";
+import { LottieAnimationViewModule } from 'ng-lottie';
+import { BrowserTab } from '@ionic-native/browser-tab';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     ContactListPage,
     ContactDetailPage,
     EditContactPage,
-    EditUserPage
+    EditUserPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,8 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
       }
     }),
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    LottieAnimationViewModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,12 +63,13 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     ContactListPage,
     ContactDetailPage,
     EditContactPage,
-    EditUserPage
+    EditUserPage,
+    AboutPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    //   A LAISSER - DECOMMENTER DANS LA VERSION FINALE    ScreenOrientation,
+    ScreenOrientation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiServicesProvider,
     ContactServicesProvider,
@@ -75,6 +81,7 @@ import { ImportServicesProvider } from '../providers/import-services/import-serv
     ImportServicesProvider,
     Network,
     NetworkProvider,
+    BrowserTab,
     ErrorServicesProvider
   ],
 })

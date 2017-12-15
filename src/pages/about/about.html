@@ -1,0 +1,40 @@
+<ion-header>
+
+  <ion-navbar color="docBlue">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="goToContactList()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>A Propos</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <h1> L'équipe Doc Contact </h1>
+  <p> L'application Doc Contact a été réalisée par une équipe de 4 jeunes développeurs dans le cadre d'une formation
+  organisée par DTA Ingenierie.</p>
+  <p>
+    Les développeurs sont :
+  </p>
+  <ul>
+    <li>ADRIEN Idris </li>
+    <li>FOLMER Thomas</li>
+    <li>LAZARO Guillaume</li>
+    <li>LOUIS Benjamin</li>
+  </ul>
+  <br>
+  <br>
+  <br>
+  <button ion-button (click)="goToGitHub()" block >Lien vers le Projet</button>
+
+  <lottie-animation-view
+    [options]="lottieConfig"
+    [width]="100"
+    [height]="100"
+    (animCreated)="handleAnimation($event)">
+  </lottie-animation-view>
+
+</ion-content>
