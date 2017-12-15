@@ -10,6 +10,7 @@ import {Contact} from "../../model/Contact";
 import { TranslateService } from '@ngx-translate/core';
 import {LoginPage} from "../login/login";
 import {ImportServicesProvider} from "../../providers/import-services/import-services";
+import {NetworkProvider} from "../../providers/network-services/network-services";
 
 @IonicPage()
 @Component({
@@ -34,6 +35,8 @@ export class ContactListPage {
               public callNumber: CallNumber,
               public events:Events,
               private importServices : ImportServicesProvider) {
+              public events:Events,
+              public networkServices: NetworkProvider) {
 
     this.menuCtrl.enable(true);
 
@@ -71,39 +74,49 @@ export class ContactListPage {
       this.navCtrl.setRoot(LoginPage)
     });
     this.initializeList();
-
     this.searchBarPlaceholder = this.translateService.instant('searchBar');
   }
 
   ionViewWillEnter(){
     //important to place it here if we want the content to be reloaded each time we call at the contact-list
     this.storage.get('user').then((user:User)=>{
-      this.contactServices.getContacts(user.token).then( (contacts: Array<Contact>) =>{
-        this.allContacts = contacts;
-        //this.contacts = this.allContacts; //OLD
-        //NEW : La liste est triée et groupée par ordre alphabétique:
+      if(this.networkServices.isConnect()) {
+        this.contactServices.getContacts(user.token).then((contacts: Array<Contact>) => {
+          this.allContacts = contacts;
+          this.contacts = this.groupContacts(this.allContacts);
+          this.verif0Contact = (this.contacts.length == 0);
+          user.contacts = this.allContacts;       //Update user
+          this.storage.set('user',user);  //on the database
+        })
+      } else {
+        this.allContacts= user.contacts;
         this.contacts = this.groupContacts(this.allContacts);
         this.verif0Contact = (this.contacts.length == 0);
-        user.contacts = contacts;       //Update user
+        user.contacts = this.allContacts;       //Update user
         this.storage.set('user',user);  //on the database
-      });
-    })
+      }
+    });
   }
 
   initializeList() {
     // On récupère l'user en base locale et on lui assigne ses contacts, ensuite on le stocke en base locale avec ses contacts
     this.storage.get('user').then((user: User) => {
-      console.log(user.phone);
-      this.contactServices.getContacts(user.token).then((contacts:Array<Contact>) => {
-        user.contacts = contacts;
-        this.storage.set('user', user);
-        this.allContacts = contacts;
+      if(this.networkServices.isConnect()){
+        this.contactServices.getContacts(user.token).then((contacts:Array<Contact>) => {
+          user.contacts = contacts;
+          this.storage.set('user', user);
+          this.allContacts = user.contacts;
+          this.contacts = this.allContacts;
+          this.verif0Contact = (this.contacts.length == 0);
+        })
+          .catch(error => console.log(error))
+      }
+      else {
+        this.allContacts = user.contacts;
         this.contacts = this.allContacts;
         this.verif0Contact = (this.contacts.length == 0);
-      })
-        .catch(error => console.log(error))
-    })
-      .catch(error => console.log(error))
+      }
+    }).catch(error => console.log(error))
   }
 
   // on créé une liste de contact filtrée suivant la recherche effectuée
